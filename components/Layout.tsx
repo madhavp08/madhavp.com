@@ -1,4 +1,5 @@
 import { Container, VStack, Text, Flex, Box, HStack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { site } from "../lib/site";
@@ -14,12 +15,28 @@ function Navigation({
 }) {
   const router = useRouter();
   const isActive =
-    link === "/" ? router.asPath === link : router.asPath.includes(link);
+    link === "/"
+      ? router.pathname === "/"
+      : router.asPath.startsWith(link);
+
+  if (isExternal) {
+    return (
+      <Link
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        color={isActive ? "black" : "gray.500"}
+        _hover={{ color: "black" }}
+      >
+        <Text fontSize="lg">{children}</Text>
+      </Link>
+    );
+  }
 
   return (
     <Link
+      as={NextLink}
       href={link}
-      target={isExternal ? "_blank" : "_self"}
       color={isActive ? "black" : "gray.500"}
       _hover={{ color: "black" }}
     >

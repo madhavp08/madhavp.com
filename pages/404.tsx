@@ -1,8 +1,9 @@
+import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 
 export default function Custom404() {
   return (
-    <Link href="/" color="blue.500">
+    <Link as={NextLink} href="/" color="blue.500">
       Home
     </Link>
   );

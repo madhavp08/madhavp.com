@@ -66,6 +66,10 @@ The no-scroll rule made the shelves too small. Constitution now prefers the bibl
 
 Clicking a spine was laggy because each click loaded a new page and every closed book still ran paper filters and cover images. Notes now load with the Favorites page. Clicks only update the URL in the browser. Filters and covers render for the open item.
 
+## 2026-08-18 — Home is a normal Next.js page
+
+The homepage is `pages/index.tsx` at `/`, and sidebar Home uses a Next.js link so it always routes to that page.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
