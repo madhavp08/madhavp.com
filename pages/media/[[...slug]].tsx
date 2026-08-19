@@ -80,6 +80,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
               <Bookshelf
                 items={shelves[kind]}
                 activeSlug={activeSlug}
+                filterId={`paper-${kind}`}
                 onSelect={select}
               />
             </Stack>

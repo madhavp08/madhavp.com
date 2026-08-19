@@ -96,6 +96,10 @@ Spotify has an official API, so albums can be pulled after a one-time OAuth and 
 
 The bible opens a book in the row and puts notes underneath, which shoved later spines away from the cursor and left a wide empty column on both sides. Notes and the cover now sit in a side panel. Spines keep a fixed width so the next item stays where it was. The page shell is a closer nav-plus-content row instead of a narrow centered column with a 160px gap.
 
+## 2026-08-18 — Opened covers shift left under the cursor
+
+The 3D open animation is back, with a wider cover. The shelf scrolls left as a book opens so the cover lands under the cursor and the next spine sits at the cover's right edge. Clicking again, without moving, opens that next item.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
