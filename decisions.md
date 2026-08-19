@@ -98,7 +98,9 @@ The bible opens a book in the row and puts notes underneath, which shoved later 
 
 ## 2026-08-18 — Opened covers shift left under the cursor
 
-The 3D open animation is back, with a wider cover. The shelf scrolls left as a book opens so the cover lands under the cursor and the next spine sits at the cover's right edge. Clicking again, without moving, opens that next item.
+The 3D open animation is back, with a wider cover. The shelf scrolls left as a book opens so the cover lands under the cursor and the next spine sits at the cover's right edge. Clicking the open item again collapses it.
+
+Nav order is Home, Media, Projects.
 
 ## 2026-08-18 — Projects is a short list with demos
 

@@ -147,11 +147,7 @@ export function Bookshelf({
                 aria-pressed={isOpen}
                 onClick={(event) => {
                   clickXRef.current = event.clientX;
-                  if (isOpen) {
-                    onSelect(items[index + 1]?.slug);
-                  } else {
-                    onSelect(item.slug);
-                  }
+                  onSelect(isOpen ? undefined : item.slug);
                 }}
                 style={{
                   display: "flex",

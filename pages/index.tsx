@@ -28,12 +28,12 @@ export default function Home() {
       </UnorderedList>
       <Text mt={4}>
         Checkout my{" "}
-        <Link as={NextLink} href={PROJECTS_HREF} color="blue.300">
-          projects
-        </Link>{" "}
-        and{" "}
         <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
           media
+        </Link>{" "}
+        and{" "}
+        <Link as={NextLink} href={PROJECTS_HREF} color="blue.300">
+          projects
         </Link>
         .
       </Text>
