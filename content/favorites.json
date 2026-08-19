@@ -1,0 +1,332 @@
+{
+  "books": [
+    {
+      "slug": "book-01",
+      "title": "Book 01",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-01.svg",
+      "spineColor": "#1b2838",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-02",
+      "title": "Book 02",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-02.svg",
+      "spineColor": "#6b2c2c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-03",
+      "title": "Book 03",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-03.svg",
+      "spineColor": "#2d4a3e",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-04",
+      "title": "Book 04",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-04.svg",
+      "spineColor": "#111111",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-05",
+      "title": "Book 05",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-05.svg",
+      "spineColor": "#8b5a2b",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-06",
+      "title": "Book 06",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-06.svg",
+      "spineColor": "#3d2b5f",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-07",
+      "title": "Book 07",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-07.svg",
+      "spineColor": "#4a3728",
+      "textColor": "#f5e6c8",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-08",
+      "title": "Book 08",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-08.svg",
+      "spineColor": "#2c4c6e",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-09",
+      "title": "Book 09",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-09.svg",
+      "spineColor": "#5c1a1a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-10",
+      "title": "Book 10",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-10.svg",
+      "spineColor": "#2f4f4f",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-11",
+      "title": "Book 11",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-11.svg",
+      "spineColor": "#3c3c3c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "book-12",
+      "title": "Book 12",
+      "creator": "To be replaced",
+      "cover": "/art/books/book-12.svg",
+      "spineColor": "#4a1c40",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    }
+  ],
+  "movies": [
+    {
+      "slug": "movie-01",
+      "title": "Movie 01",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-01.svg",
+      "spineColor": "#1a1a1a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-02",
+      "title": "Movie 02",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-02.svg",
+      "spineColor": "#7a1f2b",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-03",
+      "title": "Movie 03",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-03.svg",
+      "spineColor": "#14283c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-04",
+      "title": "Movie 04",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-04.svg",
+      "spineColor": "#3e2f1c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-05",
+      "title": "Movie 05",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-05.svg",
+      "spineColor": "#0f3d2e",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-06",
+      "title": "Movie 06",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-06.svg",
+      "spineColor": "#2a1540",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-07",
+      "title": "Movie 07",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-07.svg",
+      "spineColor": "#5a2a12",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-08",
+      "title": "Movie 08",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-08.svg",
+      "spineColor": "#1c3344",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-09",
+      "title": "Movie 09",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-09.svg",
+      "spineColor": "#4b0f1f",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-10",
+      "title": "Movie 10",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-10.svg",
+      "spineColor": "#222222",
+      "textColor": "#e8e0d0",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-11",
+      "title": "Movie 11",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-11.svg",
+      "spineColor": "#163024",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "movie-12",
+      "title": "Movie 12",
+      "creator": "To be replaced",
+      "cover": "/art/movies/movie-12.svg",
+      "spineColor": "#3a1d10",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    }
+  ],
+  "music": [
+    {
+      "slug": "album-01",
+      "title": "Album 01",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-01.svg",
+      "spineColor": "#4a2c6a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-02",
+      "title": "Album 02",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-02.svg",
+      "spineColor": "#0f5c5c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-03",
+      "title": "Album 03",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-03.svg",
+      "spineColor": "#1f1f1f",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-04",
+      "title": "Album 04",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-04.svg",
+      "spineColor": "#6e1e3a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-05",
+      "title": "Album 05",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-05.svg",
+      "spineColor": "#204060",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-06",
+      "title": "Album 06",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-06.svg",
+      "spineColor": "#3b2a1a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-07",
+      "title": "Album 07",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-07.svg",
+      "spineColor": "#12503a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-08",
+      "title": "Album 08",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-08.svg",
+      "spineColor": "#4a1028",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-09",
+      "title": "Album 09",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-09.svg",
+      "spineColor": "#2b2b55",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-10",
+      "title": "Album 10",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-10.svg",
+      "spineColor": "#5c3b12",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-11",
+      "title": "Album 11",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-11.svg",
+      "spineColor": "#0d3b4c",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    },
+    {
+      "slug": "album-12",
+      "title": "Album 12",
+      "creator": "To be replaced",
+      "cover": "/art/music/album-12.svg",
+      "spineColor": "#3a3a3a",
+      "textColor": "#fff",
+      "notes": "Notes coming."
+    }
+  ]
+}

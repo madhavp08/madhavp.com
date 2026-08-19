@@ -74,6 +74,10 @@ The homepage is `pages/index.tsx` at `/`, and sidebar Home uses a Next.js link s
 
 The sidebar contact block is labeled Contact me on. Gmail, GitHub, and LinkedIn are listed. Email is on the public site because Madhav asked for Gmail there.
 
+## 2026-08-18 — Favorites live in one JSON file
+
+Books, movies, and albums are listed in `content/favorites.json`. Covers can be an Open Library ISBN (`isbn:978...`), a local file, or a URL. How to add and remove items is in `content/HOW_TO.md`.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

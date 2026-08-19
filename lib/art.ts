@@ -11,7 +11,6 @@ export const ART_LABELS: Record<ArtKind, string> = {
 export interface Piece {
   title: string;
   creator: string;
-  date: string;
   coverImage: string;
   spineColor: string;
   textColor: string;
