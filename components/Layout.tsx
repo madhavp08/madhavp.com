@@ -79,7 +79,7 @@ function Layout({ children }: PropsWithChildren) {
     <Container
       position="relative"
       mt={{ base: 16 }}
-      pb={{ base: 8, md: 24 }}
+      pb={{ base: 6, md: 8 }}
     >
       <Flex
         position="absolute"

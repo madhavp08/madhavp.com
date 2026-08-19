@@ -78,6 +78,10 @@ The sidebar contact block is labeled Contact me on. Gmail, GitHub, and LinkedIn 
 
 Books, movies, and albums are listed in `content/favorites.json`. Covers can be an Open Library ISBN (`isbn:978...`), a local file, or a URL. How to add and remove items is in `content/HOW_TO.md`.
 
+## 2026-08-18 — Tighter Favorites spacing
+
+Favorites still uses the bible shelf size, with less page padding and row gap so the three shelves need less leftover scroll.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

@@ -69,9 +69,9 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({
           piece ? `${piece.title} by ${piece.creator}` : site.description
         }
       />
-      <Flex direction="column" gap={8}>
+      <Flex direction="column" gap={5}>
         {ART_KINDS.map((kind) => (
-          <Stack key={kind} spacing={3}>
+          <Stack key={kind} spacing={2}>
             <Text fontWeight="bold" fontSize="smaller">
               {ART_LABELS[kind].toUpperCase()}
             </Text>
