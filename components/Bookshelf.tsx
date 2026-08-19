@@ -91,7 +91,7 @@ export function Bookshelf({
             height="100%"
             width="28px"
             onClick={() => scrollBy(-(width + 12) * 4)}
-            _hover={{ bg: "gray.100" }}
+            _hover={{ bg: "whiteAlpha.200" }}
           >
             <Text fontSize="sm">‹</Text>
           </Center>
@@ -230,7 +230,7 @@ export function Bookshelf({
             borderRadius="md"
             width="28px"
             onClick={() => scrollBy((width + 12) * 4)}
-            _hover={{ bg: "gray.100" }}
+            _hover={{ bg: "whiteAlpha.200" }}
           >
             <Text fontSize="sm">›</Text>
           </Center>

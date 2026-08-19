@@ -82,6 +82,10 @@ Books, movies, and albums are listed in `content/favorites.json`. Covers can be 
 
 Favorites still uses the bible shelf size, with less page padding and row gap so the three shelves need less leftover scroll.
 
+## 2026-08-18 — Dark mode only
+
+The bible is a light site. This site is dark only: dark page background, light type, no color-mode toggle, and no following the system theme. Nav, headings, body copy, and links were retinted so they stay readable on gray.900.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

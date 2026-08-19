@@ -93,7 +93,7 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({
             >
               <Image
                 border="1px solid"
-                borderColor="gray.200"
+                borderColor="gray.600"
                 src={piece.coverImage}
                 alt={piece.title}
                 height={{ base: "140px", sm: "180px", md: "220px" }}

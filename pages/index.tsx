@@ -31,7 +31,7 @@ export default function Home() {
       </UnorderedList>
       <Text mt={4}>
         Checkout my{" "}
-        <Link as={NextLink} href={FAVORITES_HREF} color="blue.500">
+        <Link as={NextLink} href={FAVORITES_HREF} color="blue.300">
           favorites
         </Link>
         .

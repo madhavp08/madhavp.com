@@ -25,8 +25,8 @@ function Navigation({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        color={isActive ? "black" : "gray.500"}
-        _hover={{ color: "black" }}
+        color={isActive ? "gray.50" : "gray.400"}
+        _hover={{ color: "gray.50" }}
       >
         <Text fontSize="lg">{children}</Text>
       </Link>
@@ -37,8 +37,8 @@ function Navigation({
     <Link
       as={NextLink}
       href={link}
-      color={isActive ? "black" : "gray.500"}
-      _hover={{ color: "black" }}
+      color={isActive ? "gray.50" : "gray.400"}
+      _hover={{ color: "gray.50" }}
     >
       <Text fontSize="lg">{children}</Text>
     </Link>
@@ -94,7 +94,7 @@ function Layout({ children }: PropsWithChildren) {
       <Container width={{ md: "container.md" }} position="relative">
         <Box
           width="100%"
-          bg="white"
+          bg="gray.900"
           height={16}
           position="fixed"
           top={0}
@@ -111,8 +111,8 @@ function Layout({ children }: PropsWithChildren) {
           width="100%"
           align="center"
           borderBottom="1px solid"
-          borderBottomColor="gray.200"
-          bg="white"
+          borderBottomColor="gray.700"
+          bg="gray.900"
         >
           <Container px={8}>
             <HStack spacing={8}>
