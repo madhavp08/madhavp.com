@@ -76,57 +76,49 @@ function NavList() {
 
 function Layout({ children }: PropsWithChildren) {
   return (
-    <Container
-      position="relative"
-      mt={{ base: 16 }}
-      pb={{ base: 6, md: 8 }}
-    >
+    <>
       <Flex
-        position="absolute"
-        right="100%"
-        mr="160px"
-        display={{ base: "none", lg: "flex" }}
+        position="fixed"
+        top={0}
+        display={{ base: "flex", lg: "none" }}
+        height={12}
+        zIndex={50}
+        left={0}
+        width="100%"
+        align="center"
+        borderBottom="1px solid"
+        borderBottomColor="gray.700"
+        bg="gray.900"
       >
-        <VStack position="fixed" align="flex-start" spacing={10}>
-          <NavList />
-        </VStack>
+        <Container px={8}>
+          <HStack spacing={8}>
+            {site.navigation.map((item) => (
+              <Navigation key={item.href} link={item.href}>
+                {item.label}
+              </Navigation>
+            ))}
+          </HStack>
+        </Container>
       </Flex>
-      <Container width={{ md: "container.md" }} position="relative">
-        <Box
-          width="100%"
-          bg="gray.900"
-          height={16}
-          position="fixed"
-          top={0}
-          zIndex={100}
-          display={{ base: "none", lg: "block" }}
-        />
-        <Flex
-          position="fixed"
-          top={0}
-          display={{ base: "flex", lg: "none" }}
-          height={12}
-          zIndex={50}
-          left={0}
-          width="100%"
-          align="center"
-          borderBottom="1px solid"
-          borderBottomColor="gray.700"
-          bg="gray.900"
-        >
-          <Container px={8}>
-            <HStack spacing={8}>
-              {site.navigation.map((item) => (
-                <Navigation key={item.href} link={item.href}>
-                  {item.label}
-                </Navigation>
-              ))}
-            </HStack>
-          </Container>
-        </Flex>
-        {children}
-      </Container>
-    </Container>
+      <Flex
+        maxW="1240px"
+        mx="auto"
+        mt={{ base: 16, lg: 10 }}
+        pb={{ base: 6, md: 8 }}
+        px={{ base: 5, md: 8 }}
+        gap={{ lg: 10 }}
+        align="flex-start"
+      >
+        <Box display={{ base: "none", lg: "block" }} w="148px" flexShrink={0}>
+          <VStack position="sticky" top={10} align="flex-start" spacing={10}>
+            <NavList />
+          </VStack>
+        </Box>
+        <Box flex={1} minW={0}>
+          {children}
+        </Box>
+      </Flex>
+    </>
   );
 }
 

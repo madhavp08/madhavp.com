@@ -5,7 +5,7 @@ import {
   Stack,
   VStack,
   Text,
-  Divider,
+  Box,
 } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { useEffect, useMemo, useState } from "react";
@@ -66,51 +66,53 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           piece ? `${piece.title} by ${piece.creator}` : site.description
         }
       />
-      <Flex direction="column" gap={5}>
-        {MEDIA_KINDS.map((kind) => (
-          <Stack key={kind} spacing={2}>
-            <Text fontWeight="bold" fontSize="smaller">
-              {MEDIA_LABELS[kind].toUpperCase()}
-            </Text>
-            <Bookshelf
-              items={shelves[kind]}
-              activeSlug={activeSlug}
-              filterId={`paper-${kind}`}
-              onSelect={select}
-            />
-          </Stack>
-        ))}
-        {piece && (
-          <Stack spacing={5}>
-            <Divider />
-            <Flex
-              direction={{ base: "column", sm: "row" }}
-              align="flex-start"
-              gap={6}
-            >
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        align="flex-start"
+        gap={{ base: 6, md: 8 }}
+      >
+        <Flex direction="column" gap={5} flex={1} minW={0}>
+          {MEDIA_KINDS.map((kind) => (
+            <Stack key={kind} spacing={2}>
+              <Text fontWeight="bold" fontSize="smaller">
+                {MEDIA_LABELS[kind].toUpperCase()}
+              </Text>
+              <Bookshelf
+                items={shelves[kind]}
+                activeSlug={activeSlug}
+                onSelect={select}
+              />
+            </Stack>
+          ))}
+        </Flex>
+        <Box
+          w={{ md: "280px" }}
+          flexShrink={0}
+          position={{ md: "sticky" }}
+          top={{ md: 10 }}
+          alignSelf={{ md: "flex-start" }}
+        >
+          {piece && (
+            <VStack align="flex-start" spacing={3}>
               <Image
                 border="1px solid"
                 borderColor="gray.600"
                 src={piece.coverImage}
                 alt={piece.title}
-                height={{ base: "140px", sm: "180px", md: "220px" }}
+                height={{ base: "160px", md: "200px" }}
               />
-              <VStack align="flex-start" flexGrow={1} spacing={2}>
-                <Heading size="xl">{piece.title}</Heading>
-                <Text color="gray.400" fontSize="xl">
-                  {piece.creator}
-                </Text>
-                <Prose>
-                  <MDXRemote
-                    compiledSource={piece.notes}
-                    scope={{}}
-                    frontmatter={{}}
-                  />
-                </Prose>
-              </VStack>
-            </Flex>
-          </Stack>
-        )}
+              <Heading size="md">{piece.title}</Heading>
+              <Text color="gray.400">{piece.creator}</Text>
+              <Prose>
+                <MDXRemote
+                  compiledSource={piece.notes}
+                  scope={{}}
+                  frontmatter={{}}
+                />
+              </Prose>
+            </VStack>
+          )}
+        </Box>
       </Flex>
     </>
   );

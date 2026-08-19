@@ -92,6 +92,10 @@ The page is a media catalog, not a shortlist of favorites. Nav and route are Med
 
 Spotify has an official API, so albums can be pulled after a one-time OAuth and env secrets. Letterboxd does not grant API access for personal sites; diary RSS or a CSV export can still fill movies. Goodreads shut its API; a public shelf RSS or a CSV export can still fill books. Anything those feeds miss can be added by hand in the JSON.
 
+## 2026-08-18 — Notes sit beside the shelf, and spines stay put
+
+The bible opens a book in the row and puts notes underneath, which shoved later spines away from the cursor and left a wide empty column on both sides. Notes and the cover now sit in a side panel. Spines keep a fixed width so the next item stays where it was. The page shell is a closer nav-plus-content row instead of a narrow centered column with a 160px gap.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
