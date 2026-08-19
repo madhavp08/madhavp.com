@@ -9,6 +9,7 @@ export const site = {
     { label: "Favorites", href: FAVORITES_HREF },
   ],
   socials: [
+    { label: "Gmail", href: "mailto:madhav.pillai08@gmail.com" },
     { label: "GitHub", href: "https://github.com/madhavp08" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/madhavpillai" },
   ],
