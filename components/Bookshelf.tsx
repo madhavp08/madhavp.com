@@ -8,9 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useRouter } from "next/router";
 import { DM_Sans } from "next/font/google";
-import { FAVORITES_HREF } from "../lib/site";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: "400" });
 
@@ -26,6 +24,7 @@ interface BookshelfProps {
   items: ShelfItem[];
   activeSlug?: string;
   filterId: string;
+  onSelect: (slug?: string) => void;
 }
 
 const width = 41.5;
@@ -35,16 +34,14 @@ const coverWidth = `${width * 4}px`;
 const itemWidth = `${width * 5}px`;
 const itemHeight = `${height}px`;
 
-export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
-  const router = useRouter();
+export function Bookshelf({
+  items,
+  activeSlug,
+  filterId,
+  onSelect,
+}: BookshelfProps) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
-  const [itemIndex, setItemIndex] = React.useState(() =>
-    items.findIndex((item) => item.slug === activeSlug)
-  );
-
-  React.useEffect(() => {
-    setItemIndex(items.findIndex((item) => item.slug === activeSlug));
-  }, [activeSlug, items]);
+  const itemIndex = items.findIndex((item) => item.slug === activeSlug);
 
   function scrollBy(amount: number) {
     viewportRef.current?.scrollBy({ left: amount, behavior: "smooth" });
@@ -117,15 +114,7 @@ export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
                 key={item.slug}
                 type="button"
                 aria-label={item.title}
-                onClick={() => {
-                  if (isOpen) {
-                    setItemIndex(-1);
-                    router.push(FAVORITES_HREF);
-                  } else {
-                    setItemIndex(index);
-                    router.push(item.slug);
-                  }
-                }}
+                onClick={() => onSelect(isOpen ? undefined : item.slug)}
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -142,7 +131,7 @@ export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
                   border: "none",
                   background: "none",
                   cursor: "pointer",
-                  transition: "all 500ms ease",
+                  transition: "width 500ms ease, transform 500ms ease",
                 }}
               >
                 <Flex
@@ -155,26 +144,26 @@ export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
                   transformOrigin="right"
                   backgroundColor={item.spineColor}
                   color={item.textColor}
-                  transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${
-                    isOpen ? "-60deg" : "0deg"
-                  }) rotateZ(0deg) skew(0deg, 0deg)`}
-                  transition="all 500ms ease"
-                  filter="brightness(0.8) contrast(2)"
+                  transform={`rotateY(${isOpen ? "-60deg" : "0deg"})`}
+                  transition="transform 500ms ease"
+                  filter={isOpen ? "brightness(0.8) contrast(2)" : undefined}
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  <span
-                    style={{
-                      pointerEvents: "none",
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      zIndex: 50,
-                      height,
-                      width,
-                      opacity: 0.4,
-                      filter: `url(#${filterId})`,
-                    }}
-                  />
+                  {isOpen && (
+                    <span
+                      style={{
+                        pointerEvents: "none",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        zIndex: 50,
+                        height,
+                        width,
+                        opacity: 0.4,
+                        filter: `url(#${filterId})`,
+                      }}
+                    />
+                  )}
                   <Heading
                     mt="12px"
                     as="h2"
@@ -190,51 +179,37 @@ export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
                     {item.title}
                   </Heading>
                 </Flex>
-                <Box
-                  position="relative"
-                  flexShrink={0}
-                  overflow="hidden"
-                  transformOrigin="left"
-                  transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${
-                    isOpen ? "30deg" : "88.8deg"
-                  }) rotateZ(0deg) skew(0deg, 0deg)`}
-                  transition="all 500ms ease"
-                  filter="brightness(0.8) contrast(2)"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <span
-                    style={{
-                      pointerEvents: "none",
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                      zIndex: 50,
-                      height,
-                      width: width * 4,
-                      opacity: 0.4,
-                      filter: `url(#${filterId})`,
-                    }}
-                  />
-                  <span
-                    style={{
-                      pointerEvents: "none",
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      zIndex: 50,
-                      height,
-                      width: width * 4,
-                      background:
-                        "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
-                    }}
-                  />
-                  <Image
-                    src={item.coverImage}
-                    alt={item.title}
-                    width={coverWidth}
-                    height={itemHeight}
-                  />
-                </Box>
+                {isOpen && (
+                  <Box
+                    position="relative"
+                    flexShrink={0}
+                    overflow="hidden"
+                    transformOrigin="left"
+                    transform="rotateY(30deg)"
+                    filter="brightness(0.8) contrast(2)"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <span
+                      style={{
+                        pointerEvents: "none",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        zIndex: 50,
+                        height,
+                        width: width * 4,
+                        background:
+                          "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
+                      }}
+                    />
+                    <Image
+                      src={item.coverImage}
+                      alt={item.title}
+                      width={coverWidth}
+                      height={itemHeight}
+                    />
+                  </Box>
+                )}
               </button>
             );
           })}

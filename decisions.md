@@ -62,6 +62,10 @@ No scrolling should be required is now an explicit constitution rule. After ever
 
 The no-scroll rule made the shelves too small. Constitution now prefers the bible's size and spacing; the page may scroll. Shelves use the original 220px 3D spines, paper texture, and side arrows. Each row has twelve stand-in items so it reads as a full shelf until real books, movies, and albums replace them.
 
+## 2026-08-18 — Opening a favorite is client-side
+
+Clicking a spine was laggy because each click loaded a new page and every closed book still ran paper filters and cover images. Notes now load with the Favorites page. Clicks only update the URL in the browser. Filters and covers render for the open item.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

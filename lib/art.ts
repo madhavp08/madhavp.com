@@ -17,6 +17,7 @@ export interface Piece {
   textColor: string;
   slug: string;
   kind: ArtKind;
+  notes: string;
 }
 
 export function isArtKind(value: string): value is ArtKind {

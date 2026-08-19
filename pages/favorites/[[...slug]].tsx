@@ -8,6 +8,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "../../components/Layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote } from "next-mdx-remote";
@@ -18,30 +19,54 @@ import {
   isArtKind,
   Piece,
 } from "../../lib/art";
-import { getAllPieces, getPiece, getPieces } from "../../lib/art-content";
+import { getPieces } from "../../lib/art-content";
 import { Bookshelf } from "../../components/Bookshelf";
-import { Content } from "../../lib/mdx";
 import { NextSeo } from "next-seo";
 import { FAVORITES_HREF, site } from "../../lib/site";
 
 interface FavoritesProps {
   shelves: Record<ArtKind, Piece[]>;
-  piece?: Content<Piece>;
+  initialSlug?: string;
 }
 
-const Favorites: NextPageWithLayout<FavoritesProps> = ({ shelves, piece }) => {
+function slugFromPath(path: string) {
+  if (!path.startsWith(`${FAVORITES_HREF}/`)) {
+    return undefined;
+  }
+  return path;
+}
+
+const Favorites: NextPageWithLayout<FavoritesProps> = ({
+  shelves,
+  initialSlug,
+}) => {
+  const [activeSlug, setActiveSlug] = useState(initialSlug);
+
+  const allPieces = useMemo(
+    () => ART_KINDS.flatMap((kind) => shelves[kind]),
+    [shelves]
+  );
+  const piece = allPieces.find((item) => item.slug === activeSlug);
+
+  function select(slug?: string) {
+    setActiveSlug(slug);
+    window.history.pushState(null, "", slug || FAVORITES_HREF);
+  }
+
+  useEffect(() => {
+    function onPop() {
+      setActiveSlug(slugFromPath(window.location.pathname));
+    }
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   return (
     <>
       <NextSeo
-        title={
-          piece
-            ? `${piece.metadata.title} | ${site.name}`
-            : `Favorites | ${site.name}`
-        }
+        title={piece ? `${piece.title} | ${site.name}` : `Favorites | ${site.name}`}
         description={
-          piece
-            ? `${piece.metadata.title} by ${piece.metadata.creator}`
-            : site.description
+          piece ? `${piece.title} by ${piece.creator}` : site.description
         }
       />
       <Flex direction="column" gap={8}>
@@ -52,8 +77,9 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({ shelves, piece }) => {
             </Text>
             <Bookshelf
               items={shelves[kind]}
-              activeSlug={piece?.metadata.slug}
+              activeSlug={activeSlug}
               filterId={`paper-${kind}`}
+              onSelect={select}
             />
           </Stack>
         ))}
@@ -68,18 +94,18 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({ shelves, piece }) => {
               <Image
                 border="1px solid"
                 borderColor="gray.200"
-                src={piece.metadata.coverImage}
-                alt={piece.metadata.title}
+                src={piece.coverImage}
+                alt={piece.title}
                 height={{ base: "140px", sm: "180px", md: "220px" }}
               />
               <VStack align="flex-start" flexGrow={1} spacing={2}>
-                <Heading size="xl">{piece.metadata.title}</Heading>
+                <Heading size="xl">{piece.title}</Heading>
                 <Text color="gray.400" fontSize="xl">
-                  {piece.metadata.creator}
+                  {piece.creator}
                 </Text>
                 <Prose>
                   <MDXRemote
-                    compiledSource={piece.source}
+                    compiledSource={piece.notes}
                     scope={{}}
                     frontmatter={{}}
                   />
@@ -98,7 +124,12 @@ export default Favorites;
 Favorites.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticPaths() {
-  const pieces = await getAllPieces();
+  const shelves = {
+    books: await getPieces("books"),
+    movies: await getPieces("movies"),
+    music: await getPieces("music"),
+  };
+  const pieces = ART_KINDS.flatMap((kind) => shelves[kind]);
   const prefix = `${FAVORITES_HREF}/`;
 
   return {
@@ -135,8 +166,11 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     };
   }
 
-  const piece = await getPiece(params.slug[0], params.slug[1]);
-  if (!piece) {
+  const initialSlug = `${FAVORITES_HREF}/${params.slug[0]}/${params.slug[1]}`;
+  const exists = ART_KINDS.flatMap((kind) => shelves[kind]).some(
+    (item) => item.slug === initialSlug
+  );
+  if (!exists) {
     return {
       redirect: {
         destination: FAVORITES_HREF,
@@ -145,6 +179,6 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   }
 
   return {
-    props: { shelves, piece },
+    props: { shelves, initialSlug },
   };
 }
