@@ -4,6 +4,22 @@ Edit `content/media.json`. Each shelf is an array. Add an object to add an item.
 
 This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand.
 
+## Projects
+
+Edit `content/projects.json`. Add an object to add a project. Delete it to remove it.
+
+```json
+{
+  "slug": "my-project",
+  "title": "My Project",
+  "blurb": "One short sentence.",
+  "demo": "https://example.com",
+  "github": "https://github.com/madhavp08/my-project"
+}
+```
+
+Leave `demo` out if there is no live site. `github` is required.
+
 ## A book
 
 ```json

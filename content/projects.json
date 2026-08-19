@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "phrase-race",
+    "title": "PhraseRace",
+    "blurb": "Monkeytype, but you speak the words instead of typing them.",
+    "demo": "https://phrase-race-alpha.vercel.app",
+    "github": "https://github.com/madhavp08/phrase-race"
+  },
+  {
+    "slug": "gotcha",
+    "title": "Gotcha",
+    "blurb": "An AI camera that spots shoplifting for small shops. Bitcamp 2026.",
+    "demo": "https://gotchalive.us",
+    "github": "https://github.com/madhavp08/Gotcha"
+  },
+  {
+    "slug": "vardict",
+    "title": "VARdict",
+    "blurb": "A Chrome extension that lets you vote on cards and VAR while you watch soccer.",
+    "github": "https://github.com/madhavp08/soccer-chrome-extension"
+  },
+  {
+    "slug": "youtube-transcript-builder",
+    "title": "YouTube Transcript Builder",
+    "blurb": "Paste a YouTube link, get a clean transcript. No ads, no paywall.",
+    "demo": "https://youtube-transcript-builder.vercel.app",
+    "github": "https://github.com/madhavp08/youtube-transcript-builder"
+  },
+  {
+    "slug": "bridge-umd",
+    "title": "BridgeUMD",
+    "blurb": "A chat that points UMD students in crisis to real campus resources.",
+    "github": "https://github.com/madhavp08/BridgeUMD"
+  },
+  {
+    "slug": "canvas-news-feed",
+    "title": "Canvas News Feed",
+    "blurb": "Checks a Canvas class page and emails you when something important shows up.",
+    "github": "https://github.com/madhavp08/canvas-news-feed-system"
+  },
+  {
+    "slug": "instagram-unfollowing-checker",
+    "title": "Instagram Unfollowing Checker",
+    "blurb": "See who does not follow you back on Instagram.",
+    "github": "https://github.com/madhavp08/instagram-unfollowing-checker"
+  }
+]
