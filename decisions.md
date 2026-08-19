@@ -44,6 +44,20 @@ Content lives in `content/art/{books,movies,music}` as MDX, same idea as the bib
 
 The constitution now says never to compromise or forget about speed and reliability. The Art shelves dropped the custom scroll loop, paper SVG filter, and generate-content step. Native overflow scrolling is simpler and less likely to break. MDX files are read at build time, so `index.json` and `scripts/generate-content.mjs` are gone. Unused `react-icons` is gone too.
 
+## 2026-08-18 — Art fits on a 14-inch MacBook Pro with no scrolling
+
+The Art page must not scroll on a 14-inch MacBook Pro. Shelf size is viewport-relative so three rows stay on one screen, and it shrinks further when a piece is open so the cover and note still fit. The bible's `10em` bottom padding is gone because it forced a scrollbar. Notes on Art should stay short enough for that single screen.
+
+## 2026-08-18 — The section is Favorites, not Art
+
+The nav label and route are Favorites at `/favorites`. `/art` redirects there so old links still work. Content files stay under `content/art` because that is just the folder on disk.
+
+## 2026-08-18 — Home copy comes from the resume
+
+The homepage and social links use facts from Madhav's resume: name, UMD CS and math [expected May 2028], internships at Sardine and Easy Dynamics, recent projects, interests, GitHub, and LinkedIn. Phone number and email stay off the public site. Favorites shelves are still stand-ins because the resume does not name specific books, movies, or albums.
+
+No scrolling should be required is now an explicit constitution rule. After every change, commit and push to GitHub.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

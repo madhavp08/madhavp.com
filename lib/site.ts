@@ -1,10 +1,15 @@
+export const FAVORITES_HREF = "/favorites";
+
 export const site = {
-  name: "Madhav P.",
-  description: "about me + art",
+  name: "Madhav Pillai",
+  description: "about me + favorites",
   url: "https://madhavp.com",
   navigation: [
     { label: "Home", href: "/" },
-    { label: "Art", href: "/art" },
+    { label: "Favorites", href: FAVORITES_HREF },
   ],
-  socials: [] as { label: string; href: string }[],
+  socials: [
+    { label: "GitHub", href: "https://github.com/madhavp08" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/madhavpillai" },
+  ],
 };

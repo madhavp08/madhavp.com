@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { ART_KINDS, ArtKind, Piece } from "./art";
 import { getMdxContent, MaybeContent } from "./mdx";
+import { FAVORITES_HREF } from "./site";
 
 export async function getPieces(kind: ArtKind): Promise<Piece[]> {
   const basePath = path.join(process.cwd(), "content", "art", kind);
@@ -19,7 +20,7 @@ export async function getPieces(kind: ArtKind): Promise<Piece[]> {
       return {
         ...(source.frontmatter as Omit<Piece, "kind" | "slug">),
         kind,
-        slug: `/art/${kind}/${fileName.replace(/\.mdx$/, "")}`,
+        slug: `${FAVORITES_HREF}/${kind}/${fileName.replace(/\.mdx$/, "")}`,
       };
     })
   );
@@ -43,7 +44,7 @@ export async function getPiece(
     metadata: {
       ...piece.metadata,
       kind,
-      slug: `/art/${kind}/${slug}`,
+      slug: `${FAVORITES_HREF}/${kind}/${slug}`,
     },
     source: piece.source,
   };

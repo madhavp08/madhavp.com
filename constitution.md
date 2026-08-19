@@ -20,6 +20,7 @@ Ground rules for building madhavp.com
 - Do not add features, libraries, or abstractions that were not asked for
 - Ask before inventing personal facts, bio details, or public identity claims
 - Never compromise or forget about speed and reliability
+- After every change, commit and push to GitHub
 
 ## Code
 
@@ -37,6 +38,8 @@ Ground rules for building madhavp.com
 - This is a personal site, not a product
 - Content and clarity beat cleverness
 - Pages should load fast and read well on a phone
+- No scrolling should be required
+- Pages must fit on a 14-inch MacBook Pro without scrolling
 - Accessibility basics are required: real headings, readable contrast, keyboard-usable links
 - If a page needs more than a short explanation to understand, it is too complicated
 
@@ -54,4 +57,4 @@ Ground rules for building madhavp.com
 - Default to no: auth, CMS, database, analytics suite, or extra services
 - Add a dependency only when the bible uses it or the work is clearly harder without it
 - Secrets stay out of git
-- Do not commit unless asked
+- After every change, commit and push to GitHub
