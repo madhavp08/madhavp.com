@@ -58,6 +58,10 @@ The homepage and social links use facts from Madhav's resume: name, UMD CS and m
 
 No scrolling should be required is now an explicit constitution rule. After every change, commit and push to GitHub.
 
+## 2026-08-18 — Favorites match the bible shelf, and scrolling is allowed
+
+The no-scroll rule made the shelves too small. Constitution now prefers the bible's size and spacing; the page may scroll. Shelves use the original 220px 3D spines, paper texture, and side arrows. Each row has twelve stand-in items so it reads as a full shelf until real books, movies, and albums replace them.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

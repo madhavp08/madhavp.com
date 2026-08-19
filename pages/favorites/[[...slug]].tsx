@@ -44,33 +44,37 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({ shelves, piece }) => {
             : site.description
         }
       />
-      <Flex direction="column" gap={4} overflow="hidden">
+      <Flex direction="column" gap={8}>
         {ART_KINDS.map((kind) => (
-          <Stack key={kind} spacing={1}>
-            <Text fontWeight="bold" fontSize="xs">
+          <Stack key={kind} spacing={3}>
+            <Text fontWeight="bold" fontSize="smaller">
               {ART_LABELS[kind].toUpperCase()}
             </Text>
             <Bookshelf
               items={shelves[kind]}
               activeSlug={piece?.metadata.slug}
-              compact={!!piece}
+              filterId={`paper-${kind}`}
             />
           </Stack>
         ))}
         {piece && (
-          <Stack spacing={3} flex="1" minH={0}>
+          <Stack spacing={5}>
             <Divider />
-            <Flex direction="row" align="flex-start" gap={4}>
+            <Flex
+              direction={{ base: "column", sm: "row" }}
+              align="flex-start"
+              gap={6}
+            >
               <Image
                 border="1px solid"
                 borderColor="gray.200"
                 src={piece.metadata.coverImage}
                 alt={piece.metadata.title}
-                height="18vh"
+                height={{ base: "140px", sm: "180px", md: "220px" }}
               />
-              <VStack align="flex-start" flexGrow={1} spacing={1}>
-                <Heading size="md">{piece.metadata.title}</Heading>
-                <Text color="gray.400" fontSize="md">
+              <VStack align="flex-start" flexGrow={1} spacing={2}>
+                <Heading size="xl">{piece.metadata.title}</Heading>
+                <Text color="gray.400" fontSize="xl">
                   {piece.metadata.creator}
                 </Text>
                 <Prose>

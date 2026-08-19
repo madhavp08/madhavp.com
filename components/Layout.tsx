@@ -1,4 +1,4 @@
-import { Container, VStack, Text, Flex, HStack, Link } from "@chakra-ui/react";
+import { Container, VStack, Text, Flex, Box, HStack, Link } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { site } from "../lib/site";
@@ -61,8 +61,8 @@ function Layout({ children }: PropsWithChildren) {
   return (
     <Container
       position="relative"
-      mt={{ base: 14, lg: 8 }}
-      pb={{ base: 6, lg: 8 }}
+      mt={{ base: 16 }}
+      pb={{ base: 8, md: 24 }}
     >
       <Flex
         position="absolute"
@@ -75,6 +75,15 @@ function Layout({ children }: PropsWithChildren) {
         </VStack>
       </Flex>
       <Container width={{ md: "container.md" }} position="relative">
+        <Box
+          width="100%"
+          bg="white"
+          height={16}
+          position="fixed"
+          top={0}
+          zIndex={100}
+          display={{ base: "none", lg: "block" }}
+        />
         <Flex
           position="fixed"
           top={0}

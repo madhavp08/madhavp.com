@@ -38,8 +38,7 @@ Ground rules for building madhavp.com
 - This is a personal site, not a product
 - Content and clarity beat cleverness
 - Pages should load fast and read well on a phone
-- No scrolling should be required
-- Pages must fit on a 14-inch MacBook Pro without scrolling
+- Match the bible's size and spacing; scrolling is fine when the content needs it
 - Accessibility basics are required: real headings, readable contrast, keyboard-usable links
 - If a page needs more than a short explanation to understand, it is too complicated
 

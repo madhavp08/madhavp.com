@@ -7,7 +7,10 @@ import { FAVORITES_HREF } from "./site";
 
 export async function getPieces(kind: ArtKind): Promise<Piece[]> {
   const basePath = path.join(process.cwd(), "content", "art", kind);
-  const files = fs.readdirSync(basePath).filter((file) => file.endsWith(".mdx"));
+  const files = fs
+    .readdirSync(basePath)
+    .filter((file) => file.endsWith(".mdx"))
+    .sort();
 
   return Promise.all(
     files.map(async (fileName) => {

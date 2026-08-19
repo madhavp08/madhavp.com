@@ -1,6 +1,18 @@
-import { Box, Flex, Heading, Image, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import React from "react";
 import { useRouter } from "next/router";
+import { DM_Sans } from "next/font/google";
 import { FAVORITES_HREF } from "../lib/site";
+
+const dmSans = DM_Sans({ subsets: ["latin"], weight: "400" });
 
 export interface ShelfItem {
   title: string;
@@ -13,91 +25,242 @@ export interface ShelfItem {
 interface BookshelfProps {
   items: ShelfItem[];
   activeSlug?: string;
-  compact?: boolean;
+  filterId: string;
 }
 
-const RATIO = 41.5 / 220;
+const width = 41.5;
+const height = 220;
+const spineWidth = `${width}px`;
+const coverWidth = `${width * 4}px`;
+const itemWidth = `${width * 5}px`;
+const itemHeight = `${height}px`;
 
-export function Bookshelf({ items, activeSlug, compact = false }: BookshelfProps) {
+export function Bookshelf({ items, activeSlug, filterId }: BookshelfProps) {
   const router = useRouter();
-  const heightVh = compact ? 10.5 : 15;
-  const height = `${heightVh}vh`;
-  const spineWidth = `${heightVh * RATIO}vh`;
-  const coverWidth = `${heightVh * RATIO * 4}vh`;
+  const viewportRef = React.useRef<HTMLDivElement>(null);
+  const [itemIndex, setItemIndex] = React.useState(() =>
+    items.findIndex((item) => item.slug === activeSlug)
+  );
+
+  React.useEffect(() => {
+    setItemIndex(items.findIndex((item) => item.slug === activeSlug));
+  }, [activeSlug, items]);
+
+  function scrollBy(amount: number) {
+    viewportRef.current?.scrollBy({ left: amount, behavior: "smooth" });
+  }
 
   return (
-    <HStack overflowX="hidden" gap={1} align="center">
-      {items.map((item) => {
-        const isOpen = item.slug === activeSlug;
+    <>
+      <svg
+        style={{
+          position: "absolute",
+          inset: 0,
+          visibility: "hidden",
+        }}
+      >
+        <defs>
+          <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.9"
+              numOctaves="8"
+              result="noise"
+            />
+            <feDiffuseLighting
+              in="noise"
+              lightingColor="white"
+              surfaceScale="1"
+              result="diffLight"
+            >
+              <feDistantLight azimuth="45" elevation="35" />
+            </feDiffuseLighting>
+          </filter>
+        </defs>
+      </svg>
 
-        return (
-          <button
-            key={item.slug}
+      <Box position="relative">
+        <Box
+          position="absolute"
+          left={{ base: "-28px", md: "-36px" }}
+          height="100%"
+          zIndex={2}
+        >
+          <Center
+            as="button"
             type="button"
-            aria-label={item.title}
-            onClick={() => router.push(isOpen ? FAVORITES_HREF : item.slug)}
-            style={{
-              display: "flex",
-              flexShrink: 0,
-              width: isOpen ? `${heightVh * RATIO * 5}vh` : spineWidth,
-              height,
-              perspective: 1000,
-              WebkitPerspective: 1000,
-              padding: 0,
-              border: "none",
-              background: "none",
-              cursor: "pointer",
-              outline: "none",
-              transition: "width 500ms ease",
-            }}
+            aria-label="Scroll left"
+            borderRadius="md"
+            height="100%"
+            width="28px"
+            onClick={() => scrollBy(-(width + 12) * 4)}
+            _hover={{ bg: "gray.100" }}
           >
-            <Flex
-              justify="center"
-              width={spineWidth}
-              height={height}
-              flexShrink={0}
-              transformOrigin="right"
-              backgroundColor={item.spineColor}
-              color={item.textColor}
-              transform={`rotateY(${isOpen ? "-60deg" : "0deg"})`}
-              transition="transform 500ms ease"
-              filter="brightness(0.8) contrast(2)"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <Heading
-                mt="0.4em"
-                as="h2"
-                fontSize="xs"
-                fontFamily={`"DM Sans", sans-serif`}
-                style={{ writingMode: "vertical-rl" }}
-                userSelect="none"
-                textOverflow="ellipsis"
-                whiteSpace="nowrap"
-                overflow="hidden"
-                maxHeight={`calc(${height} - 0.8em)`}
+            <Text fontSize="sm">‹</Text>
+          </Center>
+        </Box>
+        <HStack
+          ref={viewportRef}
+          alignItems="center"
+          gap={1}
+          overflowX="auto"
+          cursor="grab"
+          css={{
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          {items.map((item, index) => {
+            const isOpen = index === itemIndex;
+            return (
+              <button
+                key={item.slug}
+                type="button"
+                aria-label={item.title}
+                onClick={() => {
+                  if (isOpen) {
+                    setItemIndex(-1);
+                    router.push(FAVORITES_HREF);
+                  } else {
+                    setItemIndex(index);
+                    router.push(item.slug);
+                  }
+                }}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  outline: "none",
+                  flexShrink: 0,
+                  width: isOpen ? itemWidth : spineWidth,
+                  height,
+                  perspective: "1000px",
+                  WebkitPerspective: "1000px",
+                  gap: "0px",
+                  padding: 0,
+                  border: "none",
+                  background: "none",
+                  cursor: "pointer",
+                  transition: "all 500ms ease",
+                }}
               >
-                {item.title}
-              </Heading>
-            </Flex>
-            <Box
-              position="relative"
-              overflow="hidden"
-              transformOrigin="left"
-              transform={`rotateY(${isOpen ? "30deg" : "88.8deg"})`}
-              transition="transform 500ms ease"
-              filter="brightness(0.8) contrast(2)"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <Image
-                src={item.coverImage}
-                alt=""
-                width={coverWidth}
-                height={height}
-              />
-            </Box>
-          </button>
-        );
-      })}
-    </HStack>
+                <Flex
+                  position="relative"
+                  alignItems="flex-start"
+                  justifyContent="center"
+                  width={spineWidth}
+                  height={itemHeight}
+                  flexShrink={0}
+                  transformOrigin="right"
+                  backgroundColor={item.spineColor}
+                  color={item.textColor}
+                  transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${
+                    isOpen ? "-60deg" : "0deg"
+                  }) rotateZ(0deg) skew(0deg, 0deg)`}
+                  transition="all 500ms ease"
+                  filter="brightness(0.8) contrast(2)"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <span
+                    style={{
+                      pointerEvents: "none",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      zIndex: 50,
+                      height,
+                      width,
+                      opacity: 0.4,
+                      filter: `url(#${filterId})`,
+                    }}
+                  />
+                  <Heading
+                    mt="12px"
+                    as="h2"
+                    fontSize="xs"
+                    className={dmSans.className}
+                    style={{ writingMode: "vertical-rl" }}
+                    userSelect="none"
+                    textOverflow="ellipsis"
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    maxHeight={`${height - 24}px`}
+                  >
+                    {item.title}
+                  </Heading>
+                </Flex>
+                <Box
+                  position="relative"
+                  flexShrink={0}
+                  overflow="hidden"
+                  transformOrigin="left"
+                  transform={`translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(${
+                    isOpen ? "30deg" : "88.8deg"
+                  }) rotateZ(0deg) skew(0deg, 0deg)`}
+                  transition="all 500ms ease"
+                  filter="brightness(0.8) contrast(2)"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <span
+                    style={{
+                      pointerEvents: "none",
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      zIndex: 50,
+                      height,
+                      width: width * 4,
+                      opacity: 0.4,
+                      filter: `url(#${filterId})`,
+                    }}
+                  />
+                  <span
+                    style={{
+                      pointerEvents: "none",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      zIndex: 50,
+                      height,
+                      width: width * 4,
+                      background:
+                        "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
+                    }}
+                  />
+                  <Image
+                    src={item.coverImage}
+                    alt={item.title}
+                    width={coverWidth}
+                    height={itemHeight}
+                  />
+                </Box>
+              </button>
+            );
+          })}
+        </HStack>
+        <Box
+          position="absolute"
+          right={{ base: "-28px", md: "-36px" }}
+          pl="10px"
+          height="100%"
+          top={0}
+          zIndex={2}
+        >
+          <Center
+            as="button"
+            type="button"
+            aria-label="Scroll right"
+            height="100%"
+            borderRadius="md"
+            width="28px"
+            onClick={() => scrollBy((width + 12) * 4)}
+            _hover={{ bg: "gray.100" }}
+          >
+            <Text fontSize="sm">›</Text>
+          </Center>
+        </Box>
+      </Box>
+    </>
   );
 }
