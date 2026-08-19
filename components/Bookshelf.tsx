@@ -57,13 +57,14 @@ export function Bookshelf({
       return;
     }
 
+    const originX = clickX;
     const started = performance.now();
     let raf = 0;
 
     function tick(now: number) {
       const openEl = itemRefs.current[itemIndex];
       if (openEl && viewport) {
-        const diff = openEl.getBoundingClientRect().right - (clickX + 8);
+        const diff = openEl.getBoundingClientRect().right - (originX + 8);
         viewport.scrollLeft += diff;
       }
       if (now - started < 520) {

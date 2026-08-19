@@ -106,6 +106,10 @@ Nav order is Home, Media, Projects.
 
 Nav includes Projects at `/projects`. It is a deviation from the bible, which has no projects section. Each item is a short explanation from the GitHub repo. Clicking opens a side panel with a Demo link when the repo has a live site, and GitHub otherwise. The catalog is `content/projects.json` so add and remove stays the same idea as media. This site and the Go learning repo are left out.
 
+## 2026-08-19 — Build has to typecheck
+
+`yarn build` is the bar for runnable. A TypeScript narrowing miss in the bookshelf scroll loop failed the Next typecheck, so that loop now copies the click X after the null check.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
