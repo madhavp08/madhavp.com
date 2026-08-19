@@ -1,12 +1,12 @@
-export const FAVORITES_HREF = "/favorites";
+export const MEDIA_HREF = "/media";
 
 export const site = {
   name: "Madhav Pillai",
-  description: "about me + favorites",
+  description: "about me + media",
   url: "https://madhavp.com",
   navigation: [
     { label: "Home", href: "/" },
-    { label: "Favorites", href: FAVORITES_HREF },
+    { label: "Media", href: MEDIA_HREF },
   ],
   socials: [
     { label: "Gmail", href: "mailto:madhav.pillai08@gmail.com" },

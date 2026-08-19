@@ -86,6 +86,12 @@ Favorites still uses the bible shelf size, with less page padding and row gap so
 
 The bible is a light site. This site is dark only: dark page background, light type, no color-mode toggle, and no following the system theme. Nav, headings, body copy, and links were retinted so they stay readable on gray.900.
 
+## 2026-08-18 — The section is Media, not Favorites
+
+The page is a media catalog, not a shortlist of favorites. Nav and route are Media at `/media`. `/favorites` and `/art` redirect there. Catalog lives in `content/media.json`. Manual add and remove stays the default. Spotify, Letterboxd, and Goodreads are planned later and will write into that same catalog when they are wired. Cover files still live under `public/art` because that is only a folder on disk.
+
+Spotify has an official API, so albums can be pulled after a one-time OAuth and env secrets. Letterboxd does not grant API access for personal sites; diary RSS or a CSV export can still fill movies. Goodreads shut its API; a public shelf RSS or a CSV export can still fill books. Anything those feeds miss can be added by hand in the JSON.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

@@ -1,6 +1,8 @@
-# Adding and removing favorites
+# Adding and removing media
 
-Edit `content/favorites.json`. Each shelf is an array. Add an object to add an item. Delete the object to remove it. Then the site updates on the next refresh.
+Edit `content/media.json`. Each shelf is an array. Add an object to add an item. Delete the object to remove it. Then the site updates on the next refresh.
+
+This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand.
 
 ## A book
 
@@ -12,7 +14,7 @@ Edit `content/favorites.json`. Each shelf is an array. Add an object to add an i
   "cover": "isbn:9780061122415",
   "spineColor": "#1b2838",
   "textColor": "#fff",
-  "notes": "Why this book matters to me."
+  "notes": "A short note."
 }
 ```
 
@@ -46,3 +48,15 @@ Drop the image in `public/art/movies/` or `public/art/music/`.
 ## Spine colors
 
 `spineColor` is the thin side of the 3D item. `textColor` is the title on that spine. Pick a dark hex and `#fff` for most titles.
+
+## Later: Spotify, Letterboxd, Goodreads
+
+None of these are connected yet. Manual JSON always works as a fallback.
+
+**Spotify (music) — possible.** Official API. Needs a Spotify developer app, a one-time login, and secrets in Vercel env vars. Can pull saved albums and cover art. Refresh tokens now expire after six months, so login has to be redone occasionally.
+
+**Letterboxd (movies) — no personal API.** Letterboxd does not grant API keys for personal sites. Two workable paths later: the public diary RSS feed (`https://letterboxd.com/USERNAME/rss/`) or a CSV export from Letterboxd settings. Covers would come from that feed or a poster URL you paste in.
+
+**Goodreads (books) — no official API.** Goodreads shut its API. Two workable paths later: a public shelf RSS feed or a CSV export from Goodreads. ISBN in that data can still use Open Library covers the same way as a hand-added book.
+
+When you are ready to connect one, send the Spotify app credentials, Letterboxd username, and/or Goodreads user id.

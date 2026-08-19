@@ -13,44 +13,41 @@ import Layout from "../../components/Layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote } from "next-mdx-remote";
 import {
-  ART_KINDS,
-  ART_LABELS,
-  ArtKind,
-  isArtKind,
+  MEDIA_KINDS,
+  MEDIA_LABELS,
+  MediaKind,
+  isMediaKind,
   Piece,
-} from "../../lib/art";
-import { getPieces } from "../../lib/art-content";
+} from "../../lib/media";
+import { getPieces } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
 import { NextSeo } from "next-seo";
-import { FAVORITES_HREF, site } from "../../lib/site";
+import { MEDIA_HREF, site } from "../../lib/site";
 
-interface FavoritesProps {
-  shelves: Record<ArtKind, Piece[]>;
+interface MediaProps {
+  shelves: Record<MediaKind, Piece[]>;
   initialSlug?: string;
 }
 
 function slugFromPath(path: string) {
-  if (!path.startsWith(`${FAVORITES_HREF}/`)) {
+  if (!path.startsWith(`${MEDIA_HREF}/`)) {
     return undefined;
   }
   return path;
 }
 
-const Favorites: NextPageWithLayout<FavoritesProps> = ({
-  shelves,
-  initialSlug,
-}) => {
+const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const [activeSlug, setActiveSlug] = useState(initialSlug);
 
   const allPieces = useMemo(
-    () => ART_KINDS.flatMap((kind) => shelves[kind]),
+    () => MEDIA_KINDS.flatMap((kind) => shelves[kind]),
     [shelves]
   );
   const piece = allPieces.find((item) => item.slug === activeSlug);
 
   function select(slug?: string) {
     setActiveSlug(slug);
-    window.history.pushState(null, "", slug || FAVORITES_HREF);
+    window.history.pushState(null, "", slug || MEDIA_HREF);
   }
 
   useEffect(() => {
@@ -64,16 +61,16 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({
   return (
     <>
       <NextSeo
-        title={piece ? `${piece.title} | ${site.name}` : `Favorites | ${site.name}`}
+        title={piece ? `${piece.title} | ${site.name}` : `Media | ${site.name}`}
         description={
           piece ? `${piece.title} by ${piece.creator}` : site.description
         }
       />
       <Flex direction="column" gap={5}>
-        {ART_KINDS.map((kind) => (
+        {MEDIA_KINDS.map((kind) => (
           <Stack key={kind} spacing={2}>
             <Text fontWeight="bold" fontSize="smaller">
-              {ART_LABELS[kind].toUpperCase()}
+              {MEDIA_LABELS[kind].toUpperCase()}
             </Text>
             <Bookshelf
               items={shelves[kind]}
@@ -119,9 +116,9 @@ const Favorites: NextPageWithLayout<FavoritesProps> = ({
   );
 };
 
-export default Favorites;
+export default Media;
 
-Favorites.getLayout = (page) => <Layout>{page}</Layout>;
+Media.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticPaths() {
   const shelves = {
@@ -129,8 +126,8 @@ export async function getStaticPaths() {
     movies: await getPieces("movies"),
     music: await getPieces("music"),
   };
-  const pieces = ART_KINDS.flatMap((kind) => shelves[kind]);
-  const prefix = `${FAVORITES_HREF}/`;
+  const pieces = MEDIA_KINDS.flatMap((kind) => shelves[kind]);
+  const prefix = `${MEDIA_HREF}/`;
 
   return {
     paths: [
@@ -158,22 +155,22 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     };
   }
 
-  if (params.slug.length !== 2 || !isArtKind(params.slug[0])) {
+  if (params.slug.length !== 2 || !isMediaKind(params.slug[0])) {
     return {
       redirect: {
-        destination: FAVORITES_HREF,
+        destination: MEDIA_HREF,
       },
     };
   }
 
-  const initialSlug = `${FAVORITES_HREF}/${params.slug[0]}/${params.slug[1]}`;
-  const exists = ART_KINDS.flatMap((kind) => shelves[kind]).some(
+  const initialSlug = `${MEDIA_HREF}/${params.slug[0]}/${params.slug[1]}`;
+  const exists = MEDIA_KINDS.flatMap((kind) => shelves[kind]).some(
     (item) => item.slug === initialSlug
   );
   if (!exists) {
     return {
       redirect: {
-        destination: FAVORITES_HREF,
+        destination: MEDIA_HREF,
       },
     };
   }

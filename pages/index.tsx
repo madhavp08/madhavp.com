@@ -1,6 +1,6 @@
 import { Heading, Text, UnorderedList, ListItem, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FAVORITES_HREF } from "../lib/site";
+import { MEDIA_HREF } from "../lib/site";
 
 export default function Home() {
   return (
@@ -31,8 +31,8 @@ export default function Home() {
       </UnorderedList>
       <Text mt={4}>
         Checkout my{" "}
-        <Link as={NextLink} href={FAVORITES_HREF} color="blue.300">
-          favorites
+        <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
+          media
         </Link>
         .
       </Text>
