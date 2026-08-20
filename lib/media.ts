@@ -18,6 +18,7 @@ export interface Piece {
   kind: MediaKind;
   notes: string;
   audio?: string;
+  lyrics?: { t: number; text: string }[];
 }
 
 export function isMediaKind(value: string): value is MediaKind {

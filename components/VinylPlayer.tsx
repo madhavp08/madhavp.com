@@ -1,11 +1,40 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { useEffect, useRef } from "react";
+
+interface LyricLine {
+  t: number;
+  text: string;
+}
 
 interface VinylPlayerProps {
   title: string;
   artist: string;
   cover: string;
   playing: boolean;
+  currentTime: number;
+  duration: number;
+  lyrics?: LyricLine[];
   onToggle: () => void;
+}
+
+function playhead(time: number, duration: number, lyrics: LyricLine[]) {
+  const end = lyrics[lyrics.length - 1]?.t ?? 0;
+  if (duration > 0 && end > duration + 1.5) {
+    return (time / duration) * end;
+  }
+  return time;
+}
+
+function activeIndex(lyrics: LyricLine[], time: number) {
+  let index = 0;
+  for (let i = 0; i < lyrics.length; i += 1) {
+    if (lyrics[i].t <= time) {
+      index = i;
+    } else {
+      break;
+    }
+  }
+  return index;
 }
 
 export function VinylPlayer({
@@ -13,115 +42,206 @@ export function VinylPlayer({
   artist,
   cover,
   playing,
+  currentTime,
+  duration,
+  lyrics,
   onToggle,
 }: VinylPlayerProps) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const lines = lyrics && lyrics.length ? lyrics : [];
+  const current = lines.length
+    ? activeIndex(lines, playhead(currentTime, duration, lines))
+    : 0;
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    const line = lineRefs.current[current];
+    if (!scroller || !line) {
+      return;
+    }
+    scroller.scrollTo({
+      top: line.offsetTop - scroller.clientHeight / 2 + line.offsetHeight / 2,
+      behavior: "smooth",
+    });
+  }, [current]);
+
+  useEffect(() => {
+    lineRefs.current = lineRefs.current.slice(0, lines.length);
+  }, [lines.length]);
+
   return (
-    <VStack align="center" spacing={5} w="100%">
-      <Box position="relative" w="220px" h="240px">
+    <Box position="relative" h="100%" w="100%" minH="320px" overflow="hidden">
+      {lines.length > 0 && (
         <Box
+          ref={scrollerRef}
           position="absolute"
-          left="18px"
-          top="18px"
-          w="184px"
-          h="184px"
-          borderRadius="full"
-          bg="black"
-          opacity={0.55}
-          filter="blur(14px)"
-        />
-        <Box
-          as="button"
-          type="button"
-          aria-label={playing ? `Pause ${title}` : `Play ${title}`}
-          onClick={onToggle}
-          position="absolute"
-          left="10px"
-          top="8px"
-          w="200px"
-          h="200px"
-          borderRadius="full"
-          overflow="hidden"
-          cursor="pointer"
-          boxShadow="0 0 0 3px #1a1a1a, 0 0 0 4px #3a3a3a"
-          bg="#111"
-          animation={playing ? "vinyl-spin 3.6s linear infinite" : undefined}
-          sx={{
-            backgroundImage: `
-              radial-gradient(circle at 50% 50%, transparent 28%, rgba(255,255,255,0.04) 29%, transparent 30%),
-              repeating-radial-gradient(circle at 50% 50%, #0a0a0a 0 1px, #161616 2px, #0d0d0d 3px),
-              linear-gradient(135deg, rgba(255,255,255,0.16), transparent 42%)
-            `,
+          inset={0}
+          overflowY="auto"
+          px={4}
+          css={{
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+            maskImage:
+              "linear-gradient(to bottom, transparent, black 16%, black 84%, transparent)",
           }}
         >
+          <Box h="42%" minH="140px" />
+          {lines.map((line, index) => {
+            const distance = Math.abs(index - current);
+            const isCurrent = index === current;
+            return (
+              <Text
+                key={`${line.t}-${index}`}
+                ref={(el) => {
+                  lineRefs.current[index] = el;
+                }}
+                textAlign="center"
+                py={2.5}
+                px={2}
+                fontSize={isCurrent ? "2xl" : distance === 1 ? "lg" : "md"}
+                fontWeight={isCurrent ? "semibold" : "normal"}
+                color={isCurrent ? "white" : distance < 3 ? "gray.300" : "gray.600"}
+                opacity={isCurrent ? 1 : distance === 1 ? 0.72 : distance < 3 ? 0.42 : 0.18}
+                textShadow={
+                  isCurrent
+                    ? "0 1px 18px rgba(0,0,0,0.85), 0 0 24px rgba(0,0,0,0.55)"
+                    : "0 1px 10px rgba(0,0,0,0.55)"
+                }
+                transition="color 200ms ease, opacity 200ms ease, font-size 200ms ease"
+                lineHeight="short"
+              >
+                {line.text}
+              </Text>
+            );
+          })}
+          <Box h="42%" minH="140px" />
+        </Box>
+      )}
+
+      <VStack
+        position="relative"
+        zIndex={1}
+        h="100%"
+        justify="center"
+        spacing={4}
+        pointerEvents="none"
+      >
+        <Box position="relative" w="248px" h="248px" pointerEvents="auto">
           <Box
+            as="button"
+            type="button"
+            aria-label={playing ? `Pause ${title}` : `Play ${title}`}
+            onClick={onToggle}
             position="absolute"
-            inset="31%"
+            left="16px"
+            top="16px"
+            w="216px"
+            h="216px"
             borderRadius="full"
             overflow="hidden"
-            boxShadow="0 0 0 3px #c4a574"
-            bgImage={`url(${cover})`}
-            bgSize="cover"
-            bgPosition="center"
-          />
+            cursor="pointer"
+            bg="transparent"
+            boxShadow="0 0 0 3px rgba(26,26,26,0.45), 0 0 0 4px rgba(90,90,90,0.4)"
+            animation={playing ? "vinyl-spin 3.6s linear infinite" : undefined}
+          >
+            <Box
+              position="absolute"
+              inset={0}
+              borderRadius="full"
+              bg="rgba(12,12,12,0.22)"
+              sx={{
+                backgroundImage: `
+                  radial-gradient(circle at 50% 50%, transparent 29%, rgba(255,255,255,0.1) 30%, transparent 31%),
+                  repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.07) 0 1px, rgba(8,8,8,0.28) 2px, rgba(18,18,18,0.2) 3px)
+                `,
+              }}
+            />
+            <Box
+              position="absolute"
+              inset="32%"
+              borderRadius="full"
+              overflow="hidden"
+              boxShadow="0 0 0 3px #c4a574"
+              bgImage={`url(${cover})`}
+              bgSize="cover"
+              bgPosition="center"
+            />
+            <Box
+              position="absolute"
+              left="50%"
+              top="50%"
+              w="10px"
+              h="10px"
+              ml="-5px"
+              mt="-5px"
+              borderRadius="full"
+              bg="#111"
+              boxShadow="inset 0 0 0 2px #c4a574"
+            />
+            <Box
+              position="absolute"
+              inset={0}
+              borderRadius="full"
+              pointerEvents="none"
+              bg="linear-gradient(135deg, rgba(255,255,255,0.18), transparent 42%, transparent 58%, rgba(0,0,0,0.18))"
+            />
+          </Box>
           <Box
             position="absolute"
-            left="50%"
-            top="50%"
-            w="10px"
-            h="10px"
-            ml="-5px"
-            mt="-5px"
-            borderRadius="full"
-            bg="#111"
-            boxShadow="inset 0 0 0 2px #c4a574"
-          />
-        </Box>
-        <Box
-          position="absolute"
-          right="6px"
-          top="-6px"
-          w="92px"
-          h="14px"
-          transformOrigin="12px 7px"
-          animation={playing ? "needle-drop 700ms ease forwards" : undefined}
-          transform={playing ? "rotate(18deg)" : "rotate(-28deg)"}
-          transition="transform 500ms ease"
-          pointerEvents="none"
-        >
-          <Box
-            position="absolute"
-            left="0"
-            top="0"
-            w="14px"
-            h="14px"
-            borderRadius="full"
-            bg="#b8b8b8"
-            boxShadow="0 0 0 2px #2a2a2a"
-          />
-          <Box
-            position="absolute"
-            left="10px"
-            top="5px"
-            w="78px"
-            h="4px"
-            bg="linear-gradient(90deg, #888, #ddd)"
-            borderRadius="sm"
-          />
-          <Box
-            position="absolute"
-            right="-2px"
+            right="4px"
             top="2px"
-            w="8px"
-            h="10px"
-            bg="#c0392b"
-            borderRadius="sm"
-          />
+            w="92px"
+            h="14px"
+            transformOrigin="12px 7px"
+            animation={playing ? "needle-drop 700ms ease forwards" : undefined}
+            transform={playing ? "rotate(18deg)" : "rotate(-28deg)"}
+            transition="transform 500ms ease"
+            pointerEvents="none"
+          >
+            <Box
+              position="absolute"
+              left="0"
+              top="0"
+              w="14px"
+              h="14px"
+              borderRadius="full"
+              bg="#b8b8b8"
+              boxShadow="0 0 0 2px #2a2a2a"
+            />
+            <Box
+              position="absolute"
+              left="10px"
+              top="5px"
+              w="78px"
+              h="4px"
+              bg="linear-gradient(90deg, #888, #ddd)"
+              borderRadius="sm"
+            />
+            <Box
+              position="absolute"
+              right="-2px"
+              top="2px"
+              w="8px"
+              h="10px"
+              bg="#c0392b"
+              borderRadius="sm"
+            />
+          </Box>
         </Box>
-      </Box>
-      <VStack spacing={1} textAlign="center">
-        <Heading size="md">{title}</Heading>
-        <Text color="gray.400">{artist}</Text>
+        <VStack
+          spacing={1}
+          textAlign="center"
+          bg="rgba(17,17,17,0.42)"
+          backdropFilter="blur(6px)"
+          px={4}
+          py={1.5}
+          borderRadius="md"
+        >
+          <Heading size="md">{title}</Heading>
+          <Text color="gray.400">{artist}</Text>
+        </VStack>
       </VStack>
-    </VStack>
+    </Box>
   );
 }
