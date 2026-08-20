@@ -51,7 +51,7 @@ function NavList() {
   return (
     <>
       <VStack align="flex-start">
-        <Text fontWeight="bold" fontSize="xl">
+        <Text fontWeight="bold" fontSize="lg">
           NAVIGATION
         </Text>
         {site.navigation.map((item) => (
@@ -62,7 +62,7 @@ function NavList() {
       </VStack>
       {site.socials.length > 0 && (
         <VStack align="flex-start">
-          <Text fontWeight="bold" fontSize="xl">
+          <Text fontWeight="bold" fontSize="lg">
             SOCIALS
           </Text>
           {site.socials.map((item) => (
