@@ -13,7 +13,17 @@ interface VinylPlayerProps {
   playing: boolean;
   currentTime: number;
   lyrics?: LyricLine[];
+  duration: number;
   onToggle: () => void;
+}
+
+function clipLyrics(lyrics: LyricLine[], duration: number) {
+  const synced = lyrics.some((line) => line.t > 0);
+  if (!synced) {
+    return lyrics;
+  }
+  const end = duration > 0 ? duration : 30;
+  return lyrics.filter((line) => line.t <= end);
 }
 
 function activeIndex(lyrics: LyricLine[], time: number) {
@@ -37,12 +47,13 @@ export function VinylPlayer({
   cover,
   playing,
   currentTime,
+  duration,
   lyrics,
   onToggle,
 }: VinylPlayerProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const lines = lyrics && lyrics.length ? lyrics : [];
+  const lines = clipLyrics(lyrics && lyrics.length ? lyrics : [], duration);
   const synced = lines.some((line) => line.t > 0);
   const current = synced ? activeIndex(lines, currentTime) : -1;
 
