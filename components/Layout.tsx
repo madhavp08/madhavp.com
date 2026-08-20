@@ -29,7 +29,7 @@ function Navigation({
         _hover={{ color: "gray.50" }}
         transition="color 0.15s ease"
       >
-        <Text fontSize="lg">{children}</Text>
+        <Text fontSize="xl">{children}</Text>
       </Link>
     );
   }
@@ -42,7 +42,7 @@ function Navigation({
       _hover={{ color: "gray.50" }}
       transition="color 0.15s ease"
     >
-      <Text fontSize="lg">{children}</Text>
+      <Text fontSize="xl">{children}</Text>
     </Link>
   );
 }
@@ -51,7 +51,7 @@ function NavList() {
   return (
     <>
       <VStack align="flex-start">
-        <Text fontWeight="bold" fontSize="smaller">
+        <Text fontWeight="bold" fontSize="xs">
           NAVIGATION
         </Text>
         {site.navigation.map((item) => (
@@ -62,7 +62,7 @@ function NavList() {
       </VStack>
       {site.socials.length > 0 && (
         <VStack align="flex-start">
-          <Text fontWeight="bold" fontSize="smaller">
+          <Text fontWeight="bold" fontSize="xs">
             SOCIALS
           </Text>
           {site.socials.map((item) => (
@@ -111,7 +111,7 @@ function Layout({ children }: PropsWithChildren) {
         gap={{ lg: 10 }}
         align="flex-start"
       >
-        <Box display={{ base: "none", lg: "block" }} w="148px" flexShrink={0}>
+        <Box display={{ base: "none", lg: "block" }} w="168px" flexShrink={0}>
           <VStack position="sticky" top={10} align="flex-start" spacing={10}>
             <NavList />
           </VStack>
