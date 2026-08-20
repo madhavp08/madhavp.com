@@ -131,7 +131,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       />
       <Flex
         direction={{ base: "column", md: "row" }}
-        align="flex-start"
+        align={{ base: "flex-start", md: "stretch" }}
         gap={{ base: 6, md: 8 }}
       >
         <Flex direction="column" gap={12} flex={1} minW={0}>
@@ -150,13 +150,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           ))}
         </Flex>
         {piece?.kind === "music" ? (
-          <Box
-            position="fixed"
-            top="50%"
-            left="58%"
-            transform="translate(-50%, -50%)"
-            zIndex={6}
-          >
+          <Flex flex={1} minW="240px" align="center" justify="center">
             <Fade in>
               <VinylPlayer
                 title={piece.title}
@@ -166,8 +160,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                 onToggle={togglePlay}
               />
             </Fade>
-          </Box>
-        ) : (
+          </Flex>
+        ) : piece ? (
           <Box
             w={{ md: "280px" }}
             flexShrink={0}
@@ -175,23 +169,21 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
             top={{ md: 10 }}
             alignSelf={{ md: "flex-start" }}
           >
-            <Fade in={Boolean(piece)} unmountOnExit>
-              {piece ? (
-                <VStack align="flex-start" spacing={3}>
-                  <Heading size="md">{piece.title}</Heading>
-                  <Text color="gray.400">{piece.creator}</Text>
-                  <Prose>
-                    <MDXRemote
-                      compiledSource={piece.notes}
-                      scope={{}}
-                      frontmatter={{}}
-                    />
-                  </Prose>
-                </VStack>
-              ) : null}
+            <Fade in unmountOnExit>
+              <VStack align="flex-start" spacing={3}>
+                <Heading size="md">{piece.title}</Heading>
+                <Text color="gray.400">{piece.creator}</Text>
+                <Prose>
+                  <MDXRemote
+                    compiledSource={piece.notes}
+                    scope={{}}
+                    frontmatter={{}}
+                  />
+                </Prose>
+              </VStack>
             </Fade>
           </Box>
-        )}
+        ) : null}
       </Flex>
     </>
   );
