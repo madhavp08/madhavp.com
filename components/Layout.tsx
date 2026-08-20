@@ -106,7 +106,7 @@ function Layout({ children }: PropsWithChildren) {
         maxW="1240px"
         mx="auto"
         mt={{ base: 16, lg: 10 }}
-        pb={{ base: 6, md: 8 }}
+        pb={{ base: 5, md: 6 }}
         px={{ base: 5, md: 8 }}
         gap={{ lg: 10 }}
         align="flex-start"

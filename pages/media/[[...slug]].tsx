@@ -134,7 +134,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
         align={{ base: "flex-start", md: "stretch" }}
         gap={{ base: 6, md: 8 }}
       >
-        <Flex direction="column" gap={12} flex={1} minW={0}>
+        <Flex direction="column" gap={8} flex={1} minW={0}>
           {MEDIA_KINDS.map((kind) => (
             <Stack key={kind} spacing={2}>
               <Text fontWeight="bold" fontSize="smaller">
