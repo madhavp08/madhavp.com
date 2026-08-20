@@ -149,41 +149,46 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
             </Stack>
           ))}
         </Flex>
-        {piece?.kind === "music" ? (
-          <Flex flex={1} minW="240px" align="center" justify="center">
-            <Fade in>
-              <VinylPlayer
-                title={piece.title}
-                artist={piece.creator}
-                cover={piece.coverImage}
-                playing={playing}
-                onToggle={togglePlay}
-              />
-            </Fade>
-          </Flex>
-        ) : piece ? (
-          <Box
-            w={{ md: "280px" }}
-            flexShrink={0}
-            position={{ md: "sticky" }}
-            top={{ md: 10 }}
-            alignSelf={{ md: "flex-start" }}
-          >
-            <Fade in unmountOnExit>
-              <VStack align="flex-start" spacing={3}>
-                <Heading size="md">{piece.title}</Heading>
-                <Text color="gray.400">{piece.creator}</Text>
-                <Prose>
-                  <MDXRemote
-                    compiledSource={piece.notes}
-                    scope={{}}
-                    frontmatter={{}}
-                  />
-                </Prose>
-              </VStack>
-            </Fade>
-          </Box>
-        ) : null}
+        <Box
+          w={{ md: "280px" }}
+          flexShrink={0}
+          alignSelf={{ md: "stretch" }}
+        >
+          {piece?.kind === "music" ? (
+            <Flex h="100%" align="center" justify="center">
+              <Fade in>
+                <VinylPlayer
+                  title={piece.title}
+                  artist={piece.creator}
+                  cover={piece.coverImage}
+                  playing={playing}
+                  onToggle={togglePlay}
+                />
+              </Fade>
+            </Flex>
+          ) : (
+            <Box
+              position={{ md: "sticky" }}
+              top={{ md: 10 }}
+            >
+              <Fade in={Boolean(piece)} unmountOnExit>
+                {piece ? (
+                  <VStack align="flex-start" spacing={3}>
+                    <Heading size="md">{piece.title}</Heading>
+                    <Text color="gray.400">{piece.creator}</Text>
+                    <Prose>
+                      <MDXRemote
+                        compiledSource={piece.notes}
+                        scope={{}}
+                        frontmatter={{}}
+                      />
+                    </Prose>
+                  </VStack>
+                ) : null}
+              </Fade>
+            </Box>
+          )}
+        </Box>
       </Flex>
     </>
   );
