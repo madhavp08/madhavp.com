@@ -29,7 +29,7 @@ function Navigation({
         _hover={{ color: "gray.50" }}
         transition="color 0.15s ease"
       >
-        <Text fontSize="xl">{children}</Text>
+        <Text fontSize="md">{children}</Text>
       </Link>
     );
   }
@@ -42,7 +42,7 @@ function Navigation({
       _hover={{ color: "gray.50" }}
       transition="color 0.15s ease"
     >
-      <Text fontSize="xl">{children}</Text>
+      <Text fontSize="md">{children}</Text>
     </Link>
   );
 }
@@ -51,7 +51,7 @@ function NavList() {
   return (
     <>
       <VStack align="flex-start">
-        <Text fontWeight="bold" fontSize="xs">
+        <Text fontWeight="bold" fontSize="xl">
           NAVIGATION
         </Text>
         {site.navigation.map((item) => (
@@ -62,7 +62,7 @@ function NavList() {
       </VStack>
       {site.socials.length > 0 && (
         <VStack align="flex-start">
-          <Text fontWeight="bold" fontSize="xs">
+          <Text fontWeight="bold" fontSize="xl">
             SOCIALS
           </Text>
           {site.socials.map((item) => (
