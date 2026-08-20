@@ -131,7 +131,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       <Flex
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "stretch" }}
-        gap={{ base: 5, md: 6 }}
+        gap={{ base: 8, md: 14 }}
       >
         <Flex direction="column" gap={5} flex={1} minW={0}>
           {MEDIA_KINDS.map((kind) => (
@@ -152,6 +152,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           w={{ md: "300px" }}
           flexShrink={0}
           alignSelf={{ md: "stretch" }}
+          pl={{ md: 8 }}
         >
           <Flex h="100%" align="center" justify="center">
             {piece?.kind === "music" ? (
