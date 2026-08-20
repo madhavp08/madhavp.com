@@ -12,20 +12,14 @@ interface VinylPlayerProps {
   cover: string;
   playing: boolean;
   currentTime: number;
-  duration: number;
   lyrics?: LyricLine[];
   onToggle: () => void;
 }
 
-function playhead(time: number, duration: number, lyrics: LyricLine[]) {
-  const end = lyrics[lyrics.length - 1]?.t ?? 0;
-  if (duration > 0 && end > duration + 1.5) {
-    return (time / duration) * end;
-  }
-  return time;
-}
-
 function activeIndex(lyrics: LyricLine[], time: number) {
+  if (!lyrics.length || time < lyrics[0].t) {
+    return -1;
+  }
   let index = 0;
   for (let i = 0; i < lyrics.length; i += 1) {
     if (lyrics[i].t <= time) {
@@ -43,18 +37,19 @@ export function VinylPlayer({
   cover,
   playing,
   currentTime,
-  duration,
   lyrics,
   onToggle,
 }: VinylPlayerProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const lines = lyrics && lyrics.length ? lyrics : [];
-  const current = lines.length
-    ? activeIndex(lines, playhead(currentTime, duration, lines))
-    : 0;
+  const synced = lines.some((line) => line.t > 0);
+  const current = synced ? activeIndex(lines, currentTime) : -1;
 
   useEffect(() => {
+    if (current < 0) {
+      return;
+    }
     const scroller = scrollerRef.current;
     const line = lineRefs.current[current];
     if (!scroller || !line) {
@@ -99,6 +94,7 @@ export function VinylPlayer({
                 py={2}
                 px={2}
                 fontSize="lg"
+                fontFamily="heading"
                 fontWeight={isCurrent ? "semibold" : "normal"}
                 color={isCurrent ? "white" : "gray.400"}
                 opacity={isCurrent ? 1 : 0.85}
@@ -229,18 +225,20 @@ export function VinylPlayer({
             />
           </Box>
         </Box>
-        <VStack
-          spacing={1}
-          textAlign="center"
-          bg="rgba(17,17,17,0.42)"
-          backdropFilter="blur(6px)"
-          px={4}
-          py={1.5}
-          borderRadius="md"
-        >
-          <Heading size="md">{title}</Heading>
-          <Text color="gray.400">{artist}</Text>
-        </VStack>
+        {lines.length === 0 && (
+          <VStack
+            spacing={1}
+            textAlign="center"
+            bg="rgba(17,17,17,0.42)"
+            backdropFilter="blur(6px)"
+            px={4}
+            py={1.5}
+            borderRadius="md"
+          >
+            <Heading size="md">{title}</Heading>
+            <Text color="gray.400">{artist}</Text>
+          </VStack>
+        )}
       </VStack>
     </Box>
   );

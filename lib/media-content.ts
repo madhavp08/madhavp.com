@@ -4,7 +4,7 @@ import fs from "fs";
 import { MEDIA_KINDS, MediaKind, Piece } from "./media";
 import { coverSrc } from "./covers";
 import { songPreview } from "./previews";
-import { songLyrics } from "./lyrics";
+import { songLyrics, fromCatalog } from "./lyrics";
 import { MEDIA_HREF } from "./site";
 
 interface CatalogItem {
@@ -16,6 +16,7 @@ interface CatalogItem {
   textColor: string;
   notes: string;
   audio?: string;
+  lyrics?: string[];
 }
 
 let catalog: Record<MediaKind, CatalogItem[]> | undefined;
@@ -57,7 +58,9 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
         piece.audio = audio;
       }
       if (kind === "music") {
-        const lyrics = await songLyrics(item.title, item.creator);
+        const lyrics = item.lyrics?.length
+          ? fromCatalog(item.lyrics)
+          : await songLyrics(item.title, item.creator);
         if (lyrics && lyrics.length) {
           piece.lyrics = lyrics;
         }

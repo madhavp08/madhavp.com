@@ -41,7 +41,6 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const [activeSlug, setActiveSlug] = useState(initialSlug);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   const playerRef = useRef<HTMLAudioElement | null>(null);
 
   const allPieces = useMemo(
@@ -60,7 +59,6 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
     }
     audio.pause();
     setCurrentTime(0);
-    setDuration(0);
     if (next?.kind === "music" && next.audio) {
       audio.src = next.audio;
       audio.loop = true;
@@ -93,17 +91,10 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   useEffect(() => {
     const audio = new Audio();
     playerRef.current = audio;
-    const onTime = () => {
-      setCurrentTime(audio.currentTime);
-      if (Number.isFinite(audio.duration)) {
-        setDuration(audio.duration);
-      }
-    };
+    const onTime = () => setCurrentTime(audio.currentTime);
     audio.addEventListener("timeupdate", onTime);
-    audio.addEventListener("loadedmetadata", onTime);
     return () => {
       audio.removeEventListener("timeupdate", onTime);
-      audio.removeEventListener("loadedmetadata", onTime);
       audio.pause();
       audio.src = "";
     };
@@ -120,7 +111,6 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       }
       audio.pause();
       setCurrentTime(0);
-      setDuration(0);
       if (next?.kind === "music" && next.audio) {
         audio.src = next.audio;
         audio.loop = true;
@@ -180,7 +170,6 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                     cover={piece.coverImage}
                     playing={playing}
                     currentTime={currentTime}
-                    duration={duration}
                     lyrics={piece.lyrics}
                     onToggle={togglePlay}
                   />
