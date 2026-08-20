@@ -63,7 +63,7 @@ function NavList() {
       {site.socials.length > 0 && (
         <VStack align="flex-start">
           <Text fontWeight="bold" fontSize="smaller">
-            CONTACT ME ON
+            SOCIALS
           </Text>
           {site.socials.map((item) => (
             <Navigation key={item.href} link={item.href} isExternal>
