@@ -29,13 +29,12 @@ interface BookshelfProps {
 
 const width = 41.5;
 const height = 220;
-const coverPx = Math.round((height * 2) / 3);
+const coverPx = width * 4;
 const spineWidth = `${width}px`;
 const coverWidth = `${coverPx}px`;
-const itemWidth = width + coverPx;
-const itemWidthPx = `${itemWidth}px`;
+const bookWidth = `${width * 5}px`;
 const itemHeight = `${height}px`;
-const motion = "400ms cubic-bezier(0.22, 1, 0.36, 1)";
+const motion = "500ms ease";
 
 export function Bookshelf({
   items,
@@ -48,34 +47,20 @@ export function Bookshelf({
   const itemIndex = items.findIndex((item) => item.slug === activeSlug);
 
   function scrollBy(amount: number) {
-    const viewport = viewportRef.current;
-    if (!viewport) {
-      return;
-    }
-    const min = itemIndex >= 0 ? 0 : itemWidth;
-    viewport.scrollTo({
-      left: Math.max(min, viewport.scrollLeft + amount),
-      behavior: "smooth",
-    });
+    viewportRef.current?.scrollBy({ left: amount, behavior: "smooth" });
   }
 
   React.useLayoutEffect(() => {
     const viewport = viewportRef.current;
-    if (!viewport) {
-      return;
-    }
-    if (itemIndex < 0) {
-      if (viewport.scrollLeft < itemWidth) {
-        viewport.scrollLeft = itemWidth;
-      }
-      return;
-    }
-    const openEl = itemRefs.current[itemIndex];
-    if (!openEl) {
+    const openEl = itemIndex >= 0 ? itemRefs.current[itemIndex] : null;
+    if (!viewport || !openEl) {
       return;
     }
     const shelf = viewport.getBoundingClientRect();
     const book = openEl.getBoundingClientRect();
+    if (book.right > shelf.right) {
+      viewport.scrollLeft += book.right - shelf.right + 8;
+    }
     if (book.left < shelf.left) {
       viewport.scrollLeft += book.left - shelf.left - 8;
     }
@@ -129,7 +114,6 @@ export function Bookshelf({
           alignItems="center"
           gap={1}
           overflowX="auto"
-          pl={`${itemWidth}px`}
           css={{
             scrollbarWidth: "none",
             overscrollBehaviorX: "contain",
@@ -156,8 +140,7 @@ export function Bookshelf({
                   justifyContent: "flex-start",
                   outline: "none",
                   flexShrink: 0,
-                  width: isOpen ? itemWidthPx : spineWidth,
-                  marginLeft: isOpen ? `-${itemWidth}px` : "0px",
+                  width: isOpen ? bookWidth : spineWidth,
                   height,
                   perspective: "1000px",
                   WebkitPerspective: "1000px",
@@ -166,8 +149,8 @@ export function Bookshelf({
                   border: "none",
                   background: "none",
                   cursor: "pointer",
-                  transition: `width ${motion}, margin-left ${motion}`,
-                  willChange: isOpen ? "width, margin-left" : undefined,
+                  zIndex: isOpen ? 1 : 0,
+                  transition: `width ${motion}`,
                 }}
               >
                 <Flex
@@ -235,41 +218,40 @@ export function Bookshelf({
                     {item.title}
                   </Heading>
                 </Flex>
-                {isOpen && (
-                  <Box
-                    position="relative"
-                    flexShrink={0}
-                    overflow="hidden"
-                    width={coverWidth}
-                    height={itemHeight}
-                    transformOrigin="left"
-                    transform="rotateY(12deg)"
-                    style={{ transformStyle: "preserve-3d" }}
-                  >
-                    <span
-                      style={{
-                        pointerEvents: "none",
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        zIndex: 50,
-                        height,
-                        width: coverPx,
-                        background:
-                          "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
-                      }}
-                    />
-                    <Image
-                      src={item.coverImage}
-                      alt=""
-                      w="100%"
-                      h="100%"
-                      objectFit="cover"
-                      objectPosition="center"
-                      draggable={false}
-                    />
-                  </Box>
-                )}
+                <Box
+                  position="relative"
+                  flexShrink={0}
+                  overflow="hidden"
+                  width={coverWidth}
+                  height={itemHeight}
+                  transformOrigin="left"
+                  transform={`rotateY(${isOpen ? "30deg" : "88.8deg"})`}
+                  transition={`transform ${motion}`}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <span
+                    style={{
+                      pointerEvents: "none",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      zIndex: 50,
+                      height,
+                      width: coverPx,
+                      background:
+                        "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
+                    }}
+                  />
+                  <Image
+                    src={item.coverImage}
+                    alt=""
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    objectPosition="center"
+                    draggable={false}
+                  />
+                </Box>
               </button>
             );
           })}
