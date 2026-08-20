@@ -90,7 +90,7 @@ function Layout({ children }: PropsWithChildren) {
         align="center"
         borderBottom="1px solid"
         borderBottomColor="gray.700"
-        bg="gray.900"
+        bg="#111111"
       >
         <Container px={8}>
           <HStack spacing={8}>

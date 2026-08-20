@@ -118,6 +118,10 @@ Chasing `getBoundingClientRect` every frame while width was animating made the s
 
 The Media page lists movies first, then music, then books.
 
+## 2026-08-19 — Matte black background
+
+The page background is matte black (`#111111`) instead of Chakra gray.900, which reads blue-gray.
+
 ## 2026-08-19 — Cover files stay under /art
 
 A catch-all redirect from `/art/:path*` to `/media/:path*` was sending cover files like `/art/music/album-05.svg` to a page that does not exist. `/art` still redirects to `/media`. Cover images keep being served from `public/art`.
