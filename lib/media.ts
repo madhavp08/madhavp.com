@@ -22,6 +22,7 @@ export interface Piece {
   blurb?: string;
   rating?: number;
   review?: string;
+  tag?: string;
 }
 
 export function letterboxdStars(rating: number) {

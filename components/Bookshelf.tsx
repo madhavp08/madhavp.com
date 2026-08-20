@@ -18,6 +18,7 @@ export interface ShelfItem {
   spineColor: string;
   textColor: string;
   slug: string;
+  tag?: string;
 }
 
 interface BookshelfProps {
@@ -185,6 +186,20 @@ export function Bookshelf({
                     bg="blackAlpha.200"
                     pointerEvents="none"
                   />
+                  {item.tag && (
+                    <Box
+                      position="absolute"
+                      top={0}
+                      left="50%"
+                      ml="-5px"
+                      w="10px"
+                      h="20px"
+                      bg="#c4a574"
+                      zIndex={2}
+                      clipPath="polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%)"
+                      pointerEvents="none"
+                    />
+                  )}
                   {isOpen && (
                     <span
                       style={{

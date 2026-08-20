@@ -19,6 +19,7 @@ interface CatalogItem {
   lyrics?: string[];
   blurb?: string;
   rating?: number;
+  tag?: string;
 }
 
 let catalog: Record<MediaKind, CatalogItem[]> | undefined;
@@ -76,6 +77,9 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
       }
       if (item.notes?.trim()) {
         piece.review = item.notes.trim();
+      }
+      if (item.tag) {
+        piece.tag = item.tag;
       }
       return piece;
     })

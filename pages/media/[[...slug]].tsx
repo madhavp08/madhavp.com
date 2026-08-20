@@ -194,6 +194,22 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
               <Fade in={Boolean(piece)} unmountOnExit>
                 {piece ? (
                   <VStack align="center" textAlign="center" spacing={3} w="100%">
+                    {piece.tag && (
+                      <Text
+                        fontSize="xs"
+                        fontWeight="semibold"
+                        letterSpacing="0.08em"
+                        textTransform="uppercase"
+                        color="gray.300"
+                        border="1px solid"
+                        borderColor="gray.600"
+                        px={2}
+                        py={0.5}
+                        borderRadius="sm"
+                      >
+                        {piece.tag}
+                      </Text>
+                    )}
                     <Heading size="md">{piece.title}</Heading>
                     <Text color="gray.400">{piece.creator}</Text>
                     {piece.rating != null && (
