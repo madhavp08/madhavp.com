@@ -114,6 +114,10 @@ Nav includes Projects at `/projects`. It is a deviation from the bible, which ha
 
 Chasing `getBoundingClientRect` every frame while width was animating made the shelf hitch. An open item now grows its cover and uses a matching negative left margin, so the next spine stays put and the cover slides under the cursor in CSS. The paper filter is cheaper. Side notes fade in, and picking an item replaces the URL instead of stacking history.
 
+## 2026-08-19 — Shelf order is movies, music, books
+
+The Media page lists movies first, then music, then books.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

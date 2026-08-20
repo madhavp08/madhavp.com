@@ -1,11 +1,11 @@
-export const MEDIA_KINDS = ["books", "movies", "music"] as const;
+export const MEDIA_KINDS = ["movies", "music", "books"] as const;
 
 export type MediaKind = (typeof MEDIA_KINDS)[number];
 
 export const MEDIA_LABELS: Record<MediaKind, string> = {
-  books: "Books",
   movies: "Movies",
   music: "Music",
+  books: "Books",
 };
 
 export interface Piece {

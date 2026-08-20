@@ -51,9 +51,7 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
 
 export async function getShelves(): Promise<Record<MediaKind, Piece[]>> {
   const rows = await Promise.all(MEDIA_KINDS.map((kind) => getPieces(kind)));
-  return {
-    books: rows[0],
-    movies: rows[1],
-    music: rows[2],
-  };
+  return Object.fromEntries(
+    MEDIA_KINDS.map((kind, index) => [kind, rows[index]])
+  ) as Record<MediaKind, Piece[]>;
 }
