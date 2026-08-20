@@ -194,14 +194,14 @@
   ],
   "music": [
     {
-      "slug": "die-trying",
-      "title": "Die Trying",
-      "creator": "PARTYNEXTDOOR, Drake & Yebba",
-      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/23/7c/a2/237ca270-9926-4b78-be81-410b6fc85f47/50291.jpg/600x600bb.jpg",
-      "spineColor": "#1a1210",
+      "slug": "phir-na-aana",
+      "title": "Phir Na Aana",
+      "creator": "Ashwani Gupta, Hrishi Giridhar",
+      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/1b/01/f7/1b01f788-615d-06cf-4104-1fbfdad5a416/823375168270_Cover.jpg/600x600bb.jpg",
+      "spineColor": "#3c3c3c",
       "textColor": "#fff",
       "notes": "",
-      "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5a/78/9b/5a789bbc-2b73-684e-39de-15cb5d9e9837/mzaf_18041725871234604555.plus.aac.p.m4a"
+      "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ee/c8/66/eec8663a-ebe5-edde-ec4f-94a08252370a/mzaf_4267172914847541835.plus.aac.p.m4a"
     },
     {
       "slug": "loverboy",
@@ -214,24 +214,24 @@
       "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/01/82/7f/01827fea-f088-4a37-db3b-568e6e90a1ed/mzaf_8295216672783443141.plus.aac.p.m4a"
     },
     {
+      "slug": "die-trying",
+      "title": "DIE TRYING",
+      "creator": "PARTYNEXTDOOR, Drake, Yebba",
+      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/23/7c/a2/237ca270-9926-4b78-be81-410b6fc85f47/50291.jpg/600x600bb.jpg",
+      "spineColor": "#1a1210",
+      "textColor": "#fff",
+      "notes": "",
+      "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5a/78/9b/5a789bbc-2b73-684e-39de-15cb5d9e9837/mzaf_18041725871234604555.plus.aac.p.m4a"
+    },
+    {
       "slug": "phir-le-aya-dil-reprise",
-      "title": "Phir Le Aya Dil (Reprise)",
-      "creator": "Arijit Singh",
+      "title": "Phir Le Aya Dil - Reprise",
+      "creator": "Pritam, Arijit Singh, Sayeed Quadri",
       "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5b/65/4a/5b654a60-886f-8bbf-2f39-5ea0dacb8022/886443625099.jpg/600x600bb.jpg",
       "spineColor": "#1b3a4b",
       "textColor": "#fff",
       "notes": "",
       "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7f/f5/d8/7ff5d850-871d-6621-2b74-3a772a6eec89/mzaf_52696194311988270.plus.aac.p.m4a"
-    },
-    {
-      "slug": "phir-na-aana",
-      "title": "Phir Na Aana",
-      "creator": "Ashwani Gupta & Hrishi Giridhar",
-      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/1b/01/f7/1b01f788-615d-06cf-4104-1fbfdad5a416/823375168270_Cover.jpg/600x600bb.jpg",
-      "spineColor": "#3c3c3c",
-      "textColor": "#fff",
-      "notes": "",
-      "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ee/c8/66/eec8663a-ebe5-edde-ec4f-94a08252370a/mzaf_4267172914847541835.plus.aac.p.m4a"
     }
   ]
 }

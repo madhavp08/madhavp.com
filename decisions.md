@@ -156,7 +156,7 @@ The playlist Madhav sent was not public, so the music shelf still needs the real
 
 ## 2026-08-20 — Music is four songs from Madhav
 
-The music shelf is Die Trying, Loverboy, Phir Le Aya Dil (Reprise), and Phir Na Aana, with iTunes artwork and short preview clips on the vinyl.
+The music shelf is Madhav's public [Feel Good](https://open.spotify.com/playlist/0inAMZtkbMh4565e4BmuwM) playlist, in playlist order, with iTunes artwork and short preview clips on the vinyl.
 
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 

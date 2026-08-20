@@ -2,7 +2,7 @@
 
 Edit `content/media.json`. Each shelf is an array. Add an object to add an item. Delete the object to remove it. Then the site updates on the next refresh.
 
-This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand. Movies are listed highest Letterboxd rating first. Books currently on the shelf are *Tuesdays with Morrie* and *Autobiography of a Yogi*. Songs currently on the shelf are *Die Trying*, *Loverboy*, *Phir Le Aya Dil (Reprise)*, and *Phir Na Aana*. Clicking a song plays a short preview on the vinyl.
+This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand. Movies are listed highest Letterboxd rating first. Books currently on the shelf are *Tuesdays with Morrie* and *Autobiography of a Yogi*. Songs currently on the shelf come from the [Feel Good](https://open.spotify.com/playlist/0inAMZtkbMh4565e4BmuwM) playlist. Clicking a song plays a short preview on the vinyl.
 
 ## Projects
 
