@@ -138,6 +138,10 @@ An open item takes no extra width in the row, so the next spine stays under the 
 
 Movies are ordered from highest Letterboxd star rating to lowest, using the latest rating when a film was logged more than once.
 
+## 2026-08-19 — Books are two real titles
+
+The book shelf is only *Tuesdays with Morrie* and *Autobiography of a Yogi*, with Open Library covers. Placeholder book SVGs are gone. Notes stay empty until Madhav writes them.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

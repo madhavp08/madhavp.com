@@ -1,112 +1,22 @@
 {
   "books": [
     {
-      "slug": "book-01",
-      "title": "Book 01",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-01.svg",
-      "spineColor": "#1b2838",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-02",
-      "title": "Book 02",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-02.svg",
-      "spineColor": "#6b2c2c",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-03",
-      "title": "Book 03",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-03.svg",
-      "spineColor": "#2d4a3e",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-04",
-      "title": "Book 04",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-04.svg",
-      "spineColor": "#111111",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-05",
-      "title": "Book 05",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-05.svg",
-      "spineColor": "#8b5a2b",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-06",
-      "title": "Book 06",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-06.svg",
-      "spineColor": "#3d2b5f",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-07",
-      "title": "Book 07",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-07.svg",
+      "slug": "tuesdays-with-morrie",
+      "title": "Tuesdays with Morrie",
+      "creator": "Mitch Albom",
+      "cover": "isbn:9780767905923",
       "spineColor": "#4a3728",
-      "textColor": "#f5e6c8",
-      "notes": "Notes coming."
+      "textColor": "#fff",
+      "notes": ""
     },
     {
-      "slug": "book-08",
-      "title": "Book 08",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-08.svg",
-      "spineColor": "#2c4c6e",
+      "slug": "autobiography-of-a-yogi",
+      "title": "Autobiography of a Yogi",
+      "creator": "Paramahansa Yogananda",
+      "cover": "isbn:9780876120798",
+      "spineColor": "#8b4513",
       "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-09",
-      "title": "Book 09",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-09.svg",
-      "spineColor": "#5c1a1a",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-10",
-      "title": "Book 10",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-10.svg",
-      "spineColor": "#2f4f4f",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-11",
-      "title": "Book 11",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-11.svg",
-      "spineColor": "#3c3c3c",
-      "textColor": "#fff",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "book-12",
-      "title": "Book 12",
-      "creator": "To be replaced",
-      "cover": "/art/books/book-12.svg",
-      "spineColor": "#4a1c40",
-      "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     }
   ],
   "movies": [
