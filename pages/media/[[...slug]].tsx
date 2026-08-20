@@ -18,6 +18,7 @@ import {
   MediaKind,
   isMediaKind,
   Piece,
+  letterboxdStars,
 } from "../../lib/media";
 import { getShelves } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
@@ -182,7 +183,25 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
               top={{ md: 10 }}
             >
               <Fade in={Boolean(piece)} unmountOnExit>
-                {piece ? (
+                {piece?.kind === "movies" ? (
+                  <VStack align="center" textAlign="center" spacing={3} w="100%">
+                    <Heading size="md">{piece.title}</Heading>
+                    <Text color="gray.400">{piece.creator}</Text>
+                    {piece.rating != null && (
+                      <Text color="gray.300" fontSize="sm">
+                        {letterboxdStars(piece.rating)} {piece.rating} on Letterboxd
+                      </Text>
+                    )}
+                    {piece.blurb && (
+                      <Text color="gray.200">{piece.blurb}</Text>
+                    )}
+                    {piece.review && (
+                      <Text color="gray.400" fontSize="sm">
+                        {piece.review}
+                      </Text>
+                    )}
+                  </VStack>
+                ) : piece ? (
                   <VStack align="flex-start" spacing={3}>
                     <Heading size="md">{piece.title}</Heading>
                     <Text color="gray.400">{piece.creator}</Text>

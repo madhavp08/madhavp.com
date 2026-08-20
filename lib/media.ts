@@ -19,6 +19,15 @@ export interface Piece {
   notes: string;
   audio?: string;
   lyrics?: { t: number; text: string }[];
+  blurb?: string;
+  rating?: number;
+  review?: string;
+}
+
+export function letterboxdStars(rating: number) {
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.5;
+  return `${"★".repeat(full)}${half ? "½" : ""}`;
 }
 
 export function isMediaKind(value: string): value is MediaKind {
