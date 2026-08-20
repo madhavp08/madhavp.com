@@ -1,7 +1,7 @@
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import fs from "fs";
-import { MediaKind, Piece } from "./media";
+import { MEDIA_KINDS, MediaKind, Piece } from "./media";
 import { coverSrc } from "./covers";
 import { MEDIA_HREF } from "./site";
 
@@ -15,10 +15,15 @@ interface CatalogItem {
   notes: string;
 }
 
+let catalog: Record<MediaKind, CatalogItem[]> | undefined;
+
 function readCatalog() {
-  return JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), "content", "media.json"), "utf8")
-  ) as Record<MediaKind, CatalogItem[]>;
+  if (!catalog) {
+    catalog = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), "content", "media.json"), "utf8")
+    ) as Record<MediaKind, CatalogItem[]>;
+  }
+  return catalog;
 }
 
 export async function getPieces(kind: MediaKind): Promise<Piece[]> {
@@ -42,4 +47,13 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
       };
     })
   );
+}
+
+export async function getShelves(): Promise<Record<MediaKind, Piece[]>> {
+  const rows = await Promise.all(MEDIA_KINDS.map((kind) => getPieces(kind)));
+  return {
+    books: rows[0],
+    movies: rows[1],
+    music: rows[2],
+  };
 }

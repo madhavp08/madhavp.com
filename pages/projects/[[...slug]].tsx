@@ -1,4 +1,4 @@
-import { Flex, Heading, Stack, Text, Box, Link } from "@chakra-ui/react";
+import { Flex, Heading, Stack, Text, Box, Link, Fade } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
@@ -27,7 +27,7 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
 
   function select(slug?: string) {
     setActiveSlug(slug);
-    window.history.pushState(
+    window.history.replaceState(
       null,
       "",
       slug ? `${PROJECTS_HREF}/${slug}` : PROJECTS_HREF
@@ -68,6 +68,7 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
                 onClick={() => select(isActive ? undefined : item.slug)}
                 color={isActive ? "gray.50" : "gray.300"}
                 _hover={{ color: "gray.50" }}
+                transition="color 0.15s ease"
               >
                 <Heading size="md">{item.title}</Heading>
                 <Text mt={1} color={isActive ? "gray.300" : "gray.500"}>
@@ -84,20 +85,22 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
           top={{ md: 10 }}
           alignSelf={{ md: "flex-start" }}
         >
-          {project && (
-            <Stack spacing={3}>
-              <Heading size="md">{project.title}</Heading>
-              <Text color="gray.400">{project.blurb}</Text>
-              {project.demo && (
-                <Link href={project.demo} isExternal color="blue.300">
-                  Demo
+          <Fade in={Boolean(project)} unmountOnExit>
+            {project && (
+              <Stack spacing={3}>
+                <Heading size="md">{project.title}</Heading>
+                <Text color="gray.400">{project.blurb}</Text>
+                {project.demo && (
+                  <Link href={project.demo} isExternal color="blue.300">
+                    Demo
+                  </Link>
+                )}
+                <Link href={project.github} isExternal color="blue.300">
+                  GitHub
                 </Link>
-              )}
-              <Link href={project.github} isExternal color="blue.300">
-                GitHub
-              </Link>
-            </Stack>
-          )}
+              </Stack>
+            )}
+          </Fade>
         </Box>
       </Flex>
     </>

@@ -1,11 +1,11 @@
 import {
   Flex,
   Heading,
-  Image,
   Stack,
   VStack,
   Text,
   Box,
+  Fade,
 } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { useEffect, useMemo, useState } from "react";
@@ -19,7 +19,7 @@ import {
   isMediaKind,
   Piece,
 } from "../../lib/media";
-import { getPieces } from "../../lib/media-content";
+import { getShelves } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
 import { NextSeo } from "next-seo";
 import { MEDIA_HREF, site } from "../../lib/site";
@@ -47,7 +47,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
 
   function select(slug?: string) {
     setActiveSlug(slug);
-    window.history.pushState(null, "", slug || MEDIA_HREF);
+    window.history.replaceState(null, "", slug || MEDIA_HREF);
   }
 
   useEffect(() => {
@@ -93,26 +93,21 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           top={{ md: 10 }}
           alignSelf={{ md: "flex-start" }}
         >
-          {piece && (
-            <VStack align="flex-start" spacing={3}>
-              <Image
-                border="1px solid"
-                borderColor="gray.600"
-                src={piece.coverImage}
-                alt={piece.title}
-                height={{ base: "160px", md: "200px" }}
-              />
-              <Heading size="md">{piece.title}</Heading>
-              <Text color="gray.400">{piece.creator}</Text>
-              <Prose>
-                <MDXRemote
-                  compiledSource={piece.notes}
-                  scope={{}}
-                  frontmatter={{}}
-                />
-              </Prose>
-            </VStack>
-          )}
+          <Fade in={Boolean(piece)} unmountOnExit>
+            {piece && (
+              <VStack align="flex-start" spacing={3}>
+                <Heading size="md">{piece.title}</Heading>
+                <Text color="gray.400">{piece.creator}</Text>
+                <Prose>
+                  <MDXRemote
+                    compiledSource={piece.notes}
+                    scope={{}}
+                    frontmatter={{}}
+                  />
+                </Prose>
+              </VStack>
+            )}
+          </Fade>
         </Box>
       </Flex>
     </>
@@ -124,11 +119,7 @@ export default Media;
 Media.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticPaths() {
-  const shelves = {
-    books: await getPieces("books"),
-    movies: await getPieces("movies"),
-    music: await getPieces("music"),
-  };
+  const shelves = await getShelves();
   const pieces = MEDIA_KINDS.flatMap((kind) => shelves[kind]);
   const prefix = `${MEDIA_HREF}/`;
 
@@ -144,11 +135,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const shelves = {
-    books: await getPieces("books"),
-    movies: await getPieces("movies"),
-    music: await getPieces("music"),
-  };
+  const shelves = await getShelves();
 
   if (!params || !params.slug || params.slug.length === 0) {
     return {

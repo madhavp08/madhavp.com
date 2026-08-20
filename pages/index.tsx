@@ -27,7 +27,7 @@ export default function Home() {
         <ListItem>Singing, soccer, Fortnite, music, and movies.</ListItem>
       </UnorderedList>
       <Text mt={4}>
-        Checkout my{" "}
+        Check out my{" "}
         <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
           media
         </Link>{" "}

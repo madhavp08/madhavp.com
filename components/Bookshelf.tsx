@@ -30,10 +30,12 @@ interface BookshelfProps {
 const width = 41.5;
 const height = 220;
 const coverFactor = 6;
+const coverPx = width * coverFactor;
 const spineWidth = `${width}px`;
-const coverWidth = `${width * coverFactor}px`;
-const itemWidth = `${width * (coverFactor + 1)}px`;
+const coverWidth = `${coverPx}px`;
+const itemWidth = `${width + coverPx}px`;
 const itemHeight = `${height}px`;
+const motion = "400ms cubic-bezier(0.22, 1, 0.36, 1)";
 
 export function Bookshelf({
   items,
@@ -43,54 +45,34 @@ export function Bookshelf({
 }: BookshelfProps) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const itemRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
-  const clickXRef = React.useRef<number | null>(null);
   const itemIndex = items.findIndex((item) => item.slug === activeSlug);
 
   function scrollBy(amount: number) {
     viewportRef.current?.scrollBy({ left: amount, behavior: "smooth" });
   }
 
-  React.useEffect(() => {
-    const clickX = clickXRef.current;
+  React.useLayoutEffect(() => {
     const viewport = viewportRef.current;
-    if (clickX == null || !viewport || itemIndex < 0) {
+    const openEl = itemIndex >= 0 ? itemRefs.current[itemIndex] : null;
+    if (!viewport || !openEl) {
       return;
     }
-
-    const originX = clickX;
-    const started = performance.now();
-    let raf = 0;
-
-    function tick(now: number) {
-      const openEl = itemRefs.current[itemIndex];
-      if (openEl && viewport) {
-        const diff = openEl.getBoundingClientRect().right - (originX + 8);
-        viewport.scrollLeft += diff;
-      }
-      if (now - started < 520) {
-        raf = requestAnimationFrame(tick);
-      }
+    const shelf = viewport.getBoundingClientRect();
+    const book = openEl.getBoundingClientRect();
+    if (book.left < shelf.left) {
+      viewport.scrollLeft += book.left - shelf.left - 8;
     }
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [activeSlug, itemIndex]);
+  }, [itemIndex]);
 
   return (
     <>
-      <svg
-        style={{
-          position: "absolute",
-          inset: 0,
-          visibility: "hidden",
-        }}
-      >
+      <svg width="0" height="0" aria-hidden="true">
         <defs>
           <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.9"
-              numOctaves="8"
+              baseFrequency="0.8"
+              numOctaves="3"
               result="noise"
             />
             <feDiffuseLighting
@@ -132,6 +114,8 @@ export function Bookshelf({
           overflowX="auto"
           css={{
             scrollbarWidth: "none",
+            overscrollBehaviorX: "contain",
+            WebkitOverflowScrolling: "touch",
             "&::-webkit-scrollbar": { display: "none" },
           }}
         >
@@ -146,10 +130,7 @@ export function Bookshelf({
                 }}
                 aria-label={item.title}
                 aria-pressed={isOpen}
-                onClick={(event) => {
-                  clickXRef.current = event.clientX;
-                  onSelect(isOpen ? undefined : item.slug);
-                }}
+                onClick={() => onSelect(isOpen ? undefined : item.slug)}
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -158,6 +139,7 @@ export function Bookshelf({
                   outline: "none",
                   flexShrink: 0,
                   width: isOpen ? itemWidth : spineWidth,
+                  marginLeft: isOpen ? `-${coverPx}px` : "0px",
                   height,
                   perspective: "1000px",
                   WebkitPerspective: "1000px",
@@ -166,7 +148,8 @@ export function Bookshelf({
                   border: "none",
                   background: "none",
                   cursor: "pointer",
-                  transition: "width 500ms ease, transform 500ms ease",
+                  transition: `width ${motion}, margin-left ${motion}`,
+                  willChange: isOpen ? "width, margin-left" : undefined,
                 }}
               >
                 <Flex
@@ -180,8 +163,7 @@ export function Bookshelf({
                   backgroundColor={item.spineColor}
                   color={item.textColor}
                   transform={`rotateY(${isOpen ? "-60deg" : "0deg"})`}
-                  transition="transform 500ms ease"
-                  filter={isOpen ? "brightness(0.8) contrast(2)" : undefined}
+                  transition={`transform ${motion}`}
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   {isOpen && (
@@ -221,7 +203,6 @@ export function Bookshelf({
                     overflow="hidden"
                     transformOrigin="left"
                     transform="rotateY(30deg)"
-                    filter="brightness(0.8) contrast(2)"
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <span
@@ -232,16 +213,17 @@ export function Bookshelf({
                         left: 0,
                         zIndex: 50,
                         height,
-                        width: width * coverFactor,
+                        width: coverPx,
                         background:
                           "linear-gradient(to right, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.5) 3px, rgba(255, 255, 255, 0.25) 4px, rgba(255, 255, 255, 0.25) 6px, transparent 7px, transparent 9px, rgba(255, 255, 255, 0.25) 9px, transparent 12px)",
                       }}
                     />
                     <Image
                       src={item.coverImage}
-                      alt={item.title}
+                      alt=""
                       width={coverWidth}
                       height={itemHeight}
+                      draggable={false}
                     />
                   </Box>
                 )}

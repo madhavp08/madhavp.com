@@ -27,6 +27,7 @@ function Navigation({
         rel="noopener noreferrer"
         color={isActive ? "gray.50" : "gray.400"}
         _hover={{ color: "gray.50" }}
+        transition="color 0.15s ease"
       >
         <Text fontSize="lg">{children}</Text>
       </Link>
@@ -39,6 +40,7 @@ function Navigation({
       href={link}
       color={isActive ? "gray.50" : "gray.400"}
       _hover={{ color: "gray.50" }}
+      transition="color 0.15s ease"
     >
       <Text fontSize="lg">{children}</Text>
     </Link>
