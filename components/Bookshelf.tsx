@@ -112,7 +112,7 @@ export function Bookshelf({
         <HStack
           ref={viewportRef}
           alignItems="center"
-          gap={1}
+          gap={3}
           overflowX="auto"
           css={{
             scrollbarWidth: "none",

@@ -2,7 +2,7 @@
 
 Edit `content/media.json`. Each shelf is an array. Add an object to add an item. Delete the object to remove it. Then the site updates on the next refresh.
 
-This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand. Movies are listed highest Letterboxd rating first. Books currently on the shelf are *Tuesdays with Morrie* and *Autobiography of a Yogi*.
+This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand. Movies are listed highest Letterboxd rating first. Books currently on the shelf are *Tuesdays with Morrie* and *Autobiography of a Yogi*. Songs play a short preview on a vinyl in the side panel when you click the spine.
 
 ## Projects
 
@@ -61,6 +61,23 @@ Same shape. Movies on this site currently come from [Letterboxd](https://letterb
 
 Drop the image in `public/art/movies/` or `public/art/music/`.
 
+## A song
+
+Same shape as a movie, plus optional `audio`. If `audio` is missing, the site looks up a short preview from the title and artist.
+
+```json
+{
+  "slug": "pink-white",
+  "title": "Pink + White",
+  "creator": "Frank Ocean",
+  "cover": "https://example.com/cover.jpg",
+  "spineColor": "#4a2c6a",
+  "textColor": "#fff",
+  "notes": "",
+  "audio": "https://example.com/preview.m4a"
+}
+```
+
 ## Spine colors
 
 The spine shows a strip of the cover. `spineColor` is the fallback behind that image. `textColor` is the title on the spine. Pick a dark hex and `#fff` for most titles.
@@ -69,7 +86,7 @@ The spine shows a strip of the cover. `spineColor` is the fallback behind that i
 
 None of these are connected yet. Manual JSON always works as a fallback.
 
-**Spotify (music) — possible.** Official API. Needs a Spotify developer app, a one-time login, and secrets in Vercel env vars. Can pull saved albums and cover art. Refresh tokens now expire after six months, so login has to be redone occasionally.
+**Spotify (music) — playlist fill, previews to play.** Songs can be copied from a public Spotify playlist into `media.json`. Clicking a spine plays a short preview on the vinyl. Full tracks still need Spotify itself. A private playlist cannot be read.
 
 **Letterboxd (movies) — no personal API.** Letterboxd does not grant API keys for personal sites. Two workable paths later: the public diary RSS feed (`https://letterboxd.com/USERNAME/rss/`) or a CSV export from Letterboxd settings. Covers would come from that feed or a poster URL you paste in.
 

@@ -8,7 +8,7 @@ import {
   Fade,
 } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { MDXRemote } from "next-mdx-remote";
@@ -21,6 +21,7 @@ import {
 } from "../../lib/media";
 import { getShelves } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
+import { VinylPlayer } from "../../components/VinylPlayer";
 import { NextSeo } from "next-seo";
 import { MEDIA_HREF, site } from "../../lib/site";
 
@@ -38,6 +39,8 @@ function slugFromPath(path: string) {
 
 const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const [activeSlug, setActiveSlug] = useState(initialSlug);
+  const [playing, setPlaying] = useState(false);
+  const playerRef = useRef<HTMLAudioElement | null>(null);
 
   const allPieces = useMemo(
     () => MEDIA_KINDS.flatMap((kind) => shelves[kind]),
@@ -46,17 +49,77 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const piece = allPieces.find((item) => item.slug === activeSlug);
 
   function select(slug?: string) {
+    const next = allPieces.find((item) => item.slug === slug);
     setActiveSlug(slug);
     window.history.replaceState(null, "", slug || MEDIA_HREF);
+    const audio = playerRef.current;
+    if (!audio) {
+      return;
+    }
+    audio.pause();
+    if (next?.kind === "music" && next.audio) {
+      audio.src = next.audio;
+      audio.loop = true;
+      void audio.play().then(
+        () => setPlaying(true),
+        () => setPlaying(false)
+      );
+    } else {
+      audio.removeAttribute("src");
+      setPlaying(false);
+    }
+  }
+
+  function togglePlay() {
+    const audio = playerRef.current;
+    if (!audio || !piece?.audio) {
+      return;
+    }
+    if (audio.paused) {
+      void audio.play().then(
+        () => setPlaying(true),
+        () => setPlaying(false)
+      );
+    } else {
+      audio.pause();
+      setPlaying(false);
+    }
   }
 
   useEffect(() => {
+    const audio = new Audio();
+    playerRef.current = audio;
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
+
+  useEffect(() => {
     function onPop() {
-      setActiveSlug(slugFromPath(window.location.pathname));
+      const slug = slugFromPath(window.location.pathname);
+      setActiveSlug(slug);
+      const next = allPieces.find((item) => item.slug === slug);
+      const audio = playerRef.current;
+      if (!audio) {
+        return;
+      }
+      audio.pause();
+      if (next?.kind === "music" && next.audio) {
+        audio.src = next.audio;
+        audio.loop = true;
+        void audio.play().then(
+          () => setPlaying(true),
+          () => setPlaying(false)
+        );
+      } else {
+        audio.removeAttribute("src");
+        setPlaying(false);
+      }
     }
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
-  }, []);
+  }, [allPieces]);
 
   return (
     <>
@@ -94,7 +157,15 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           alignSelf={{ md: "flex-start" }}
         >
           <Fade in={Boolean(piece)} unmountOnExit>
-            {piece && (
+            {piece && piece.kind === "music" ? (
+              <VinylPlayer
+                title={piece.title}
+                artist={piece.creator}
+                cover={piece.coverImage}
+                playing={playing}
+                onToggle={togglePlay}
+              />
+            ) : piece ? (
               <VStack align="flex-start" spacing={3}>
                 <Heading size="md">{piece.title}</Heading>
                 <Text color="gray.400">{piece.creator}</Text>
@@ -106,7 +177,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                   />
                 </Prose>
               </VStack>
-            )}
+            ) : null}
           </Fade>
         </Box>
       </Flex>

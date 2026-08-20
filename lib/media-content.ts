@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { MEDIA_KINDS, MediaKind, Piece } from "./media";
 import { coverSrc } from "./covers";
+import { songPreview } from "./previews";
 import { MEDIA_HREF } from "./site";
 
 interface CatalogItem {
@@ -13,6 +14,7 @@ interface CatalogItem {
   spineColor: string;
   textColor: string;
   notes: string;
+  audio?: string;
 }
 
 let catalog: Record<MediaKind, CatalogItem[]> | undefined;
@@ -34,6 +36,10 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
       const source = await serialize(item.notes || "", {
         mdxOptions: { development: false },
       });
+      const preview =
+        kind === "music" && !item.audio && item.creator !== "To be replaced"
+          ? await songPreview(item.title, item.creator)
+          : undefined;
 
       return {
         title: item.title,
@@ -44,6 +50,7 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
         kind,
         slug: `${MEDIA_HREF}/${kind}/${item.slug}`,
         notes: source.compiledSource,
+        audio: item.audio || preview?.audio,
       };
     })
   );

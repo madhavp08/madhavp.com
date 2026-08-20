@@ -17,6 +17,7 @@ export interface Piece {
   slug: string;
   kind: MediaKind;
   notes: string;
+  audio?: string;
 }
 
 export function isMediaKind(value: string): value is MediaKind {

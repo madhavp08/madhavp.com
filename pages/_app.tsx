@@ -33,6 +33,14 @@ const theme = extendTheme(
           bg: "#111111",
           color: "gray.100",
         },
+        "@keyframes vinyl-spin": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "@keyframes needle-drop": {
+          from: { transform: "rotate(-28deg)" },
+          to: { transform: "rotate(18deg)" },
+        },
       },
     },
     fonts: {

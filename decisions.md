@@ -146,6 +146,14 @@ The book shelf is only *Tuesdays with Morrie* and *Autobiography of a Yogi*, wit
 
 Opening to the left hid the first posters and pushed short shelves (the two books) away from the left edge. Covers now open to the right the way the bible does: closed cover is edge-on at `rotateY(88.8deg)`, open cover is `30deg`, and the row grows instead of using negative margin or left padding.
 
+## 2026-08-19 — Shelf gap and a vinyl for songs
+
+Spines have a little air between them so covers do not sit flush.
+
+Clicking a song opens a record on the side. It starts playing from that click, with no extra button. Audio is a short preview looked up by title and artist, not a Spotify login. Full Spotify playback needs their player and an account.
+
+The playlist Madhav sent was not public, so the music shelf still needs the real track list.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
