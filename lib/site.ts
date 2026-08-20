@@ -16,7 +16,7 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/madhavpillai" },
     { label: "X", href: "https://x.com/madhav_p08" },
     { label: "Letterboxd", href: "https://letterboxd.com/madhavp08/" },
-    { label: "Goodreads", href: "https://www.goodreads.com" },
+    { label: "Goodreads", href: "https://www.goodreads.com/user/show/189090255-madhav-pillai" },
     { label: "Chess.com", href: "https://www.chess.com/member/sack_madhav" },
   ],
 };
