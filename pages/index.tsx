@@ -7,24 +7,16 @@ export default function Home() {
     <>
       <Heading as="h1">Madhav Pillai</Heading>
       <Text fontWeight="bold" mt={4}>
-        Some things about me:
+        About me:
       </Text>
       <UnorderedList>
-        <ListItem>
-          I&apos;m currently a software engineering intern at Sardine.
-        </ListItem>
-        <ListItem>
-          Before this I interned at Easy Dynamics. I&apos;m studying computer
-          science and mathematics at the University of Maryland, College Park
-          [expected May 2028].
-        </ListItem>
-        <ListItem>I like building software.</ListItem>
+        <ListItem>coming soon...</ListItem>
       </UnorderedList>
       <Text fontWeight="bold" mt={4}>
-        Some things I&apos;m interested in:
+        Interests:
       </Text>
       <UnorderedList>
-        <ListItem>Singing, soccer, Fortnite, music, and movies.</ListItem>
+        <ListItem>coming soon...</ListItem>
       </UnorderedList>
       <Text mt={4}>
         Check out my{" "}
