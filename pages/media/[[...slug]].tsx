@@ -131,11 +131,11 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       <Flex
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "stretch" }}
-        gap={{ base: 6, md: 8 }}
+        gap={{ base: 5, md: 6 }}
       >
-        <Flex direction="column" gap={8} flex={1} minW={0}>
+        <Flex direction="column" gap={5} flex={1} minW={0}>
           {MEDIA_KINDS.map((kind) => (
-            <Stack key={kind} spacing={2}>
+            <Stack key={kind} spacing={1}>
               <Text fontWeight="bold" fontSize="smaller">
                 {MEDIA_LABELS[kind].toUpperCase()}
               </Text>
@@ -153,8 +153,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           flexShrink={0}
           alignSelf={{ md: "stretch" }}
         >
-          {piece?.kind === "music" ? (
-            <Flex h="100%" align="center" justify="center">
+          <Flex h="100%" align="center" justify="center">
+            {piece?.kind === "music" ? (
               <Fade in>
                 <VinylPlayer
                   title={piece.title}
@@ -164,12 +164,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                   onToggle={togglePlay}
                 />
               </Fade>
-            </Flex>
-          ) : (
-            <Box
-              position={{ md: "sticky" }}
-              top={{ md: 10 }}
-            >
+            ) : (
               <Fade in={Boolean(piece)} unmountOnExit>
                 {piece ? (
                   <VStack align="center" textAlign="center" spacing={3} w="100%">
@@ -208,8 +203,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                   </VStack>
                 ) : null}
               </Fade>
-            </Box>
-          )}
+            )}
+          </Flex>
         </Box>
       </Flex>
     </>

@@ -105,8 +105,8 @@ function Layout({ children }: PropsWithChildren) {
       <Flex
         maxW="1240px"
         mx="auto"
-        mt={{ base: 16, lg: 10 }}
-        pb={{ base: 5, md: 6 }}
+        mt={{ base: 16, lg: 8 }}
+        pb={{ base: 4, md: 4 }}
         px={{ base: 5, md: 8 }}
         gap={{ lg: 10 }}
         align="flex-start"
