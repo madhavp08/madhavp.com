@@ -83,12 +83,11 @@ export function VinylPlayer({
             scrollbarWidth: "none",
             "&::-webkit-scrollbar": { display: "none" },
             maskImage:
-              "linear-gradient(to bottom, transparent, black 16%, black 84%, transparent)",
+              "linear-gradient(to bottom, transparent, black 8%, black 92%, transparent)",
           }}
         >
           <Box h="42%" minH="140px" />
           {lines.map((line, index) => {
-            const distance = Math.abs(index - current);
             const isCurrent = index === current;
             return (
               <Text
@@ -97,18 +96,19 @@ export function VinylPlayer({
                   lineRefs.current[index] = el;
                 }}
                 textAlign="center"
-                py={2.5}
+                py={2}
                 px={2}
-                fontSize={isCurrent ? "2xl" : distance === 1 ? "lg" : "md"}
+                fontSize="lg"
                 fontWeight={isCurrent ? "semibold" : "normal"}
-                color={isCurrent ? "white" : distance < 3 ? "gray.300" : "gray.600"}
-                opacity={isCurrent ? 1 : distance === 1 ? 0.72 : distance < 3 ? 0.42 : 0.18}
+                color={isCurrent ? "white" : "gray.400"}
+                opacity={isCurrent ? 1 : 0.85}
                 textShadow={
                   isCurrent
                     ? "0 1px 18px rgba(0,0,0,0.85), 0 0 24px rgba(0,0,0,0.55)"
                     : "0 1px 10px rgba(0,0,0,0.55)"
                 }
-                transition="color 200ms ease, opacity 200ms ease, font-size 200ms ease"
+                transform={isCurrent ? "scale(1.06)" : undefined}
+                transition="color 200ms ease, opacity 200ms ease, transform 200ms ease"
                 lineHeight="short"
               >
                 {line.text}
