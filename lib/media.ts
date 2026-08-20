@@ -18,7 +18,6 @@ export interface Piece {
   kind: MediaKind;
   notes: string;
   audio?: string;
-  lyrics?: { t: number; text: string }[];
   blurb?: string;
   rating?: number;
   review?: string;

@@ -6,7 +6,7 @@ export interface Project {
   slug: string;
   title: string;
   blurb: string;
-  demo?: string;
+  website?: string;
   github: string;
   href: string;
 }

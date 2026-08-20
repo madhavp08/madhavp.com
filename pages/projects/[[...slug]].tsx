@@ -90,9 +90,9 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
               <Stack spacing={3}>
                 <Heading size="md">{project.title}</Heading>
                 <Text color="gray.400">{project.blurb}</Text>
-                {project.demo && (
-                  <Link href={project.demo} isExternal color="blue.300">
-                    Demo
+                {project.website && (
+                  <Link href={project.website} isExternal color="blue.300">
+                    Website
                   </Link>
                 )}
                 <Link href={project.github} isExternal color="blue.300">

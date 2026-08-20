@@ -4,7 +4,6 @@ import fs from "fs";
 import { MEDIA_KINDS, MediaKind, Piece } from "./media";
 import { coverSrc } from "./covers";
 import { songPreview } from "./previews";
-import { songLyrics, fromCatalog } from "./lyrics";
 import { MEDIA_HREF } from "./site";
 
 interface CatalogItem {
@@ -16,7 +15,6 @@ interface CatalogItem {
   textColor: string;
   notes: string;
   audio?: string;
-  lyrics?: string[];
   blurb?: string;
   rating?: number;
   tag?: string;
@@ -60,15 +58,6 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
       if (audio) {
         piece.audio = audio;
       }
-      if (kind === "music") {
-        const lyrics = item.lyrics?.length
-          ? fromCatalog(item.lyrics)
-          : await songLyrics(item.title, item.creator);
-        if (lyrics && lyrics.length) {
-          piece.lyrics = lyrics;
-        }
-      }
-
       if (item.blurb) {
         piece.blurb = item.blurb;
       }

@@ -13,12 +13,12 @@ Edit `content/projects.json`. Add an object to add a project. Delete it to remov
   "slug": "my-project",
   "title": "My Project",
   "blurb": "One short sentence.",
-  "demo": "https://example.com",
+  "website": "https://example.com",
   "github": "https://github.com/madhavp08/my-project"
 }
 ```
 
-Leave `demo` out if there is no live site. `github` is required.
+Leave `website` out if there is no live site. `github` is required.
 
 ## A book
 
