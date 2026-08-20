@@ -41,7 +41,7 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
           ? await songPreview(item.title, item.creator)
           : undefined;
 
-      return {
+      const piece: Piece = {
         title: item.title,
         creator: item.creator,
         coverImage: coverSrc(item.cover),
@@ -50,8 +50,13 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
         kind,
         slug: `${MEDIA_HREF}/${kind}/${item.slug}`,
         notes: source.compiledSource,
-        audio: item.audio || preview?.audio,
       };
+      const audio = item.audio || preview?.audio;
+      if (audio) {
+        piece.audio = audio;
+      }
+
+      return piece;
     })
   );
 }
