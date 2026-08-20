@@ -154,6 +154,10 @@ Clicking a song opens a record on the side. It starts playing from that click, w
 
 The playlist Madhav sent was not public, so the music shelf still needs the real track list.
 
+## 2026-08-20 — Music is four songs from Madhav
+
+The music shelf is Die Trying, Loverboy, Phir Le Aya Dil (Reprise), and Phir Na Aana, with iTunes artwork and short preview clips on the vinyl.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
