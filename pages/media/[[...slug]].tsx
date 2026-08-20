@@ -10,8 +10,6 @@ import {
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Layout from "../../components/Layout";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import { MDXRemote } from "next-mdx-remote";
 import {
   MEDIA_KINDS,
   MEDIA_LABELS,
@@ -183,13 +181,14 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
               top={{ md: 10 }}
             >
               <Fade in={Boolean(piece)} unmountOnExit>
-                {piece?.kind === "movies" ? (
+                {piece ? (
                   <VStack align="center" textAlign="center" spacing={3} w="100%">
                     <Heading size="md">{piece.title}</Heading>
                     <Text color="gray.400">{piece.creator}</Text>
                     {piece.rating != null && (
                       <Text color="gray.300" fontSize="sm">
-                        {letterboxdStars(piece.rating)} {piece.rating} on Letterboxd
+                        {letterboxdStars(piece.rating)} {piece.rating} on{" "}
+                        {piece.kind === "books" ? "Goodreads" : "Letterboxd"}
                       </Text>
                     )}
                     {piece.blurb && (
@@ -200,18 +199,6 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                         {piece.review}
                       </Text>
                     )}
-                  </VStack>
-                ) : piece ? (
-                  <VStack align="flex-start" spacing={3}>
-                    <Heading size="md">{piece.title}</Heading>
-                    <Text color="gray.400">{piece.creator}</Text>
-                    <Prose>
-                      <MDXRemote
-                        compiledSource={piece.notes}
-                        scope={{}}
-                        frontmatter={{}}
-                      />
-                    </Prose>
                   </VStack>
                 ) : null}
               </Fade>

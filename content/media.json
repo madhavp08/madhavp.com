@@ -7,7 +7,9 @@
       "cover": "isbn:9780767905923",
       "spineColor": "#4a3728",
       "textColor": "#fff",
-      "notes": ""
+      "notes": "",
+      "rating": 4.2,
+      "blurb": "Mitch Albom reconnects with his old sociology professor, Morrie Schwartz, and visits him every Tuesday as Schwartz is dying of ALS. Their talks become a last class on love, work, family, and how to live."
     },
     {
       "slug": "autobiography-of-a-yogi",
@@ -16,7 +18,9 @@
       "cover": "isbn:9780876120798",
       "spineColor": "#8b4513",
       "textColor": "#fff",
-      "notes": ""
+      "notes": "",
+      "rating": 4.3,
+      "blurb": "Yogananda's account of his search for a guru in India, and the saints, scientists, and teachers he met along the way. Published in 1946, it was many Western readers' first introduction to yoga and meditation."
     }
   ],
   "movies": [
