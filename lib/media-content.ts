@@ -1,4 +1,3 @@
-import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import fs from "fs";
 import { MEDIA_KINDS, MediaKind, Piece } from "./media";
@@ -36,9 +35,6 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
 
   return Promise.all(
     items.map(async (item) => {
-      const source = await serialize(item.notes || "", {
-        mdxOptions: { development: false },
-      });
       const preview =
         kind === "music" && !item.audio && item.creator !== "To be replaced"
           ? await songPreview(item.title, item.creator)
@@ -52,7 +48,7 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
         textColor: item.textColor,
         kind,
         slug: `${MEDIA_HREF}/${kind}/${item.slug}`,
-        notes: source.compiledSource,
+        notes: item.notes || "",
       };
       const audio = item.audio || preview?.audio;
       if (audio) {
