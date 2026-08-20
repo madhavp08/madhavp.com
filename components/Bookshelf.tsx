@@ -29,11 +29,11 @@ interface BookshelfProps {
 
 const width = 41.5;
 const height = 220;
-const coverFactor = 6;
-const coverPx = width * coverFactor;
+const coverPx = Math.round((height * 2) / 3);
 const spineWidth = `${width}px`;
 const coverWidth = `${coverPx}px`;
-const itemWidth = `${width + coverPx}px`;
+const itemWidth = width + coverPx;
+const itemWidthPx = `${itemWidth}px`;
 const itemHeight = `${height}px`;
 const motion = "400ms cubic-bezier(0.22, 1, 0.36, 1)";
 
@@ -48,13 +48,30 @@ export function Bookshelf({
   const itemIndex = items.findIndex((item) => item.slug === activeSlug);
 
   function scrollBy(amount: number) {
-    viewportRef.current?.scrollBy({ left: amount, behavior: "smooth" });
+    const viewport = viewportRef.current;
+    if (!viewport) {
+      return;
+    }
+    const min = itemIndex >= 0 ? 0 : itemWidth;
+    viewport.scrollTo({
+      left: Math.max(min, viewport.scrollLeft + amount),
+      behavior: "smooth",
+    });
   }
 
   React.useLayoutEffect(() => {
     const viewport = viewportRef.current;
-    const openEl = itemIndex >= 0 ? itemRefs.current[itemIndex] : null;
-    if (!viewport || !openEl) {
+    if (!viewport) {
+      return;
+    }
+    if (itemIndex < 0) {
+      if (viewport.scrollLeft < itemWidth) {
+        viewport.scrollLeft = itemWidth;
+      }
+      return;
+    }
+    const openEl = itemRefs.current[itemIndex];
+    if (!openEl) {
       return;
     }
     const shelf = viewport.getBoundingClientRect();
@@ -112,6 +129,7 @@ export function Bookshelf({
           alignItems="center"
           gap={1}
           overflowX="auto"
+          pl={`${itemWidth}px`}
           css={{
             scrollbarWidth: "none",
             overscrollBehaviorX: "contain",
@@ -138,8 +156,8 @@ export function Bookshelf({
                   justifyContent: "flex-start",
                   outline: "none",
                   flexShrink: 0,
-                  width: isOpen ? itemWidth : spineWidth,
-                  marginLeft: isOpen ? `-${coverPx}px` : "0px",
+                  width: isOpen ? itemWidthPx : spineWidth,
+                  marginLeft: isOpen ? `-${itemWidth}px` : "0px",
                   height,
                   perspective: "1000px",
                   WebkitPerspective: "1000px",
@@ -159,6 +177,7 @@ export function Bookshelf({
                   width={spineWidth}
                   height={itemHeight}
                   flexShrink={0}
+                  overflow="hidden"
                   transformOrigin="right"
                   backgroundColor={item.spineColor}
                   color={item.textColor}
@@ -166,6 +185,23 @@ export function Bookshelf({
                   transition={`transform ${motion}`}
                   style={{ transformStyle: "preserve-3d" }}
                 >
+                  <Image
+                    src={item.coverImage}
+                    alt=""
+                    position="absolute"
+                    inset={0}
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    objectPosition="left center"
+                    draggable={false}
+                  />
+                  <Box
+                    position="absolute"
+                    inset={0}
+                    bg="blackAlpha.200"
+                    pointerEvents="none"
+                  />
                   {isOpen && (
                     <span
                       style={{
@@ -187,11 +223,14 @@ export function Bookshelf({
                     fontSize="xs"
                     className={dmSans.className}
                     style={{ writingMode: "vertical-rl" }}
+                    position="relative"
+                    zIndex={1}
                     userSelect="none"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
                     overflow="hidden"
                     maxHeight={`${height - 24}px`}
+                    textShadow="0 1px 2px rgba(0,0,0,0.85)"
                   >
                     {item.title}
                   </Heading>
@@ -201,8 +240,10 @@ export function Bookshelf({
                     position="relative"
                     flexShrink={0}
                     overflow="hidden"
+                    width={coverWidth}
+                    height={itemHeight}
                     transformOrigin="left"
-                    transform="rotateY(30deg)"
+                    transform="rotateY(12deg)"
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <span
@@ -221,8 +262,10 @@ export function Bookshelf({
                     <Image
                       src={item.coverImage}
                       alt=""
-                      width={coverWidth}
-                      height={itemHeight}
+                      w="100%"
+                      h="100%"
+                      objectFit="cover"
+                      objectPosition="center"
                       draggable={false}
                     />
                   </Box>

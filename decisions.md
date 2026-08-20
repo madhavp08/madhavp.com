@@ -130,6 +130,14 @@ A catch-all redirect from `/art/:path*` to `/media/:path*` was sending cover fil
 
 The movie shelf is Madhav's logged films on [letterboxd.com/madhavp08](https://letterboxd.com/madhavp08/), with Letterboxd posters and directors from each film page. Placeholder movie SVGs are gone. This is a one-time fill from the public RSS/diary, not a live API sync.
 
+## 2026-08-19 — Shelf covers, spines, and click-through
+
+Movie posters are 2:3. The open cover is that ratio with `object-fit: cover` so art is not stretched. The closed spine is a strip of the same cover, not a flat color with only sideways text.
+
+An open item takes no extra width in the row, so the next spine stays under the cursor. Left padding on the shelf keeps the first covers on screen instead of sliding off the row.
+
+Movies are ordered from highest Letterboxd star rating to lowest, using the latest rating when a film was logged more than once.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

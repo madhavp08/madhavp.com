@@ -2,7 +2,7 @@
 
 Edit `content/media.json`. Each shelf is an array. Add an object to add an item. Delete the object to remove it. Then the site updates on the next refresh.
 
-This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand.
+This is the catalog. Later, Spotify, Letterboxd, and Goodreads can fill the same file. Until those are wired, add items by hand. Movies are listed highest Letterboxd rating first.
 
 ## Projects
 
@@ -63,7 +63,7 @@ Drop the image in `public/art/movies/` or `public/art/music/`.
 
 ## Spine colors
 
-`spineColor` is the thin side of the 3D item. `textColor` is the title on that spine. Pick a dark hex and `#fff` for most titles.
+The spine shows a strip of the cover. `spineColor` is the fallback behind that image. `textColor` is the title on the spine. Pick a dark hex and `#fff` for most titles.
 
 ## Later: Spotify, Letterboxd, Goodreads
 
