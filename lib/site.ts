@@ -14,7 +14,7 @@ export const site = {
     { label: "Gmail", href: "mailto:madhav.pillai08@gmail.com" },
     { label: "GitHub", href: "https://github.com/madhavp08" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/madhavpillai" },
-    { label: "X", href: "https://x.com/Madhav_Pillai08" },
+    { label: "X", href: "https://x.com/madhav_p08" },
     { label: "Letterboxd", href: "https://letterboxd.com/madhavp08/" },
     { label: "Chess.com", href: "https://www.chess.com/member/sack_madhav" },
     { label: "LeetCode", href: "https://leetcode.com/u/madhavp08/" },
