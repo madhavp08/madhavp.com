@@ -126,6 +126,10 @@ The page background is matte black (`#111111`) instead of Chakra gray.900, which
 
 A catch-all redirect from `/art/:path*` to `/media/:path*` was sending cover files like `/art/music/album-05.svg` to a page that does not exist. `/art` still redirects to `/media`. Cover images keep being served from `public/art`.
 
+## 2026-08-19 — Movies come from Letterboxd
+
+The movie shelf is Madhav's logged films on [letterboxd.com/madhavp08](https://letterboxd.com/madhavp08/), with Letterboxd posters and directors from each film page. Placeholder movie SVGs are gone. This is a one-time fill from the public RSS/diary, not a live API sync.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.

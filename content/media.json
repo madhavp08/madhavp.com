@@ -111,112 +111,175 @@
   ],
   "movies": [
     {
-      "slug": "movie-01",
-      "title": "Movie 01",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-01.svg",
+      "slug": "the-wolf-of-wall-street",
+      "title": "The Wolf of Wall Street",
+      "creator": "Martin Scorsese",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/8/6/1/1/4/86114-the-wolf-of-wall-street-0-600-0-900-crop.jpg?v=a2b958b6f1",
       "spineColor": "#1a1a1a",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-02",
-      "title": "Movie 02",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-02.svg",
-      "spineColor": "#7a1f2b",
+      "slug": "meet-joe-black",
+      "title": "Meet Joe Black",
+      "creator": "Martin Brest",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/5/1/7/6/2/51762-meet-joe-black-0-600-0-900-crop.jpg?v=a48335de29",
+      "spineColor": "#6b2c2c",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-03",
-      "title": "Movie 03",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-03.svg",
-      "spineColor": "#14283c",
+      "slug": "spider-man-brand-new-day",
+      "title": "Spider-Man: Brand New Day",
+      "creator": "Destin Daniel Cretton",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/8/7/2/8/7/1/872871-spider-man-brand-new-day-0-600-0-900-crop.jpg?v=ebe6beb4fc",
+      "spineColor": "#1b2838",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-04",
-      "title": "Movie 04",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-04.svg",
-      "spineColor": "#3e2f1c",
+      "slug": "green-book",
+      "title": "Green Book",
+      "creator": "Peter Farrelly",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/4/2/0/7/0/3/420703-green-book-0-600-0-900-crop.jpg?v=9919fcce4c",
+      "spineColor": "#2d4a3e",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-05",
-      "title": "Movie 05",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-05.svg",
-      "spineColor": "#0f3d2e",
+      "slug": "moneyball",
+      "title": "Moneyball",
+      "creator": "Bennett Miller",
+      "cover": "https://a.ltrbxd.com/resized/sm/upload/h1/fd/pz/pi/3oAa8mJJ97CH9AeGEY6vjAxqcvZ-0-600-0-900-crop.jpg?v=3ce471493f",
+      "spineColor": "#111111",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-06",
-      "title": "Movie 06",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-06.svg",
-      "spineColor": "#2a1540",
+      "slug": "nuremberg-2025",
+      "title": "Nuremberg",
+      "creator": "James Vanderbilt",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/1/0/9/8/7/8/2/1098782-nuremberg-2025-0-600-0-900-crop.jpg?v=954f98ffb4",
+      "spineColor": "#8b5a2b",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-07",
-      "title": "Movie 07",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-07.svg",
-      "spineColor": "#5a2a12",
+      "slug": "super-30",
+      "title": "Super 30",
+      "creator": "Vikas Bahl",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/4/6/3/3/3/0/463330-super-30-0-600-0-900-crop.jpg?v=9185a5ef5d",
+      "spineColor": "#3d2b5f",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-08",
-      "title": "Movie 08",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-08.svg",
-      "spineColor": "#1c3344",
+      "slug": "the-odyssey-2026",
+      "title": "The Odyssey",
+      "creator": "Christopher Nolan",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/1/2/5/5/3/9/4/1255394-the-odyssey-2026-0-600-0-900-crop.jpg?v=1eed046d0c",
+      "spineColor": "#4a3728",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-09",
-      "title": "Movie 09",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-09.svg",
-      "spineColor": "#4b0f1f",
+      "slug": "sarvam-maya",
+      "title": "Sarvam Maya",
+      "creator": "Akhil Sathyan",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/1/3/5/0/3/6/1/1350361-sarvam-maya-0-600-0-900-crop.jpg?v=df1750ead2",
+      "spineColor": "#2c4c6e",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
     },
     {
-      "slug": "movie-10",
-      "title": "Movie 10",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-10.svg",
-      "spineColor": "#222222",
-      "textColor": "#e8e0d0",
-      "notes": "Notes coming."
-    },
-    {
-      "slug": "movie-11",
-      "title": "Movie 11",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-11.svg",
-      "spineColor": "#163024",
+      "slug": "slumdog-millionaire",
+      "title": "Slumdog Millionaire",
+      "creator": "Danny Boyle",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/4/4/6/1/3/44613-slumdog-millionaire-0-600-0-900-crop.jpg?v=6cff9e413f",
+      "spineColor": "#5c1a1a",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": "Would be an easy 5 if it wasn't for the heinous and incorrect representation of India ]]>"
     },
     {
-      "slug": "movie-12",
-      "title": "Movie 12",
-      "creator": "To be replaced",
-      "cover": "/art/movies/movie-12.svg",
-      "spineColor": "#3a1d10",
+      "slug": "beautiful-boy-2018",
+      "title": "Beautiful Boy",
+      "creator": "Felix van Groeningen",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/3/8/4/0/5/8/384058-beautiful-boy-0-600-0-900-crop.jpg?v=f926f71a50",
+      "spineColor": "#2f4f4f",
       "textColor": "#fff",
-      "notes": "Notes coming."
+      "notes": ""
+    },
+    {
+      "slug": "main-vaapas-aaunga",
+      "title": "Main Vaapas Aaunga",
+      "creator": "Imtiaz Ali",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/1/3/0/9/7/9/7/1309797-main-vaapas-aaunga-0-600-0-900-crop.jpg?v=8463d9a3f4",
+      "spineColor": "#3c3c3c",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "dead-poets-society",
+      "title": "Dead Poets Society",
+      "creator": "Peter Weir",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/5/1/8/4/6/51846-dead-poets-society-0-600-0-900-crop.jpg?v=9273e8acf7",
+      "spineColor": "#4a1c40",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "jacobs-kingdom-of-heaven",
+      "title": "Jacob's Kingdom of Heaven",
+      "creator": "Vineeth Sreenivasan",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/3/2/2/8/1/0/322810-jacob-s-kingdom-of-heaven-0-600-0-900-crop.jpg?v=28cca12b0f",
+      "spineColor": "#243447",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "3-idiots",
+      "title": "3 Idiots",
+      "creator": "Rajkumar Hirani",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/3/8/9/9/9/38999-3-idiots-0-600-0-900-crop.jpg?v=890bae83d8",
+      "spineColor": "#3e2723",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "the-martian",
+      "title": "The Martian",
+      "creator": "Ridley Scott",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/2/1/1/5/1/1/211511-the-martian-0-600-0-900-crop.jpg?v=71ca0c832e",
+      "spineColor": "#1b3a4b",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "ford-v-ferrari",
+      "title": "Ford v Ferrari",
+      "creator": "James Mangold",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/2/9/1/4/1/9/291419-ford-v-ferrari-0-600-0-900-crop.jpg?v=27ed4e72db",
+      "spineColor": "#4a3b2a",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "the-social-network",
+      "title": "The Social Network",
+      "creator": "David Fincher",
+      "cover": "https://a.ltrbxd.com/resized/sm/upload/nw/cm/pa/ai/sGQv3ZMZBDBnl3z42Q0mEQ5uiDe-0-600-0-900-crop.jpg?v=54ee59f7cd",
+      "spineColor": "#2e1a1a",
+      "textColor": "#fff",
+      "notes": ""
+    },
+    {
+      "slug": "good-will-hunting",
+      "title": "Good Will Hunting",
+      "creator": "Gus Van Sant",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/5/1/6/2/1/51621-good-will-hunting-0-600-0-900-crop.jpg?v=acb4766abd",
+      "spineColor": "#16332a",
+      "textColor": "#fff",
+      "notes": ""
     }
   ],
   "music": [

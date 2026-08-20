@@ -45,7 +45,7 @@ Find an ISBN on the book's Amazon or Open Library page. Use the 13-digit ISBN wi
 
 ## A movie or album
 
-Same shape. Open Library is for books, so for movies and music use a file or a URL:
+Same shape. Movies on this site currently come from [Letterboxd](https://letterboxd.com/madhavp08/). `cover` can be a Letterboxd poster URL, a file under `public/art/movies/`, or any image URL.
 
 ```json
 {
