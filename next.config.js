@@ -24,11 +24,6 @@ module.exports = withMDX({
         permanent: true,
       },
       {
-        source: "/art/:path*",
-        destination: "/media/:path*",
-        permanent: true,
-      },
-      {
         source: "/favorites",
         destination: "/media",
         permanent: true,

@@ -118,6 +118,10 @@ Chasing `getBoundingClientRect` every frame while width was animating made the s
 
 The Media page lists movies first, then music, then books.
 
+## 2026-08-19 — Cover files stay under /art
+
+A catch-all redirect from `/art/:path*` to `/media/:path*` was sending cover files like `/art/music/album-05.svg` to a page that does not exist. `/art` still redirects to `/media`. Cover images keep being served from `public/art`.
+
 ## 2026-08-18 — Domain and Vercel wait until the site runs locally
 
 madhavp.com is on GoDaddy and should deploy on Vercel from main. That wiring comes after `yarn dev` and `yarn build` work, so a broken first deploy does not become the production baseline.
