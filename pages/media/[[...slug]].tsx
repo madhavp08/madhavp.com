@@ -166,10 +166,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           ))}
         </Flex>
         <Box
-          flex={{ md: "0 0 38%" }}
-          w={{ md: "auto" }}
-          minW={{ md: "320px" }}
-          maxW={{ md: "560px" }}
+          w={{ md: "300px" }}
           flexShrink={0}
           alignSelf={{ md: "stretch" }}
         >
