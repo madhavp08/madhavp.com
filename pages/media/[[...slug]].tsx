@@ -23,6 +23,7 @@ import { getShelves } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
 import { VinylPlayer } from "../../components/VinylPlayer";
 import { RecommendForm } from "../../components/RecommendForm";
+import { MediaHint } from "../../components/MediaHint";
 import { NextSeo } from "next-seo";
 import { MEDIA_HREF, site } from "../../lib/site";
 
@@ -287,25 +288,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           </Flex>
         </Box>
       </Flex>
-      {hint && (
-        <Flex
-          position="fixed"
-          inset={0}
-          align="center"
-          justify="center"
-          zIndex={100}
-          pointerEvents="none"
-        >
-          <Text
-            color="whiteAlpha.500"
-            fontSize="md"
-            textAlign="center"
-            px={6}
-          >
-            Click on a movie, book, song, or show
-          </Text>
-        </Flex>
-      )}
+      {hint && <MediaHint />}
     </>
   );
 };
