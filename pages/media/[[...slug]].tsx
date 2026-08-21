@@ -34,7 +34,7 @@ function ratingSource(kind: MediaKind) {
   if (kind === "books") {
     return "Goodreads";
   }
-  if (kind === "movies") {
+  if (kind === "movies" || kind === "shows") {
     return "Letterboxd";
   }
   return undefined;

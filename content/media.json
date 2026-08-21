@@ -8,7 +8,7 @@
       "spineColor": "#4a3728",
       "textColor": "#fff",
       "notes": "",
-      "rating": 4.2,
+      "rating": 3.5,
       "blurb": "Mitch Albom reconnects with his old sociology professor, Morrie Schwartz, and visits him every Tuesday as Schwartz is dying of ALS. Their talks become a last class on love, work, family, and how to live."
     },
     {
@@ -19,12 +19,56 @@
       "spineColor": "#8b4513",
       "textColor": "#fff",
       "notes": "",
-      "rating": 4.3,
       "blurb": "Yogananda's account of his search for a guru in India, and the saints, scientists, and teachers he met along the way. Published in 1946, it was many Western readers' first introduction to yoga and meditation.",
       "tag": "Currently reading"
     }
   ],
-  "shows": [],
+  "shows": [
+    {
+      "slug": "death-note",
+      "title": "Death Note",
+      "creator": "Tetsuro Araki",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/6/0/6/8/3/4/606834-death-note-2006-0-600-0-900-crop.jpg?v=5a5d43ebbc",
+      "spineColor": "#1a1210",
+      "textColor": "#fff",
+      "notes": "",
+      "rating": 4.5,
+      "blurb": "Light Yagami is an ace student with great prospects—and he's bored out of his mind. But all that changes when he finds the Death Note, a notebook dropped by a rogue Shinigami death god. Any human whose name is written in the notebook dies, and Light has vowed to use the power of the Death Note to rid the world of evil."
+    },
+    {
+      "slug": "vinland-saga",
+      "title": "Vinland Saga",
+      "creator": "Shuhei Yabuta",
+      "cover": "https://a.ltrbxd.com/resized/film-poster/6/2/4/8/5/4/624854-vinland-saga-0-600-0-900-crop.jpg?v=776598842c",
+      "spineColor": "#3d2b1a",
+      "textColor": "#fff",
+      "notes": "",
+      "rating": 4.5,
+      "blurb": "For a thousand years, the Vikings have made quite a name and reputation for themselves as the strongest families with a thirst for violence. Thorfinn, the son of one of the Vikings' greatest warriors, spends his boyhood in a battlefield enhancing his skills in his adventure to redeem his most-desired revenge after his father was murdered."
+    },
+    {
+      "slug": "breaking-bad",
+      "title": "Breaking Bad",
+      "creator": "Vince Gilligan",
+      "cover": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/anFx9aTOOYqgS3v7x3R84Kz67ly.jpg",
+      "spineColor": "#1e3d32",
+      "textColor": "#fff",
+      "notes": "",
+      "rating": 4.0,
+      "blurb": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime."
+    },
+    {
+      "slug": "silicon-valley",
+      "title": "Silicon Valley",
+      "creator": "Mike Judge",
+      "cover": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/4ptpmWBVD9HY9hMh8Cbs6SMiy7p.jpg",
+      "spineColor": "#1a365d",
+      "textColor": "#fff",
+      "notes": "",
+      "blurb": "Follows the struggle of Richard Hendricks, a Silicon Valley engineer trying to build his own company called Pied Piper.",
+      "tag": "Currently watching"
+    }
+  ],
   "movies": [
     {
       "slug": "the-martian",
