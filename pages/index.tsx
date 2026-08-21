@@ -17,8 +17,8 @@ export default function Home() {
         <ListItem>
           This past summer, I interned at Sardine on their Merchant Risk team,
           where I spent most of my time writing code that has since been put
-          into production and helps customers with millions of dollars&apos;
-          worth of KYC-related compliance processes.
+          into production and helps customers (worth millions of dollars)
+          with their KYC related compliance processes.
         </ListItem>
         <ListItem>
           Previously, I worked for a government contractor, where I helped
@@ -45,7 +45,7 @@ export default function Home() {
           <Text as="span" fontWeight="bold">
             Startups.{" "}
           </Text>
-          I love learning and talking about startups and truly think that my
+          I love learning and talking about startups, and I truly think that my
           life would be incomplete without trying to build a startup that will
           &quot;change the world.&quot;
         </ListItem>
@@ -60,7 +60,7 @@ export default function Home() {
           <Text as="span" fontWeight="bold">
             Singing.{" "}
           </Text>
-          I sang a LOT growing up and attended and won several competitions and
+          I sang a LOT growing up, won several competitions, and sang in
           honor choirs in India and the USA. Nowadays, I only sing for myself
           and those close to me.
         </ListItem>
@@ -69,8 +69,8 @@ export default function Home() {
             Soccer.{" "}
           </Text>
           I played a LOT of soccer growing up and used to be pretty good
-          before COVID hit and I stopped playing for two years. Nowadays, the
-          only physical activity I do is go to the gym (sometimes).
+          until COVID hit, and I stopped playing for two years. Nowadays, the
+          only physical activity I do is going to the gym (sometimes).
         </ListItem>
       </UnorderedList>
       <Text mt={12}>
