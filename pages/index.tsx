@@ -16,9 +16,8 @@ export default function Home() {
         </ListItem>
         <ListItem>
           This past summer, I interned at Sardine on their Merchant Risk team,
-          where I spent most of my time writing code that has since been put
-          into production and helps customers (worth millions of dollars)
-          with their KYC related compliance processes.
+          where I spent most of my time writing code to help with
+          client&apos;s compliance processes.
         </ListItem>
         <ListItem>
           Previously, I worked for a government contractor, where I helped
