@@ -93,3 +93,7 @@ None of these are connected yet. Manual JSON always works as a fallback.
 **Goodreads (books) — no official API.** Goodreads shut its API. Two workable paths later: a public shelf RSS feed or a CSV export from Goodreads. ISBN in that data can still use Open Library covers the same way as a hand-added book.
 
 When you are ready to connect one, send the Spotify app credentials, Letterboxd username, and/or Goodreads user id.
+
+## Recommendations
+
+The blank Media column is a small form. Submissions go to Gmail through [Web3Forms](https://web3forms.com). Create a key for `madhav.pillai08@gmail.com`, put it in `.env.local` as `WEB3FORMS_ACCESS_KEY`, and add the same name in Vercel project env vars. Then redeploy.

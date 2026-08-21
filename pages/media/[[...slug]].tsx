@@ -22,6 +22,7 @@ import {
 import { getShelves } from "../../lib/media-content";
 import { Bookshelf } from "../../components/Bookshelf";
 import { VinylPlayer } from "../../components/VinylPlayer";
+import { RecommendForm } from "../../components/RecommendForm";
 import { NextSeo } from "next-seo";
 import { MEDIA_HREF, site } from "../../lib/site";
 
@@ -86,6 +87,7 @@ function slugFromPath(path: string) {
 const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const [activeSlug, setActiveSlug] = useState(initialSlug);
   const [playing, setPlaying] = useState(false);
+  const [hint, setHint] = useState(!initialSlug);
   const playerRef = useRef<HTMLAudioElement | null>(null);
 
   const allPieces = useMemo(
@@ -135,6 +137,23 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       audio.src = "";
     };
   }, []);
+
+  useEffect(() => {
+    if (!hint) {
+      return;
+    }
+    const timer = window.setTimeout(() => setHint(false), 5000);
+    function dismiss() {
+      setHint(false);
+    }
+    document.addEventListener("click", dismiss);
+    document.addEventListener("keydown", dismiss);
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("click", dismiss);
+      document.removeEventListener("keydown", dismiss);
+    };
+  }, [hint]);
 
   useEffect(() => {
     function onPop() {
@@ -209,7 +228,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
         >
           <Flex h="100%" align="center" justify="center">
             {piece?.kind === "music" ? (
-              <Fade in>
+              <Fade in key={piece.slug}>
                 <VinylPlayer
                   title={piece.title}
                   artist={piece.creator}
@@ -218,54 +237,76 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                   onToggle={togglePlay}
                 />
               </Fade>
+            ) : piece ? (
+              <Fade in key={piece.slug}>
+                <VStack align="stretch" spacing={3} w="100%">
+                  {piece.tag && (
+                    <Text
+                      fontSize="xs"
+                      fontWeight="semibold"
+                      letterSpacing="0.08em"
+                      textTransform="uppercase"
+                      color="gray.300"
+                      border="1px solid"
+                      borderColor="gray.600"
+                      px={2}
+                      py={0.5}
+                      borderRadius="sm"
+                      alignSelf="flex-start"
+                    >
+                      {piece.tag}
+                    </Text>
+                  )}
+                  <Heading size="md">{piece.title}</Heading>
+                  <Text color="gray.400">{piece.creator}</Text>
+                  {piece.rating != null && (
+                    <Text color="gray.300" fontSize="sm">
+                      {letterboxdStars(piece.rating)} {piece.rating}
+                      {ratingSource(piece.kind)
+                        ? ` on ${ratingSource(piece.kind)}`
+                        : ""}
+                    </Text>
+                  )}
+                  {piece.blurb && (
+                    <Text color="gray.200" textAlign="justify">
+                      {piece.blurb}
+                    </Text>
+                  )}
+                  {piece.review && (
+                    <Text color="gray.400" fontSize="sm" textAlign="justify">
+                      {piece.review}
+                    </Text>
+                  )}
+                </VStack>
+              </Fade>
             ) : (
-              <Fade in={Boolean(piece)} unmountOnExit>
-                {piece ? (
-                  <VStack align="stretch" spacing={3} w="100%">
-                    {piece.tag && (
-                      <Text
-                        fontSize="xs"
-                        fontWeight="semibold"
-                        letterSpacing="0.08em"
-                        textTransform="uppercase"
-                        color="gray.300"
-                        border="1px solid"
-                        borderColor="gray.600"
-                        px={2}
-                        py={0.5}
-                        borderRadius="sm"
-                        alignSelf="flex-start"
-                      >
-                        {piece.tag}
-                      </Text>
-                    )}
-                    <Heading size="md">{piece.title}</Heading>
-                    <Text color="gray.400">{piece.creator}</Text>
-                    {piece.rating != null && (
-                      <Text color="gray.300" fontSize="sm">
-                        {letterboxdStars(piece.rating)} {piece.rating}
-                        {ratingSource(piece.kind)
-                          ? ` on ${ratingSource(piece.kind)}`
-                          : ""}
-                      </Text>
-                    )}
-                    {piece.blurb && (
-                      <Text color="gray.200" textAlign="justify">
-                        {piece.blurb}
-                      </Text>
-                    )}
-                    {piece.review && (
-                      <Text color="gray.400" fontSize="sm" textAlign="justify">
-                        {piece.review}
-                      </Text>
-                    )}
-                  </VStack>
-                ) : null}
+              <Fade in>
+                <RecommendForm />
               </Fade>
             )}
           </Flex>
         </Box>
       </Flex>
+      {hint && (
+        <Flex
+          position="fixed"
+          inset={0}
+          align="center"
+          justify="center"
+          zIndex={100}
+          pointerEvents="none"
+          bg="blackAlpha.500"
+        >
+          <Text
+            color="gray.100"
+            fontSize="lg"
+            textAlign="center"
+            px={6}
+          >
+            Click on a movie, book, song, or show
+          </Text>
+        </Flex>
+      )}
     </>
   );
 };
