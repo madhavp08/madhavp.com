@@ -30,7 +30,7 @@ export default function Home() {
           life.
         </ListItem>
         <ListItem>
-          I am a devotee of Krishna ॐ and am actively exploring the world of
+          I am a devotee of Krishna (ॐ) and am actively exploring the world of
           non-dualism through the teachings of Advaita Vedanta, Osho, and
           Ashtavakra.
         </ListItem>
