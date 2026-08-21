@@ -70,19 +70,28 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
                 _hover={{ color: "gray.50" }}
                 transition="color 0.15s ease"
               >
-                <Heading size="md">{item.title}</Heading>
-                {item.tag && (
-                  <Text
-                    mt={1}
-                    fontSize="xs"
-                    fontWeight="semibold"
-                    letterSpacing="0.08em"
-                    textTransform="uppercase"
-                    color={isActive ? "gray.300" : "gray.500"}
-                  >
-                    {item.tag}
-                  </Text>
-                )}
+                <Flex align="center" gap={3} wrap="wrap">
+                  <Heading size="md">{item.title}</Heading>
+                  {item.tag && (
+                    <Text
+                      as="span"
+                      fontSize="xs"
+                      fontWeight="semibold"
+                      letterSpacing="0.06em"
+                      color={isActive ? "gray.200" : "gray.400"}
+                      border="1px solid"
+                      borderColor={isActive ? "gray.500" : "gray.600"}
+                      bg="whiteAlpha.100"
+                      px={2.5}
+                      py={0.5}
+                      borderRadius="full"
+                      boxShadow="sm"
+                      lineHeight="short"
+                    >
+                      {item.tag}
+                    </Text>
+                  )}
+                </Flex>
                 <Text mt={1} color={isActive ? "gray.300" : "gray.500"}>
                   {item.blurb}
                 </Text>
@@ -100,24 +109,28 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
           <Fade in={Boolean(project)} unmountOnExit>
             {project && (
               <Stack spacing={3}>
-                {project.tag && (
-                  <Text
-                    fontSize="xs"
-                    fontWeight="semibold"
-                    letterSpacing="0.08em"
-                    textTransform="uppercase"
-                    color="gray.300"
-                    border="1px solid"
-                    borderColor="gray.600"
-                    px={2}
-                    py={0.5}
-                    borderRadius="sm"
-                    alignSelf="flex-start"
-                  >
-                    {project.tag}
-                  </Text>
-                )}
-                <Heading size="md">{project.title}</Heading>
+                <Flex align="center" gap={3} wrap="wrap">
+                  <Heading size="md">{project.title}</Heading>
+                  {project.tag && (
+                    <Text
+                      as="span"
+                      fontSize="xs"
+                      fontWeight="semibold"
+                      letterSpacing="0.06em"
+                      color="gray.300"
+                      border="1px solid"
+                      borderColor="gray.600"
+                      bg="whiteAlpha.100"
+                      px={2.5}
+                      py={0.5}
+                      borderRadius="full"
+                      boxShadow="sm"
+                      lineHeight="short"
+                    >
+                      {project.tag}
+                    </Text>
+                  )}
+                </Flex>
                 <Text color="gray.400">{project.blurb}</Text>
                 {project.website && (
                   <Link href={project.website} isExternal color="blue.300">

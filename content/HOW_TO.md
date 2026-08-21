@@ -18,7 +18,7 @@ Edit `content/projects.json`. Add an object to add a project. Delete it to remov
 }
 ```
 
-Leave `website` out if there is no live site. Leave `github` out if there is no repo yet. Add `tag` for a status like "Currently working now".
+Leave `website` out if there is no live site. Leave `github` out if there is no repo yet. Add `tag` for a status like "currently working".
 
 ## A book
 
