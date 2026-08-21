@@ -26,12 +26,10 @@ export function RecommendForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
-  const [error, setError] = useState("");
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setStatus("sending");
-    setError("");
     try {
       if (honeypot.trim()) {
         setStatus("sent");
@@ -60,7 +58,6 @@ export function RecommendForm() {
       };
       if (!response.ok || !data.success) {
         setStatus("error");
-        setError(data.message || "Could not send");
         return;
       }
       setStatus("sent");
@@ -69,7 +66,6 @@ export function RecommendForm() {
       setMessage("");
     } catch {
       setStatus("error");
-      setError("Could not send");
     }
   }
 
@@ -130,22 +126,17 @@ export function RecommendForm() {
         overflow="hidden"
         variant="outline"
         borderColor="gray.700"
-        color="gray.300"
+        color={status === "error" ? "red.300" : "gray.300"}
         fontWeight="normal"
         isLoading={status === "sending"}
         _hover={{ bg: "whiteAlpha.100", borderColor: "gray.500" }}
       >
-        Send
+        {status === "sent"
+          ? "Sent."
+          : status === "error"
+            ? "Could not send"
+            : "Send"}
       </Button>
-      <Text
-        fontSize="sm"
-        minH="24px"
-        lineHeight="24px"
-        noOfLines={1}
-        color={status === "error" ? "red.300" : "gray.500"}
-      >
-        {status === "sent" ? "Sent." : status === "error" ? error : "\u00a0"}
-      </Text>
     </Stack>
   );
 }
