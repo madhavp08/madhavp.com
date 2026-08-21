@@ -25,6 +25,12 @@
     "github": "https://github.com/madhavp08/soccer-chrome-extension"
   },
   {
+    "slug": "canvas-news-feed",
+    "title": "Canvas News Feed",
+    "blurb": "Checks a Canvas class page and emails you when something important shows up.",
+    "github": "https://github.com/madhavp08/canvas-news-feed-system"
+  },
+  {
     "slug": "youtube-transcript-builder",
     "title": "YouTube Transcript Builder",
     "blurb": "Paste a YouTube link, get a clean transcript. No ads, no paywall.",
@@ -35,18 +41,7 @@
     "slug": "bridge-umd",
     "title": "BridgeUMD",
     "blurb": "A chat that points UMD students in crisis to real campus resources.",
-    "github": "https://github.com/madhavp08/BridgeUMD"
-  },
-  {
-    "slug": "canvas-news-feed",
-    "title": "Canvas News Feed",
-    "blurb": "Checks a Canvas class page and emails you when something important shows up.",
-    "github": "https://github.com/madhavp08/canvas-news-feed-system"
-  },
-  {
-    "slug": "instagram-unfollowing-checker",
-    "title": "Instagram Unfollowing Checker",
-    "blurb": "See who does not follow you back on Instagram.",
-    "github": "https://github.com/madhavp08/instagram-unfollowing-checker"
+    "github": "https://github.com/madhavp08/BridgeUMD",
+    "tag": "vibecoded slop"
   }
 ]
