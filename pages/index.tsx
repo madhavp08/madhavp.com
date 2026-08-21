@@ -53,7 +53,6 @@ export default function Home() {
             Teaching.{" "}
           </Text>
           I love explaining concepts to people and seeing their eyes light up.
-          I like to think I&apos;m above average at it.
         </ListItem>
         <ListItem>
           <Text as="span" fontWeight="bold">
