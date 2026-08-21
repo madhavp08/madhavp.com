@@ -95,11 +95,7 @@ export function Bookshelf({
       <Box position="relative">
         <Box
           position="absolute"
-          left={
-            split === "end"
-              ? { base: "-28px", md: 0 }
-              : { base: "-28px", md: "-36px" }
-          }
+          left={{ base: "-28px", md: "-36px" }}
           height="100%"
           zIndex={2}
         >
