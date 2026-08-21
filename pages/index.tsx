@@ -45,8 +45,8 @@ export default function Home() {
             Startups.{" "}
           </Text>
           I love learning and talking about startups, and I truly think that my
-          life would be incomplete without trying to build a startup that will
-          &quot;change the world.&quot;
+          life would be incomplete without trying to build a startup once in
+          my lifetime.
         </ListItem>
         <ListItem>
           <Text as="span" fontWeight="bold">
