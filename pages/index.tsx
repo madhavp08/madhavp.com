@@ -27,8 +27,7 @@ export default function Home() {
         <ListItem>
           I love building things that I believe the world needs, thinking
           through design and product decisions, and seeing the vision come to
-          life. My highest level of achievement would be starting and
-          running a successful company that employs 50 people.
+          life.
         </ListItem>
         <ListItem>
           I am a devotee of Krishna ॐ and am actively exploring the world of
