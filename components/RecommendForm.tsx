@@ -59,8 +59,8 @@ export function RecommendForm() {
   }
 
   return (
-    <Stack as="form" spacing={3} w="100%" onSubmit={onSubmit}>
-      <Text fontWeight="bold" fontSize="sm" color="gray.400">
+    <Stack as="form" spacing={4} w="100%" onSubmit={onSubmit}>
+      <Text fontWeight="bold" fontSize="md" color="gray.300">
         Media recommendation
       </Text>
       <Input
@@ -75,7 +75,8 @@ export function RecommendForm() {
         value={kind}
         onChange={(event) => setKind(event.target.value)}
         isRequired
-        size="sm"
+        size="md"
+        h="44px"
         sx={{ option: { bg: "#1a1a1a" } }}
         {...field}
       >
@@ -91,7 +92,8 @@ export function RecommendForm() {
         onChange={(event) => setTitle(event.target.value)}
         isRequired
         maxLength={200}
-        size="sm"
+        size="md"
+        h="44px"
         {...field}
       />
       <Textarea
@@ -99,14 +101,16 @@ export function RecommendForm() {
         value={message}
         onChange={(event) => setMessage(event.target.value)}
         maxLength={2000}
-        size="sm"
-        rows={4}
+        size="md"
+        rows={6}
+        minH="160px"
         resize="none"
         {...field}
       />
       <Button
         type="submit"
-        size="sm"
+        size="md"
+        h="44px"
         variant="outline"
         borderColor="gray.700"
         color="gray.300"
