@@ -6,6 +6,7 @@ import { useEffect, type ReactElement, type ReactNode } from "react";
 import type { NextPage } from "next";
 import { DefaultSeo } from "next-seo";
 import { Lora } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { site } from "../lib/site";
 
 type NextPageWithLayout = NextPage & {
@@ -112,6 +113,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         }}
       />
       {getLayout(<Component {...pageProps} />)}
+      <Analytics />
     </ChakraProvider>
   );
 }
