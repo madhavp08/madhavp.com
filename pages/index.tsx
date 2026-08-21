@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <>
       <Heading as="h1">Madhav Pillai</Heading>
-      <Text fontWeight="bold" mt={8}>
+      <Text fontWeight="bold" mt={10}>
         About me:
       </Text>
-      <UnorderedList spacing={3}>
+      <UnorderedList spacing={5}>
         <ListItem>
           I&apos;m currently studying computer science and mathematics at the
           University of Maryland, College Park.
@@ -37,10 +37,10 @@ export default function Home() {
           Ashtavakra.
         </ListItem>
       </UnorderedList>
-      <Text fontWeight="bold" mt={8}>
+      <Text fontWeight="bold" mt={12}>
         Interests:
       </Text>
-      <UnorderedList spacing={3}>
+      <UnorderedList spacing={5}>
         <ListItem>
           <Text as="span" fontWeight="bold">
             Startups.{" "}
@@ -74,7 +74,7 @@ export default function Home() {
           consistently).
         </ListItem>
       </UnorderedList>
-      <Text mt={8}>
+      <Text mt={12}>
         Check out my{" "}
         <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
           media
