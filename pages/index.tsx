@@ -1,4 +1,4 @@
-import { Heading, Text, UnorderedList, ListItem, Link } from "@chakra-ui/react";
+import { Heading, Text, UnorderedList, ListItem, Link, Stack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { MEDIA_HREF, PROJECTS_HREF } from "../lib/site";
 
@@ -9,14 +9,70 @@ export default function Home() {
       <Text fontWeight="bold" mt={4}>
         About me:
       </Text>
-      <UnorderedList>
-        <ListItem>coming soon...</ListItem>
-      </UnorderedList>
+      <Stack spacing={3} mt={2}>
+        <Text>
+          I&apos;m currently studying computer science and mathematics at the
+          University of Maryland, College Park.
+        </Text>
+        <Text>
+          This past summer, I interned at Sardine on their Merchant Risk team,
+          where I spent most of my time writing code that has since been put
+          into production and helps customers with millions of dollars&apos;
+          worth of KYC-related compliance processes.
+        </Text>
+        <Text>
+          Previously, I worked for a government contractor, where I helped
+          build and ship an agent to solve IT issues. As of today, it has
+          resolved 27% of tickets without the need for any human intervention.
+        </Text>
+        <Text>
+          I love building things that I believe the world needs, thinking
+          through design and product decisions, and seeing the vision come to
+          life. In fact, my highest level of achievement would be starting and
+          running a successful company that employs 50 people.
+        </Text>
+        <Text>
+          I am a devotee of Krishna ॐ and am actively exploring the world of
+          non-dualism through the teachings of Advaita Vedanta, Osho, and
+          Ashtavakra.
+        </Text>
+      </Stack>
       <Text fontWeight="bold" mt={4}>
         Interests:
       </Text>
       <UnorderedList>
-        <ListItem>coming soon...</ListItem>
+        <ListItem>
+          <Text as="span" fontWeight="bold">
+            Startups:{" "}
+          </Text>
+          I love learning and talking about startups and truly think that my
+          life would be incomplete without trying to build a startup that will
+          &quot;change the world.&quot;
+        </ListItem>
+        <ListItem>
+          <Text as="span" fontWeight="bold">
+            Teaching:{" "}
+          </Text>
+          I love explaining concepts to people and seeing their eyes light up.
+          I like to think I&apos;m above average at it.
+        </ListItem>
+        <ListItem>
+          <Text as="span" fontWeight="bold">
+            Singing:{" "}
+          </Text>
+          I sang a LOT growing up and attended and won several competitions and
+          honor choirs in India and the USA. Nowadays, I only sing for myself
+          and those close to me.
+        </ListItem>
+        <ListItem>
+          <Text as="span" fontWeight="bold">
+            Soccer:{" "}
+          </Text>
+          I played a LOT of soccer growing up and used to be extremely good
+          before COVID hit and I stopped playing for two years. Nowadays, the
+          only physical activity I do is go to the gym (and even that, not
+          consistently).
+        </ListItem>
       </UnorderedList>
       <Text mt={4}>
         Check out my{" "}
