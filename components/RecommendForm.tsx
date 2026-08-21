@@ -61,7 +61,7 @@ export function RecommendForm() {
   return (
     <Stack as="form" spacing={3} w="100%" onSubmit={onSubmit}>
       <Text fontWeight="bold" fontSize="sm" color="gray.400">
-        Recommend something
+        Media recommendation
       </Text>
       <Input
         display="none"

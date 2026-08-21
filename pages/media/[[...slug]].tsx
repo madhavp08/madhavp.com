@@ -295,11 +295,10 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           justify="center"
           zIndex={100}
           pointerEvents="none"
-          bg="blackAlpha.500"
         >
           <Text
-            color="gray.100"
-            fontSize="lg"
+            color="whiteAlpha.500"
+            fontSize="md"
             textAlign="center"
             px={6}
           >
