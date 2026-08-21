@@ -14,6 +14,7 @@ interface CatalogItem {
   textColor: string;
   notes: string;
   audio?: string;
+  audioStart?: number;
   blurb?: string;
   rating?: number;
   tag?: string;
@@ -53,6 +54,9 @@ export async function getPieces(kind: MediaKind): Promise<Piece[]> {
       const audio = item.audio || preview?.audio;
       if (audio) {
         piece.audio = audio;
+      }
+      if (item.audioStart != null) {
+        piece.audioStart = item.audioStart;
       }
       if (item.blurb) {
         piece.blurb = item.blurb;

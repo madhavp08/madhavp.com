@@ -1,5 +1,11 @@
 [
   {
+    "slug": "nutriterp",
+    "title": "NutriTerp",
+    "blurb": "Using machine learning to suggest people the right meals to reach their body goals.",
+    "tag": "Currently working now"
+  },
+  {
     "slug": "phrase-race",
     "title": "PhraseRace",
     "blurb": "Monkeytype, but you speak the words instead of typing them.",

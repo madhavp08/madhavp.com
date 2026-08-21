@@ -13,6 +13,7 @@ import Layout from "../../components/Layout";
 import {
   MEDIA_KINDS,
   MEDIA_LABELS,
+  MEDIA_ROWS,
   MediaKind,
   isMediaKind,
   Piece,
@@ -29,6 +30,52 @@ interface MediaProps {
   initialSlug?: string;
 }
 
+function ratingSource(kind: MediaKind) {
+  if (kind === "books") {
+    return "Goodreads";
+  }
+  if (kind === "movies") {
+    return "Letterboxd";
+  }
+  return undefined;
+}
+
+function playClip(
+  audio: HTMLAudioElement,
+  piece: Piece,
+  setPlaying: (value: boolean) => void
+) {
+  if (!piece.audio) {
+    audio.removeAttribute("src");
+    setPlaying(false);
+    return;
+  }
+  audio.src = piece.audio;
+  audio.onended = null;
+  const start = piece.audioStart ?? 0;
+  audio.loop = start === 0;
+
+  function startPlay() {
+    if (start > 0 && Number.isFinite(audio.duration)) {
+      audio.currentTime = Math.min(start, Math.max(0, audio.duration - 1));
+      audio.onended = () => {
+        audio.currentTime = start;
+        void audio.play();
+      };
+    }
+    void audio.play().then(
+      () => setPlaying(true),
+      () => setPlaying(false)
+    );
+  }
+
+  if (start > 0) {
+    audio.addEventListener("loadedmetadata", startPlay, { once: true });
+  } else {
+    startPlay();
+  }
+}
+
 function slugFromPath(path: string) {
   if (!path.startsWith(`${MEDIA_HREF}/`)) {
     return undefined;
@@ -42,7 +89,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const playerRef = useRef<HTMLAudioElement | null>(null);
 
   const allPieces = useMemo(
-    () => MEDIA_KINDS.flatMap((kind) => shelves[kind]),
+    () => MEDIA_KINDS.flatMap((kind) => shelves[kind] ?? []),
     [shelves]
   );
   const piece = allPieces.find((item) => item.slug === activeSlug);
@@ -56,13 +103,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       return;
     }
     audio.pause();
-    if (next?.kind === "music" && next.audio) {
-      audio.src = next.audio;
-      audio.loop = true;
-      void audio.play().then(
-        () => setPlaying(true),
-        () => setPlaying(false)
-      );
+    if (next?.kind === "music") {
+      playClip(audio, next, setPlaying);
     } else {
       audio.removeAttribute("src");
       setPlaying(false);
@@ -104,13 +146,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
         return;
       }
       audio.pause();
-      if (next?.kind === "music" && next.audio) {
-        audio.src = next.audio;
-        audio.loop = true;
-        void audio.play().then(
-          () => setPlaying(true),
-          () => setPlaying(false)
-        );
+      if (next?.kind === "music") {
+        playClip(audio, next, setPlaying);
       } else {
         audio.removeAttribute("src");
         setPlaying(false);
@@ -134,18 +171,34 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
         gap={{ base: 8, md: 14 }}
       >
         <Flex direction="column" gap={5} flex={1} minW={0}>
-          {MEDIA_KINDS.map((kind) => (
-            <Stack key={kind} spacing={1}>
-              <Text fontWeight="bold" fontSize="smaller">
-                {MEDIA_LABELS[kind].toUpperCase()}
-              </Text>
-              <Bookshelf
-                items={shelves[kind]}
-                activeSlug={activeSlug}
-                filterId={`paper-${kind}`}
-                onSelect={select}
-              />
-            </Stack>
+          {MEDIA_ROWS.map((row) => (
+            <Flex
+              key={row.join("-")}
+              direction={{ base: "column", md: "row" }}
+              gap={{ base: 5, md: row.length > 1 ? 14 : 0 }}
+              minW={0}
+            >
+              {row.map((kind, index) => (
+                <Stack key={kind} spacing={1} flex={1} minW={0}>
+                  <Text fontWeight="bold" fontSize="smaller">
+                    {MEDIA_LABELS[kind].toUpperCase()}
+                  </Text>
+                  <Bookshelf
+                    items={shelves[kind] ?? []}
+                    activeSlug={activeSlug}
+                    filterId={`paper-${kind}`}
+                    onSelect={select}
+                    split={
+                      row.length > 1
+                        ? index === 0
+                          ? "start"
+                          : "end"
+                        : undefined
+                    }
+                  />
+                </Stack>
+              ))}
+            </Flex>
           ))}
         </Flex>
         <Box
@@ -168,7 +221,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
             ) : (
               <Fade in={Boolean(piece)} unmountOnExit>
                 {piece ? (
-                  <VStack align="center" textAlign="center" spacing={3} w="100%">
+                  <VStack align="stretch" spacing={3} w="100%">
                     {piece.tag && (
                       <Text
                         fontSize="xs"
@@ -181,6 +234,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                         px={2}
                         py={0.5}
                         borderRadius="sm"
+                        alignSelf="flex-start"
                       >
                         {piece.tag}
                       </Text>
@@ -189,15 +243,19 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                     <Text color="gray.400">{piece.creator}</Text>
                     {piece.rating != null && (
                       <Text color="gray.300" fontSize="sm">
-                        {letterboxdStars(piece.rating)} {piece.rating} on{" "}
-                        {piece.kind === "books" ? "Goodreads" : "Letterboxd"}
+                        {letterboxdStars(piece.rating)} {piece.rating}
+                        {ratingSource(piece.kind)
+                          ? ` on ${ratingSource(piece.kind)}`
+                          : ""}
                       </Text>
                     )}
                     {piece.blurb && (
-                      <Text color="gray.200">{piece.blurb}</Text>
+                      <Text color="gray.200" textAlign="justify">
+                        {piece.blurb}
+                      </Text>
                     )}
                     {piece.review && (
-                      <Text color="gray.400" fontSize="sm">
+                      <Text color="gray.400" fontSize="sm" textAlign="justify">
                         {piece.review}
                       </Text>
                     )}

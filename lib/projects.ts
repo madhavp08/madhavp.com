@@ -7,7 +7,8 @@ export interface Project {
   title: string;
   blurb: string;
   website?: string;
-  github: string;
+  github?: string;
+  tag?: string;
   href: string;
 }
 

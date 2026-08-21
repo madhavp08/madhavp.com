@@ -26,6 +26,7 @@ interface BookshelfProps {
   activeSlug?: string;
   filterId: string;
   onSelect: (slug?: string) => void;
+  split?: "start" | "end";
 }
 
 const width = 41.5;
@@ -42,6 +43,7 @@ export function Bookshelf({
   activeSlug,
   filterId,
   onSelect,
+  split,
 }: BookshelfProps) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const itemRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
@@ -93,7 +95,11 @@ export function Bookshelf({
       <Box position="relative">
         <Box
           position="absolute"
-          left={{ base: "-28px", md: "-36px" }}
+          left={
+            split === "end"
+              ? { base: "-28px", md: 0 }
+              : { base: "-28px", md: "-36px" }
+          }
           height="100%"
           zIndex={2}
         >
@@ -114,6 +120,7 @@ export function Bookshelf({
           ref={viewportRef}
           alignItems="center"
           gap={3}
+          minH={itemHeight}
           overflowX="auto"
           css={{
             scrollbarWidth: "none",
@@ -273,7 +280,11 @@ export function Bookshelf({
         </HStack>
         <Box
           position="absolute"
-          right={{ base: "-28px", md: "-36px" }}
+          right={
+            split === "start"
+              ? { base: "-28px", md: 0 }
+              : { base: "-28px", md: "-36px" }
+          }
           pl="10px"
           height="100%"
           top={0}

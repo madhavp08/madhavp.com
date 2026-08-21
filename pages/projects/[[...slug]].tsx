@@ -71,6 +71,18 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
                 transition="color 0.15s ease"
               >
                 <Heading size="md">{item.title}</Heading>
+                {item.tag && (
+                  <Text
+                    mt={1}
+                    fontSize="xs"
+                    fontWeight="semibold"
+                    letterSpacing="0.08em"
+                    textTransform="uppercase"
+                    color={isActive ? "gray.300" : "gray.500"}
+                  >
+                    {item.tag}
+                  </Text>
+                )}
                 <Text mt={1} color={isActive ? "gray.300" : "gray.500"}>
                   {item.blurb}
                 </Text>
@@ -88,6 +100,23 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
           <Fade in={Boolean(project)} unmountOnExit>
             {project && (
               <Stack spacing={3}>
+                {project.tag && (
+                  <Text
+                    fontSize="xs"
+                    fontWeight="semibold"
+                    letterSpacing="0.08em"
+                    textTransform="uppercase"
+                    color="gray.300"
+                    border="1px solid"
+                    borderColor="gray.600"
+                    px={2}
+                    py={0.5}
+                    borderRadius="sm"
+                    alignSelf="flex-start"
+                  >
+                    {project.tag}
+                  </Text>
+                )}
                 <Heading size="md">{project.title}</Heading>
                 <Text color="gray.400">{project.blurb}</Text>
                 {project.website && (
@@ -95,9 +124,11 @@ const Projects: NextPageWithLayout<ProjectsProps> = ({
                     Website
                   </Link>
                 )}
-                <Link href={project.github} isExternal color="blue.300">
-                  GitHub
-                </Link>
+                {project.github && (
+                  <Link href={project.github} isExternal color="blue.300">
+                    GitHub
+                  </Link>
+                )}
               </Stack>
             )}
           </Fade>
