@@ -5,7 +5,14 @@ import { MEDIA_HREF, PROJECTS_HREF } from "../lib/site";
 export default function Home() {
   return (
     <>
-      <Heading as="h1" size="2xl">
+      <Heading
+        as="h1"
+        size="3xl"
+        mt={0}
+        mb={4}
+        lineHeight="short"
+        sx={{ marginTop: "0 !important" }}
+      >
         Madhav Pillai
       </Heading>
       <Text fontWeight="bold" mt={12} mb={0}>
