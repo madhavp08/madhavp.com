@@ -4,77 +4,55 @@ export function MediaHint() {
   return (
     <Flex
       position="fixed"
-      inset={0}
-      align="center"
-      justify="center"
+      top="42%"
+      left={0}
       zIndex={100}
       pointerEvents="none"
+      align="center"
+      sx={{
+        animation: "media-flag-drift 5s linear forwards",
+        "@keyframes media-flag-drift": {
+          "0%": { transform: "translateX(-110%) translateY(0)" },
+          "25%": { transform: "translateX(18vw) translateY(-6px)" },
+          "50%": { transform: "translateX(45vw) translateY(5px)" },
+          "75%": { transform: "translateX(78vw) translateY(-5px)" },
+          "100%": { transform: "translateX(112vw) translateY(0)" },
+        },
+      }}
     >
+      <Box
+        w="3px"
+        h="48px"
+        bg="rgba(120, 158, 196, 0.45)"
+        borderRadius="full"
+        flexShrink={0}
+      />
       <Flex
         align="center"
+        justify="center"
+        h="36px"
+        px={5}
+        bg="rgba(120, 158, 196, 0.2)"
         sx={{
-          animation: "media-flag-float 5s ease-in-out forwards",
-          "@keyframes media-flag-float": {
-            "0%": {
-              opacity: 0,
-              transform: "translate(0, 6px) rotate(-1.5deg)",
-            },
-            "10%": {
-              opacity: 1,
-              transform: "translate(4px, -4px) rotate(1deg)",
-            },
-            "40%": {
-              opacity: 1,
-              transform: "translate(-8px, 6px) rotate(-1.2deg)",
-            },
-            "70%": {
-              opacity: 1,
-              transform: "translate(6px, -5px) rotate(0.8deg)",
-            },
-            "88%": {
-              opacity: 1,
-              transform: "translate(-2px, 2px) rotate(-0.6deg)",
-            },
-            "100%": {
-              opacity: 0,
-              transform: "translate(0, -4px) rotate(0deg)",
-            },
+          transformOrigin: "left center",
+          clipPath:
+            "polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%)",
+          animation: "media-flag-wave 2s ease-in-out infinite",
+          "@keyframes media-flag-wave": {
+            "0%, 100%": { transform: "skewY(0deg)" },
+            "50%": { transform: "skewY(1.2deg)" },
           },
         }}
       >
-        <Box
-          w="3px"
-          h="52px"
-          bg="whiteAlpha.500"
-          borderRadius="full"
-          flexShrink={0}
-        />
-        <Flex
-          align="center"
-          h="36px"
-          pl={3}
-          pr={7}
-          bg="whiteAlpha.200"
-          sx={{
-            transformOrigin: "left center",
-            clipPath:
-              "polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%)",
-            animation: "media-flag-wave 1.8s ease-in-out infinite",
-            "@keyframes media-flag-wave": {
-              "0%, 100%": { transform: "skewY(0deg)" },
-              "50%": { transform: "skewY(1.4deg)" },
-            },
-          }}
+        <Text
+          color="whiteAlpha.800"
+          fontSize="sm"
+          whiteSpace="nowrap"
+          letterSpacing="0.02em"
+          px={2}
         >
-          <Text
-            color="whiteAlpha.800"
-            fontSize="sm"
-            whiteSpace="nowrap"
-            letterSpacing="0.02em"
-          >
-            Click on a movie, book, song, or show
-          </Text>
-        </Flex>
+          Click on a movie, book, song, or show
+        </Text>
       </Flex>
     </Flex>
   );
