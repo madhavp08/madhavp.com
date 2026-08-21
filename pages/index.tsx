@@ -32,14 +32,6 @@ export default function Home() {
           running a successful company that employs 50 people.
         </ListItem>
         <ListItem>
-          I do not think there is any specific meaning to life, and I believe
-          that we, as humans, have the freedom to create our own. I am not a
-          fan of blindly believing anything our family, friends, or society
-          might try to instill in us, but rather am an advocate for each
-          person to have the liberty to choose their beliefs deliberately (as
-          long as those beliefs do not harm humanity).
-        </ListItem>
-        <ListItem>
           I am a devotee of Krishna ॐ and am actively exploring the world of
           non-dualism through the teachings of Advaita Vedanta, Osho, and
           Ashtavakra.

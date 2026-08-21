@@ -1,5 +1,6 @@
 import { Button, Input, Select, Stack, Text, Textarea } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
+import { RECOMMEND_EMAIL, WEB3FORMS_ACCESS_KEY } from "../lib/site";
 
 const KINDS = [
   { value: "movies", label: "Movie" },
@@ -32,20 +33,35 @@ export function RecommendForm() {
     setStatus("sending");
     setError("");
     try {
-      const response = await fetch("/api/recommend", {
+      if (honeypot.trim()) {
+        setStatus("sent");
+        return;
+      }
+      const label = KINDS.find((item) => item.value === kind)?.label || kind;
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
-          kind,
-          title,
-          message,
-          company: honeypot,
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Recommendation: ${label} — ${title}`,
+          from_name: "madhavp.com",
+          email: RECOMMEND_EMAIL,
+          ccemail: RECOMMEND_EMAIL,
+          Media: label,
+          Title: title,
+          Message: message.trim() || "(none)",
         }),
       });
-      const data = (await response.json()) as { error?: string };
-      if (!response.ok) {
+      const data = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
+      if (!response.ok || !data.success) {
         setStatus("error");
-        setError(data.error || "Could not send");
+        setError(data.message || "Could not send");
         return;
       }
       setStatus("sent");

@@ -96,4 +96,4 @@ When you are ready to connect one, send the Spotify app credentials, Letterboxd 
 
 ## Recommendations
 
-The blank Media column is a small form. Submissions go to Gmail through [Web3Forms](https://web3forms.com). Create a key for `madhav.pillai08@gmail.com`, put it in `.env.local` as `WEB3FORMS_ACCESS_KEY`, and add the same name in Vercel project env vars. Then redeploy.
+The blank Media column is a small form. Submissions go to Gmail through [Web3Forms](https://web3forms.com) from the browser. The public access key lives in `lib/site.ts`. In the Web3Forms dashboard, set the receiving inbox to `madhav.pillai08@gmail.com`.

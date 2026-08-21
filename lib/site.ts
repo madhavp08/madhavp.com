@@ -1,5 +1,7 @@
 export const MEDIA_HREF = "/media";
 export const PROJECTS_HREF = "/projects";
+export const WEB3FORMS_ACCESS_KEY = "ff9fe6de-bc08-4ef0-af88-ec548587cde0";
+export const RECOMMEND_EMAIL = "madhav.pillai08@gmail.com";
 
 export const site = {
   name: "Madhav Pillai",
