@@ -5,7 +5,9 @@ import { MEDIA_HREF, PROJECTS_HREF } from "../lib/site";
 export default function Home() {
   return (
     <>
-      <Heading as="h1">Madhav Pillai</Heading>
+      <Heading as="h1" size="2xl">
+        Madhav Pillai
+      </Heading>
       <Text fontWeight="bold" mt={12} mb={0}>
         About me:
       </Text>
