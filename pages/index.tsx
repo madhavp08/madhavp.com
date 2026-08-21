@@ -68,10 +68,9 @@ export default function Home() {
           <Text as="span" fontWeight="bold">
             Soccer.{" "}
           </Text>
-          I played a LOT of soccer growing up and used to be extremely good
+          I played a LOT of soccer growing up and used to be pretty good
           before COVID hit and I stopped playing for two years. Nowadays, the
-          only physical activity I do is go to the gym (and even that, not
-          consistently).
+          only physical activity I do is go to the gym (sometimes).
         </ListItem>
       </UnorderedList>
       <Text mt={12}>
