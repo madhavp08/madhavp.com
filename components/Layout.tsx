@@ -50,7 +50,7 @@ function Navigation({
 function NavList() {
   return (
     <>
-      <VStack align="flex-start" spacing={4}>
+      <VStack align="flex-start">
         <Text fontWeight="bold" fontSize="lg">
           NAVIGATION
         </Text>
@@ -61,7 +61,7 @@ function NavList() {
         ))}
       </VStack>
       {site.socials.length > 0 && (
-        <VStack align="flex-start" spacing={4}>
+        <VStack align="flex-start">
           <Text fontWeight="bold" fontSize="lg">
             SOCIALS
           </Text>
@@ -112,7 +112,7 @@ function Layout({ children }: PropsWithChildren) {
         align="flex-start"
       >
         <Box display={{ base: "none", lg: "block" }} w="168px" flexShrink={0}>
-          <VStack position="sticky" top={10} align="flex-start" spacing={14}>
+          <VStack position="sticky" top={10} align="flex-start" spacing={10}>
             <NavList />
           </VStack>
         </Box>
