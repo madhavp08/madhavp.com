@@ -49,7 +49,6 @@ export function RecommendForm() {
           subject: `Recommendation: ${label} — ${title}`,
           from_name: "madhavp.com",
           email: RECOMMEND_EMAIL,
-          ccemail: RECOMMEND_EMAIL,
           Media: label,
           Title: title,
           Message: message.trim() || "(none)",
@@ -127,6 +126,8 @@ export function RecommendForm() {
         type="submit"
         size="md"
         h="44px"
+        minH="44px"
+        overflow="hidden"
         variant="outline"
         borderColor="gray.700"
         color="gray.300"
@@ -136,16 +137,15 @@ export function RecommendForm() {
       >
         Send
       </Button>
-      {status === "sent" && (
-        <Text fontSize="sm" color="gray.500">
-          Sent.
-        </Text>
-      )}
-      {status === "error" && (
-        <Text fontSize="sm" color="red.300">
-          {error}
-        </Text>
-      )}
+      <Text
+        fontSize="sm"
+        minH="24px"
+        lineHeight="24px"
+        noOfLines={1}
+        color={status === "error" ? "red.300" : "gray.500"}
+      >
+        {status === "sent" ? "Sent." : status === "error" ? error : "\u00a0"}
+      </Text>
     </Stack>
   );
 }
