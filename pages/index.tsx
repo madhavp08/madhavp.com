@@ -1,4 +1,4 @@
-import { Heading, Text, UnorderedList, ListItem, Link, Stack } from "@chakra-ui/react";
+import { Heading, Text, UnorderedList, ListItem, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { MEDIA_HREF, PROJECTS_HREF } from "../lib/site";
 
@@ -6,44 +6,44 @@ export default function Home() {
   return (
     <>
       <Heading as="h1">Madhav Pillai</Heading>
-      <Text fontWeight="bold" mt={4}>
+      <Text fontWeight="bold" mt={8}>
         About me:
       </Text>
-      <Stack spacing={3} mt={2}>
-        <Text>
+      <UnorderedList spacing={3}>
+        <ListItem>
           I&apos;m currently studying computer science and mathematics at the
           University of Maryland, College Park.
-        </Text>
-        <Text>
+        </ListItem>
+        <ListItem>
           This past summer, I interned at Sardine on their Merchant Risk team,
           where I spent most of my time writing code that has since been put
           into production and helps customers with millions of dollars&apos;
           worth of KYC-related compliance processes.
-        </Text>
-        <Text>
+        </ListItem>
+        <ListItem>
           Previously, I worked for a government contractor, where I helped
           build and ship an agent to solve IT issues. As of today, it has
           resolved 27% of tickets without the need for any human intervention.
-        </Text>
-        <Text>
+        </ListItem>
+        <ListItem>
           I love building things that I believe the world needs, thinking
           through design and product decisions, and seeing the vision come to
           life. In fact, my highest level of achievement would be starting and
           running a successful company that employs 50 people.
-        </Text>
-        <Text>
+        </ListItem>
+        <ListItem>
           I am a devotee of Krishna ॐ and am actively exploring the world of
           non-dualism through the teachings of Advaita Vedanta, Osho, and
           Ashtavakra.
-        </Text>
-      </Stack>
-      <Text fontWeight="bold" mt={4}>
+        </ListItem>
+      </UnorderedList>
+      <Text fontWeight="bold" mt={8}>
         Interests:
       </Text>
-      <UnorderedList>
+      <UnorderedList spacing={3}>
         <ListItem>
           <Text as="span" fontWeight="bold">
-            Startups:{" "}
+            Startups.{" "}
           </Text>
           I love learning and talking about startups and truly think that my
           life would be incomplete without trying to build a startup that will
@@ -51,14 +51,14 @@ export default function Home() {
         </ListItem>
         <ListItem>
           <Text as="span" fontWeight="bold">
-            Teaching:{" "}
+            Teaching.{" "}
           </Text>
           I love explaining concepts to people and seeing their eyes light up.
           I like to think I&apos;m above average at it.
         </ListItem>
         <ListItem>
           <Text as="span" fontWeight="bold">
-            Singing:{" "}
+            Singing.{" "}
           </Text>
           I sang a LOT growing up and attended and won several competitions and
           honor choirs in India and the USA. Nowadays, I only sing for myself
@@ -66,7 +66,7 @@ export default function Home() {
         </ListItem>
         <ListItem>
           <Text as="span" fontWeight="bold">
-            Soccer:{" "}
+            Soccer.{" "}
           </Text>
           I played a LOT of soccer growing up and used to be extremely good
           before COVID hit and I stopped playing for two years. Nowadays, the
@@ -74,7 +74,7 @@ export default function Home() {
           consistently).
         </ListItem>
       </UnorderedList>
-      <Text mt={4}>
+      <Text mt={8}>
         Check out my{" "}
         <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
           media
