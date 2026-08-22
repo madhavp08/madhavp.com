@@ -1,25 +1,57 @@
 import { Container, VStack, Text, Flex, Box, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 import { site } from "../lib/site";
 
 function Navigation({
   link,
   children,
   isExternal,
+  copy,
 }: {
-  link: string;
+  link?: string;
   children: string;
   isExternal?: boolean;
+  copy?: string;
 }) {
   const router = useRouter();
+  const [copied, setCopied] = useState(false);
   const isActive =
-    link === "/"
+    Boolean(link) &&
+    (link === "/"
       ? router.pathname === "/"
-      : router.asPath.startsWith(link);
+      : router.asPath.startsWith(link ?? ""));
 
-  if (isExternal) {
+  if (copy) {
+    return (
+      <Link
+        as="button"
+        type="button"
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(copy);
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 1400);
+          } catch {
+            setCopied(false);
+          }
+        }}
+        color={copied ? "gray.50" : "gray.400"}
+        textDecoration="none"
+        _hover={{ color: "gray.50", textDecoration: "none" }}
+        bg="transparent"
+        border="none"
+        p={0}
+        cursor="pointer"
+        fontFamily="inherit"
+      >
+        <Text fontSize="md">{copied ? "Copied" : children}</Text>
+      </Link>
+    );
+  }
+
+  if (isExternal && link) {
     return (
       <Link
         href={link}
@@ -37,7 +69,7 @@ function Navigation({
   return (
     <Link
       as={NextLink}
-      href={link}
+      href={link ?? "/"}
       color={isActive ? "gray.50" : "gray.400"}
       _hover={{ color: "gray.50" }}
       transition="color 0.15s ease"
@@ -51,7 +83,7 @@ function NavList() {
   return (
     <>
       <VStack align="flex-start">
-        <Text fontWeight="bold" fontSize="lg">
+        <Text fontWeight="bold" fontSize="lg" lineHeight={1}>
           NAVIGATION
         </Text>
         {site.navigation.map((item) => (
@@ -66,7 +98,12 @@ function NavList() {
             SOCIALS
           </Text>
           {site.socials.map((item) => (
-            <Navigation key={item.href} link={item.href} isExternal>
+            <Navigation
+              key={item.label}
+              link={item.href}
+              copy={item.copy}
+              isExternal={Boolean(item.href)}
+            >
               {item.label}
             </Navigation>
           ))}

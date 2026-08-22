@@ -10,7 +10,7 @@ export default function Home() {
         size="3xl"
         mt={0}
         mb={4}
-        lineHeight="short"
+        lineHeight={1}
         sx={{ marginTop: "0 !important" }}
       >
         Madhav Pillai
@@ -18,7 +18,7 @@ export default function Home() {
       <Text fontWeight="bold" mt={12} mb={0}>
         About me:
       </Text>
-      <UnorderedList spacing={6} mt={6} mb={0}>
+      <UnorderedList spacing={6} mt={6} mb={0} ml={0} pl={4}>
         <ListItem>
           I&apos;m currently studying computer science and mathematics at the
           University of Maryland, College Park.
