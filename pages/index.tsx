@@ -15,10 +15,10 @@ export default function Home() {
       >
         Madhav Pillai
       </Heading>
-      <Text fontWeight="bold" mt={12} mb={0}>
+      <Text fontWeight="bold" mt={12} mb={0} sx={{ marginBottom: "0 !important" }}>
         About me:
       </Text>
-      <UnorderedList spacing={6} mt={6} mb={0} ml={0} pl={4}>
+      <UnorderedList spacing={6} mt={3} mb={0} ml={0} pl={4}>
         <ListItem>
           I&apos;m currently studying computer science and mathematics at the
           University of Maryland, College Park.
@@ -44,7 +44,7 @@ export default function Home() {
           Ashtavakra.
         </ListItem>
       </UnorderedList>
-      <Text fontWeight="bold" mt={14} mb={0}>
+      <Text fontWeight="bold" mt={20} mb={0}>
         Interests:
       </Text>
       <UnorderedList spacing={6} mt={6} mb={0}>
@@ -79,7 +79,7 @@ export default function Home() {
           only physical activity I do is going to the gym (sometimes).
         </ListItem>
       </UnorderedList>
-      <Text mt={14}>
+      <Text mt={24}>
         Check out my{" "}
         <Link as={NextLink} href={MEDIA_HREF} color="blue.300">
           media
