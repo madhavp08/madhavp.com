@@ -5,7 +5,6 @@ import {
   VStack,
   Text,
   Box,
-  Fade,
 } from "@chakra-ui/react";
 import { GetStaticPropsContext, NextPageWithLayout } from "next";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -42,36 +41,60 @@ function ratingSource(kind: MediaKind) {
   return undefined;
 }
 
+function getAudio(ref: { current: HTMLAudioElement | null }) {
+  if (!ref.current) {
+    ref.current = new Audio();
+  }
+  return ref.current;
+}
+
 function playClip(
   audio: HTMLAudioElement,
   piece: Piece,
-  setPlaying: (value: boolean) => void
+  setPlaying: (value: boolean) => void,
+  isCurrent: () => boolean
 ) {
+  audio.pause();
+  audio.onended = null;
   if (!piece.audio) {
     audio.removeAttribute("src");
     setPlaying(false);
     return;
   }
-  audio.src = piece.audio;
-  audio.onended = null;
+
   const start = piece.audioStart ?? 0;
   audio.loop = start === 0;
 
   function startPlay() {
-    if (start > 0 && Number.isFinite(audio.duration)) {
+    if (!isCurrent()) {
+      return;
+    }
+    if (start > 0 && Number.isFinite(audio.duration) && audio.duration > 0) {
       audio.currentTime = Math.min(start, Math.max(0, audio.duration - 1));
       audio.onended = () => {
+        if (!isCurrent()) {
+          return;
+        }
         audio.currentTime = start;
         void audio.play();
       };
     }
     void audio.play().then(
-      () => setPlaying(true),
-      () => setPlaying(false)
+      () => {
+        if (isCurrent()) {
+          setPlaying(true);
+        }
+      },
+      () => {
+        if (isCurrent()) {
+          setPlaying(false);
+        }
+      }
     );
   }
 
-  if (start > 0) {
+  audio.src = piece.audio;
+  if (start > 0 && audio.readyState < 1) {
     audio.addEventListener("loadedmetadata", startPlay, { once: true });
   } else {
     startPlay();
@@ -90,6 +113,7 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   const [playing, setPlaying] = useState(false);
   const [hint, setHint] = useState(!initialSlug);
   const playerRef = useRef<HTMLAudioElement | null>(null);
+  const clipGen = useRef(0);
 
   const allPieces = useMemo(
     () => MEDIA_KINDS.flatMap((kind) => shelves[kind] ?? []),
@@ -101,13 +125,12 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
     const next = allPieces.find((item) => item.slug === slug);
     setActiveSlug(slug);
     window.history.replaceState(null, "", slug || MEDIA_HREF);
-    const audio = playerRef.current;
-    if (!audio) {
-      return;
-    }
+    const gen = ++clipGen.current;
+    const audio = getAudio(playerRef);
     audio.pause();
+    audio.onended = null;
     if (next?.kind === "music") {
-      playClip(audio, next, setPlaying);
+      playClip(audio, next, setPlaying, () => clipGen.current === gen);
     } else {
       audio.removeAttribute("src");
       setPlaying(false);
@@ -115,8 +138,13 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   }
 
   function togglePlay() {
-    const audio = playerRef.current;
-    if (!audio || !piece?.audio) {
+    const audio = getAudio(playerRef);
+    if (!piece?.audio) {
+      return;
+    }
+    if (audio.getAttribute("src") !== piece.audio) {
+      const gen = ++clipGen.current;
+      playClip(audio, piece, setPlaying, () => clipGen.current === gen);
       return;
     }
     if (audio.paused) {
@@ -131,13 +159,24 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
   }
 
   useEffect(() => {
-    const audio = new Audio();
-    playerRef.current = audio;
+    const audio = getAudio(playerRef);
     return () => {
+      clipGen.current += 1;
       audio.pause();
       audio.src = "";
+      playerRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (piece?.kind !== "music" || !piece.audio) {
+      return;
+    }
+    const audio = getAudio(playerRef);
+    if (!audio.getAttribute("src")) {
+      audio.src = piece.audio;
+    }
+  }, [piece]);
 
   useEffect(() => {
     if (!hint) {
@@ -161,13 +200,12 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
       const slug = slugFromPath(window.location.pathname);
       setActiveSlug(slug);
       const next = allPieces.find((item) => item.slug === slug);
-      const audio = playerRef.current;
-      if (!audio) {
-        return;
-      }
+      const gen = ++clipGen.current;
+      const audio = getAudio(playerRef);
       audio.pause();
+      audio.onended = null;
       if (next?.kind === "music") {
-        playClip(audio, next, setPlaying);
+        playClip(audio, next, setPlaying, () => clipGen.current === gen);
       } else {
         audio.removeAttribute("src");
         setPlaying(false);
@@ -227,19 +265,37 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
           alignSelf={{ md: "stretch" }}
           pl={{ md: 8 }}
         >
-          <Flex h="100%" align="center" justify="center">
-            {piece?.kind === "music" ? (
-              <Fade in key={piece.slug}>
+          <Flex h="100%" align="center" justify="center" position="relative">
+            <Box
+              w="100%"
+              opacity={piece ? 0 : 1}
+              pointerEvents={piece ? "none" : "auto"}
+              aria-hidden={Boolean(piece)}
+              transition="opacity 180ms ease"
+            >
+              <RecommendForm />
+            </Box>
+            <Flex
+              position="absolute"
+              inset={0}
+              align="center"
+              justify="center"
+              w="100%"
+              opacity={piece ? 1 : 0}
+              pointerEvents={piece ? "auto" : "none"}
+              aria-hidden={!piece}
+              transition="opacity 180ms ease"
+            >
+              {piece?.kind === "music" ? (
                 <VinylPlayer
+                  key={piece.slug}
                   title={piece.title}
                   artist={piece.creator}
                   cover={piece.coverImage}
                   playing={playing}
                   onToggle={togglePlay}
                 />
-              </Fade>
-            ) : piece ? (
-              <Fade in key={piece.slug}>
+              ) : piece ? (
                 <VStack align="stretch" spacing={3} w="100%">
                   {piece.tag && (
                     <Text
@@ -279,12 +335,8 @@ const Media: NextPageWithLayout<MediaProps> = ({ shelves, initialSlug }) => {
                     </Text>
                   )}
                 </VStack>
-              </Fade>
-            ) : (
-              <Fade in>
-                <RecommendForm />
-              </Fade>
-            )}
+              ) : null}
+            </Flex>
           </Flex>
         </Box>
       </Flex>

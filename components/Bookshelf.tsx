@@ -54,19 +54,24 @@ export function Bookshelf({
   }
 
   React.useLayoutEffect(() => {
-    const viewport = viewportRef.current;
+    const shelfEl = viewportRef.current;
     const openEl = itemIndex >= 0 ? itemRefs.current[itemIndex] : null;
-    if (!viewport || !openEl) {
+    if (!shelfEl || !openEl) {
       return;
     }
-    const shelf = viewport.getBoundingClientRect();
-    const book = openEl.getBoundingClientRect();
-    if (book.right > shelf.right) {
-      viewport.scrollLeft += book.right - shelf.right + 8;
+    function keepInView(shelf: HTMLDivElement, bookEl: HTMLButtonElement) {
+      const shelfBox = shelf.getBoundingClientRect();
+      const book = bookEl.getBoundingClientRect();
+      if (book.right > shelfBox.right) {
+        shelf.scrollLeft += book.right - shelfBox.right + 8;
+      }
+      if (book.left < shelfBox.left) {
+        shelf.scrollLeft += book.left - shelfBox.left - 8;
+      }
     }
-    if (book.left < shelf.left) {
-      viewport.scrollLeft += book.left - shelf.left - 8;
-    }
+    keepInView(shelfEl, openEl);
+    const timer = window.setTimeout(() => keepInView(shelfEl, openEl), 520);
+    return () => window.clearTimeout(timer);
   }, [itemIndex]);
 
   return (
@@ -182,6 +187,10 @@ export function Bookshelf({
                     objectFit="cover"
                     objectPosition="left center"
                     draggable={false}
+                    decoding="async"
+                    fallback={
+                      <Box w="100%" h="100%" bg={item.spineColor} />
+                    }
                   />
                   <Box
                     position="absolute"
@@ -268,6 +277,10 @@ export function Bookshelf({
                     objectFit="cover"
                     objectPosition="center"
                     draggable={false}
+                    decoding="async"
+                    fallback={
+                      <Box w="100%" h="100%" bg={item.spineColor} />
+                    }
                   />
                 </Box>
               </button>

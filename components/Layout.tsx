@@ -1,7 +1,7 @@
 import { Container, VStack, Text, Flex, Box, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { site } from "../lib/site";
 
 function Navigation({
@@ -17,6 +17,11 @@ function Navigation({
 }) {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
+  const copiedTimer = useRef<number>();
+
+  useEffect(() => {
+    return () => window.clearTimeout(copiedTimer.current);
+  }, []);
   const isActive =
     Boolean(link) &&
     (link === "/"
@@ -32,7 +37,8 @@ function Navigation({
           try {
             await navigator.clipboard.writeText(copy);
             setCopied(true);
-            window.setTimeout(() => setCopied(false), 1400);
+            window.clearTimeout(copiedTimer.current);
+            copiedTimer.current = window.setTimeout(() => setCopied(false), 1400);
           } catch {
             setCopied(false);
           }

@@ -11,6 +11,12 @@ export function MediaHint() {
       align="center"
       sx={{
         animation: "media-flag-drift 5s linear forwards",
+        "@media (prefers-reduced-motion: reduce)": {
+          animation: "none",
+          left: "50%",
+          transform: "translateX(-50%)",
+          opacity: 0.85,
+        },
         "@keyframes media-flag-drift": {
           "0%": { transform: "translateX(-110%) translateY(0)" },
           "25%": { transform: "translateX(18vw) translateY(-6px)" },

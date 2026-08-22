@@ -1,5 +1,5 @@
 import { Button, Input, Select, Stack, Text, Textarea } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { RECOMMEND_EMAIL, WEB3FORMS_ACCESS_KEY } from "../lib/site";
 
 const KINDS = [
@@ -26,13 +26,39 @@ export function RecommendForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
+  const alive = useRef(true);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+      abortRef.current?.abort();
+    };
+  }, []);
+
+  function markChanged() {
+    if (status === "error" || status === "sent") {
+      setStatus("idle");
+    }
+  }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setStatus("sending");
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    let timedOut = false;
+    const timeout = window.setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, 12000);
     try {
       if (honeypot.trim()) {
-        setStatus("sent");
+        if (alive.current) {
+          setStatus("sent");
+        }
         return;
       }
       const label = KINDS.find((item) => item.value === kind)?.label || kind;
@@ -42,6 +68,7 @@ export function RecommendForm() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        signal: controller.signal,
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
           subject: `Recommendation: ${label} — ${title}`,
@@ -56,6 +83,9 @@ export function RecommendForm() {
         success?: boolean;
         message?: string;
       };
+      if (!alive.current) {
+        return;
+      }
       if (!response.ok || !data.success) {
         setStatus("error");
         return;
@@ -65,7 +95,12 @@ export function RecommendForm() {
       setTitle("");
       setMessage("");
     } catch {
+      if (!alive.current || (!timedOut && controller.signal.aborted)) {
+        return;
+      }
       setStatus("error");
+    } finally {
+      window.clearTimeout(timeout);
     }
   }
 
@@ -84,7 +119,10 @@ export function RecommendForm() {
       <Select
         placeholder="Media"
         value={kind}
-        onChange={(event) => setKind(event.target.value)}
+        onChange={(event) => {
+          markChanged();
+          setKind(event.target.value);
+        }}
         isRequired
         size="md"
         h="44px"
@@ -100,7 +138,10 @@ export function RecommendForm() {
       <Input
         placeholder="Title"
         value={title}
-        onChange={(event) => setTitle(event.target.value)}
+        onChange={(event) => {
+          markChanged();
+          setTitle(event.target.value);
+        }}
         isRequired
         maxLength={200}
         size="md"
@@ -110,7 +151,10 @@ export function RecommendForm() {
       <Textarea
         placeholder="Message (optional)"
         value={message}
-        onChange={(event) => setMessage(event.target.value)}
+        onChange={(event) => {
+          markChanged();
+          setMessage(event.target.value);
+        }}
         maxLength={2000}
         size="md"
         rows={6}
